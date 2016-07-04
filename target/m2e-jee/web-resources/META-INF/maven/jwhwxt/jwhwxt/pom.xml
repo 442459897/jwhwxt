@@ -277,7 +277,7 @@
 		<jetty.version>9.0.7.v20131107</jetty.version> <!-- Adapt this to a version found on http://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-maven-plugin/ -->
 	</properties>
 	<build>
-		<finalName>propertyServer</finalName>
+		<finalName>jwhwxtServer</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
