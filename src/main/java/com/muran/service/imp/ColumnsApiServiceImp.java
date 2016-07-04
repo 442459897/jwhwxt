@@ -1,6 +1,10 @@
 package com.muran.service.imp;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.stereotype.Service;
 
@@ -27,8 +31,15 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 		user.setAutoId(1);
 		user.setHeadImg("img");
 		user.setNickName("name");
-		user.setWatched(true);
-		return Response.ok().entity(user).build();
+		user.setWatched(true);	
+		try {
+			return Response.status(Status.FOUND).location(new URI("http://nc.mrshare.cn")).build();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		//return Response.status(Status.FOUND).location(new URI("http://nc.mrshare.cn")).build();
 	}
 
 	@Override
