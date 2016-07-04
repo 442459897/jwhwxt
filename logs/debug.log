@@ -1,0 +1,895 @@
+[INFO ][2016/07/02 17:28:5919 ][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 17:28:59156][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 17:28:59 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 17:28:59222][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 17:28:59817][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 17:28:59831][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [WARN ][2016/07/02 17:28:59934][org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:487)]
+Exception encountered during context initialization - cancelling refresh attempt
+ org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.muran.cloudlife.application.SpringContextHolder] for bean with name 'com.muran.cloudlife.application.SpringContextHolder#0' defined in class path resource [applicationContext.xml]; nested exception is java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.restartWebApp(JettyRunMojo.java:532)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo$1.filesChanged(JettyRunMojo.java:485)
+	at org.eclipse.jetty.util.Scanner.reportBulkChanges(Scanner.java:681)
+	at org.eclipse.jetty.util.Scanner.reportDifferences(Scanner.java:539)
+	at org.eclipse.jetty.util.Scanner.scan(Scanner.java:391)
+	at org.eclipse.jetty.util.Scanner$1.run(Scanner.java:329)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+Caused by: java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:429)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:382)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 27 more
+[ERROR][2016/07/02 17:28:59965][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:331)]
+Context initialization failed
+ org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.muran.cloudlife.application.SpringContextHolder] for bean with name 'com.muran.cloudlife.application.SpringContextHolder#0' defined in class path resource [applicationContext.xml]; nested exception is java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.restartWebApp(JettyRunMojo.java:532)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo$1.filesChanged(JettyRunMojo.java:485)
+	at org.eclipse.jetty.util.Scanner.reportBulkChanges(Scanner.java:681)
+	at org.eclipse.jetty.util.Scanner.reportDifferences(Scanner.java:539)
+	at org.eclipse.jetty.util.Scanner.scan(Scanner.java:391)
+	at org.eclipse.jetty.util.Scanner$1.run(Scanner.java:329)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+Caused by: java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:429)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:382)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 27 more
+[INFO ][2016/07/02 17:30:40944][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:31:05531][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 17:31:05663][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 17:31:05 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 17:31:05694][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 17:31:0666 ][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 17:31:0673 ][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [WARN ][2016/07/02 17:31:06135][org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:487)]
+Exception encountered during context initialization - cancelling refresh attempt
+ org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.muran.cloudlife.application.SpringContextHolder] for bean with name 'com.muran.cloudlife.application.SpringContextHolder#0' defined in class path resource [applicationContext.xml]; nested exception is java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:155)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.server.Server.start(Server.java:342)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:290)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:68)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:564)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:360)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:168)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:429)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:382)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 61 more
+[ERROR][2016/07/02 17:31:06161][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:331)]
+Context initialization failed
+ org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.muran.cloudlife.application.SpringContextHolder] for bean with name 'com.muran.cloudlife.application.SpringContextHolder#0' defined in class path resource [applicationContext.xml]; nested exception is java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1328)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:622)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:591)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:968)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:735)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:155)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.server.Server.start(Server.java:342)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:290)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:68)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:564)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:360)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:168)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.ClassNotFoundException: com.muran.cloudlife.application.SpringContextHolder
+	at org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy.loadClass(SelfFirstStrategy.java:50)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.unsynchronizedLoadClass(ClassRealm.java:271)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:247)
+	at org.codehaus.plexus.classworlds.realm.ClassRealm.loadClass(ClassRealm.java:239)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:429)
+	at org.eclipse.jetty.webapp.WebAppClassLoader.loadClass(WebAppClassLoader.java:382)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:249)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:395)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1349)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1320)
+	... 61 more
+[INFO ][2016/07/02 17:32:07399][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:32:22555][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:33:19649][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 17:33:19757][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 17:33:19 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 17:33:19801][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 17:33:20164][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 17:33:20172][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [INFO ][2016/07/02 17:33:20730][org.springframework.jdbc.datasource.DriverManagerDataSource.setDriverClassName(DriverManagerDataSource.java:133)]
+Loaded JDBC driver: com.mysql.jdbc.Driver
+ [INFO ][2016/07/02 17:33:2115 ][org.hibernate.annotations.common.reflection.java.JavaReflectionManager.<clinit>(JavaReflectionManager.java:66)]
+HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+ [INFO ][2016/07/02 17:33:2133 ][org.hibernate.Version.logVersion(Version.java:54)]
+HHH000412: Hibernate Core {4.3.10.Final}
+ [INFO ][2016/07/02 17:33:2139 ][org.hibernate.cfg.Environment.<clinit>(Environment.java:239)]
+HHH000206: hibernate.properties not found
+ [INFO ][2016/07/02 17:33:2142 ][org.hibernate.cfg.Environment.buildBytecodeProvider(Environment.java:346)]
+HHH000021: Bytecode provider name : javassist
+ [INFO ][2016/07/02 17:33:22489][org.hibernate.dialect.Dialect.<init>(Dialect.java:145)]
+HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+ [WARN ][2016/07/02 17:33:22662][org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:487)]
+Exception encountered during context initialization - cancelling refresh attempt
+ org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: No identifier specified for entity: com.muran.model.Column
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:155)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.server.Server.start(Server.java:342)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:290)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:68)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:564)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:360)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:168)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.hibernate.AnnotationException: No identifier specified for entity: com.muran.model.Column
+	at org.hibernate.cfg.InheritanceState.determineDefaultAccessType(InheritanceState.java:277)
+	at org.hibernate.cfg.InheritanceState.getElementsToProcess(InheritanceState.java:224)
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:775)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processAnnotatedClassesQueue(Configuration.java:3845)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processMetadata(Configuration.java:3799)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1412)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1846)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1930)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:372)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:454)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:439)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 63 more
+[ERROR][2016/07/02 17:33:22684][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:331)]
+Context initialization failed
+ org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sessionFactory' defined in class path resource [applicationContext.xml]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: No identifier specified for entity: com.muran.model.Column
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:736)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:788)
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:434)
+	at org.eclipse.jetty.server.handler.ContextHandler.startContext(ContextHandler.java:780)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:284)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1322)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:732)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:490)
+	at org.eclipse.jetty.maven.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:281)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:155)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:118)
+	at org.eclipse.jetty.server.Server.start(Server.java:342)
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:100)
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:60)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:290)
+	at org.eclipse.jetty.maven.plugin.JettyServer.doStart(JettyServer.java:68)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:69)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:564)
+	at org.eclipse.jetty.maven.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:360)
+	at org.eclipse.jetty.maven.plugin.JettyRunMojo.execute(JettyRunMojo.java:168)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:145)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:116)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:80)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:307)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:193)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:106)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:862)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:286)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:197)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: org.hibernate.AnnotationException: No identifier specified for entity: com.muran.model.Column
+	at org.hibernate.cfg.InheritanceState.determineDefaultAccessType(InheritanceState.java:277)
+	at org.hibernate.cfg.InheritanceState.getElementsToProcess(InheritanceState.java:224)
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:775)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processAnnotatedClassesQueue(Configuration.java:3845)
+	at org.hibernate.cfg.Configuration$MetadataSourceQueue.processMetadata(Configuration.java:3799)
+	at org.hibernate.cfg.Configuration.secondPassCompile(Configuration.java:1412)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1846)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1930)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBuilder.buildSessionFactory(LocalSessionFactoryBuilder.java:372)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.buildSessionFactory(LocalSessionFactoryBean.java:454)
+	at org.springframework.orm.hibernate4.LocalSessionFactoryBean.afterPropertiesSet(LocalSessionFactoryBean.java:439)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 63 more
+[INFO ][2016/07/02 17:36:50441][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:40:07509][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:40:37828][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:41:58673][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:42:08780][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:42:49190][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:43:19511][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:43:34666][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:43:44770][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:43:59928][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:44:20146][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:44:35304][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:44:40358][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:45:05621][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:45:10682][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:45:25841][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:45:4657 ][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:46:01219][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:46:21431][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:46:31541][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:46:51749][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:47:11965][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:47:32183][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:47:52389][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:48:5314 ][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 17:49:13197][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 17:49:13288][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 17:49:13 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 17:49:13338][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 17:49:13753][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 17:49:13761][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [INFO ][2016/07/02 17:49:14142][org.springframework.jdbc.datasource.DriverManagerDataSource.setDriverClassName(DriverManagerDataSource.java:133)]
+Loaded JDBC driver: com.mysql.jdbc.Driver
+ [INFO ][2016/07/02 17:49:14334][org.hibernate.annotations.common.reflection.java.JavaReflectionManager.<clinit>(JavaReflectionManager.java:66)]
+HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+ [INFO ][2016/07/02 17:49:14341][org.hibernate.Version.logVersion(Version.java:54)]
+HHH000412: Hibernate Core {4.3.10.Final}
+ [INFO ][2016/07/02 17:49:14344][org.hibernate.cfg.Environment.<clinit>(Environment.java:239)]
+HHH000206: hibernate.properties not found
+ [INFO ][2016/07/02 17:49:14346][org.hibernate.cfg.Environment.buildBytecodeProvider(Environment.java:346)]
+HHH000021: Bytecode provider name : javassist
+ [INFO ][2016/07/02 17:49:1537 ][org.hibernate.dialect.Dialect.<init>(Dialect.java:145)]
+HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+ [INFO ][2016/07/02 17:49:15207][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator.initiateService(TransactionFactoryInitiator.java:62)]
+HHH000399: Using default transaction strategy (direct JDBC transactions)
+ [INFO ][2016/07/02 17:49:15228][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory.<init>(ASTQueryTranslatorFactory.java:47)]
+HHH000397: Using ASTQueryTranslatorFactory
+ [INFO ][2016/07/02 17:49:15374][org.hibernate.validator.util.Version.<clinit>(Version.java:24)]
+Hibernate Validator 4.2.0.Final
+ [INFO ][2016/07/02 17:49:15981][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:207)]
+HHH000228: Running hbm2ddl schema update
+ [INFO ][2016/07/02 17:49:15981][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:218)]
+HHH000102: Fetching database metadata
+ [INFO ][2016/07/02 17:49:1621 ][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:230)]
+HHH000396: Updating schema
+ [INFO ][2016/07/02 17:49:1627 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_COLUMN_ITEM
+ [INFO ][2016/07/02 17:49:1631 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_WECHAT_USER
+ [INFO ][2016/07/02 17:49:1634 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_COLUMN_ITEM
+ [INFO ][2016/07/02 17:49:1637 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_WECHAT_USER
+ [INFO ][2016/07/02 17:49:1643 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_COLUMN_ITEM
+ [INFO ][2016/07/02 17:49:1646 ][org.hibernate.tool.hbm2ddl.DatabaseMetadata.getTableMetadata(DatabaseMetadata.java:147)]
+HHH000262: Table not found: TB_WECHAT_USER
+ [INFO ][2016/07/02 17:49:17182][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:267)]
+HHH000232: Schema update complete
+ [INFO ][2016/07/02 17:49:17349][org.springframework.orm.hibernate4.HibernateTransactionManager.afterPropertiesSet(HibernateTransactionManager.java:360)]
+Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@170cd3b6] of Hibernate SessionFactory for HibernateTransactionManager
+ [INFO ][2016/07/02 17:49:17590][com.muran.application.MuranSpringApplicationListener.onApplicationEvent(MuranSpringApplicationListener.java:18)]
+muran spring context listener: runtime=0
+ [WARN ][2016/07/02 17:49:17796][org.hibernate.engine.jdbc.spi.SqlExceptionHelper.logExceptions(SqlExceptionHelper.java:144)]
+SQL Error: 1146, SQLState: 42S02
+ [ERROR][2016/07/02 17:49:17796][org.hibernate.engine.jdbc.spi.SqlExceptionHelper.logExceptions(SqlExceptionHelper.java:146)]
+Table 'jwhwxt.sys_cache' doesn't exist
+ [INFO ][2016/07/02 17:49:17802][com.muran.application.MuranSpringApplicationListener.onApplicationEvent(MuranSpringApplicationListener.java:18)]
+muran spring context listener: runtime=1
+ [INFO ][2016/07/02 17:49:17804][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)]
+Root WebApplicationContext: initialization completed in 4602 ms
+ [INFO ][2016/07/02 17:49:17804][com.muran.application.MuranServletContextListener.contextInitialized(MuranServletContextListener.java:28)]
+contextInitialized
+ [INFO ][2016/07/02 17:49:17805][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:62)]
+配置文件地址:-->common.properties
+ [INFO ][2016/07/02 17:49:17805][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:64)]
+配置文件地址:-->file:/Users/wxz/projects/jwhwxt/target/classes/common.properties
+ [INFO ][2016/07/02 17:49:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:50:17815][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:51:17812][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:52:17813][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:53:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:54:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:55:17814][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:56:17814][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:57:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:58:17814][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 17:59:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:00:17810][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:01:17811][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:01:55516][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 18:01:5648 ][org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:862)]
+Closing Root WebApplicationContext: startup date [Sat Jul 02 17:49:13 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 18:02:09484][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 18:02:09579][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 18:02:09 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 18:02:09612][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 18:02:100  ][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 18:02:109  ][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [INFO ][2016/07/02 18:02:10318][org.springframework.jdbc.datasource.DriverManagerDataSource.setDriverClassName(DriverManagerDataSource.java:133)]
+Loaded JDBC driver: com.mysql.jdbc.Driver
+ [INFO ][2016/07/02 18:02:10461][org.hibernate.annotations.common.reflection.java.JavaReflectionManager.<clinit>(JavaReflectionManager.java:66)]
+HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+ [INFO ][2016/07/02 18:02:10471][org.hibernate.Version.logVersion(Version.java:54)]
+HHH000412: Hibernate Core {4.3.10.Final}
+ [INFO ][2016/07/02 18:02:10474][org.hibernate.cfg.Environment.<clinit>(Environment.java:239)]
+HHH000206: hibernate.properties not found
+ [INFO ][2016/07/02 18:02:10477][org.hibernate.cfg.Environment.buildBytecodeProvider(Environment.java:346)]
+HHH000021: Bytecode provider name : javassist
+ [INFO ][2016/07/02 18:02:10815][org.hibernate.dialect.Dialect.<init>(Dialect.java:145)]
+HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+ [INFO ][2016/07/02 18:02:10944][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator.initiateService(TransactionFactoryInitiator.java:62)]
+HHH000399: Using default transaction strategy (direct JDBC transactions)
+ [INFO ][2016/07/02 18:02:10948][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory.<init>(ASTQueryTranslatorFactory.java:47)]
+HHH000397: Using ASTQueryTranslatorFactory
+ [INFO ][2016/07/02 18:02:117  ][org.hibernate.validator.util.Version.<clinit>(Version.java:24)]
+Hibernate Validator 4.2.0.Final
+ [INFO ][2016/07/02 18:02:11350][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:207)]
+HHH000228: Running hbm2ddl schema update
+ [INFO ][2016/07/02 18:02:11350][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:218)]
+HHH000102: Fetching database metadata
+ [INFO ][2016/07/02 18:02:11393][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:230)]
+HHH000396: Updating schema
+ [INFO ][2016/07/02 18:02:11431][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:65)]
+HHH000261: Table found: jwhwxt.tb_column_item
+ [INFO ][2016/07/02 18:02:11432][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:66)]
+HHH000037: Columns: [isposter, modifytime, name, posterurl, parentid, isshowposter, type, modifyman, autoid, outurl, columnkey, url]
+ [INFO ][2016/07/02 18:02:11433][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:68)]
+HHH000108: Foreign keys: []
+ [INFO ][2016/07/02 18:02:11434][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:69)]
+HHH000126: Indexes: [primary]
+ [INFO ][2016/07/02 18:02:11451][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:65)]
+HHH000261: Table found: jwhwxt.tb_wechat_user
+ [INFO ][2016/07/02 18:02:11452][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:66)]
+HHH000037: Columns: [nickname, headimg, openid, autoid, watched]
+ [INFO ][2016/07/02 18:02:11452][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:68)]
+HHH000108: Foreign keys: []
+ [INFO ][2016/07/02 18:02:11453][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:69)]
+HHH000126: Indexes: [primary, uk_hgsyryei05qpev9v8ckp45tx8]
+ [INFO ][2016/07/02 18:02:11454][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:267)]
+HHH000232: Schema update complete
+ [INFO ][2016/07/02 18:02:11618][org.springframework.orm.hibernate4.HibernateTransactionManager.afterPropertiesSet(HibernateTransactionManager.java:360)]
+Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@4b1f5d8c] of Hibernate SessionFactory for HibernateTransactionManager
+ [INFO ][2016/07/02 18:02:11809][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)]
+Root WebApplicationContext: initialization completed in 2321 ms
+ [INFO ][2016/07/02 18:02:11809][com.muran.application.MuranServletContextListener.contextInitialized(MuranServletContextListener.java:28)]
+contextInitialized
+ [INFO ][2016/07/02 18:02:11810][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:62)]
+配置文件地址:-->common.properties
+ [INFO ][2016/07/02 18:02:11811][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:64)]
+配置文件地址:-->file:/Users/wxz/projects/jwhwxt/target/classes/common.properties
+ [INFO ][2016/07/02 18:02:11814][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:03:11818][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:03:54805][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:30)]
+getIpAddress(HttpServletRequest) - X-Forwarded-For - String ip=null
+ [INFO ][2016/07/02 18:03:54807][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:37)]
+getIpAddress(HttpServletRequest) - Proxy-Client-IP - String ip=null
+ [INFO ][2016/07/02 18:03:54808][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:43)]
+getIpAddress(HttpServletRequest) - WL-Proxy-Client-IP - String ip=null
+ [INFO ][2016/07/02 18:03:54808][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:49)]
+getIpAddress(HttpServletRequest) - HTTP_CLIENT_IP - String ip=null
+ [INFO ][2016/07/02 18:03:54809][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:55)]
+getIpAddress(HttpServletRequest) - HTTP_X_FORWARDED_FOR - String ip=null
+ [INFO ][2016/07/02 18:03:54809][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:61)]
+getIpAddress(HttpServletRequest) - getRemoteAddr - String ip=127.0.0.1
+ [INFO ][2016/07/02 18:03:54817][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:28)]
+拦截到异常: NullPointerException
+ [ERROR][2016/07/02 18:03:54818][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:39)]
+服务器异常,请运维处理:
+ [ERROR][2016/07/02 18:03:54823][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+com.muran.api.AbstractApi.context(AbstractApi.java:100)
+ [ERROR][2016/07/02 18:03:54824][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+com.muran.api.ColumnsApi.getCommunityUrl(ColumnsApi.java:68)
+ [ERROR][2016/07/02 18:03:54824][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+ [ERROR][2016/07/02 18:03:54824][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+ [ERROR][2016/07/02 18:03:54825][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+ [ERROR][2016/07/02 18:03:54825][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+java.lang.reflect.Method.invoke(Method.java:606)
+ [ERROR][2016/07/02 18:03:54826][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81)
+ [ERROR][2016/07/02 18:03:54826][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:144)
+ [ERROR][2016/07/02 18:03:54827][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:161)
+ [ERROR][2016/07/02 18:03:54828][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:160)
+ [ERROR][2016/07/02 18:03:54828][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:99)
+ [ERROR][2016/07/02 18:03:54828][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:389)
+ [ERROR][2016/07/02 18:03:54829][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:347)
+ [ERROR][2016/07/02 18:03:54829][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:102)
+ [ERROR][2016/07/02 18:03:54830][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:309)
+ [ERROR][2016/07/02 18:03:54830][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+ [ERROR][2016/07/02 18:03:54830][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+ [ERROR][2016/07/02 18:03:54831][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+ [ERROR][2016/07/02 18:03:54831][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+ [ERROR][2016/07/02 18:03:54831][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+ [ERROR][2016/07/02 18:03:54832][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+ [ERROR][2016/07/02 18:03:54832][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:292)
+ [ERROR][2016/07/02 18:03:54833][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1139)
+ [ERROR][2016/07/02 18:03:54834][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:460)
+ [ERROR][2016/07/02 18:03:54835][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+ [ERROR][2016/07/02 18:03:54835][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:334)
+ [ERROR][2016/07/02 18:03:54836][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:221)
+ [ERROR][2016/07/02 18:03:54836][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:696)
+ [ERROR][2016/07/02 18:03:54836][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1515)
+ [ERROR][2016/07/02 18:03:54837][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+com.muran.filter.CrossDomainFilter.doFilter(CrossDomainFilter.java:42)
+ [ERROR][2016/07/02 18:03:54837][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:344)
+ [ERROR][2016/07/02 18:03:54838][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:261)
+ [ERROR][2016/07/02 18:03:54838][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1503)
+ [ERROR][2016/07/02 18:03:54839][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:85)
+ [ERROR][2016/07/02 18:03:54839][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+ [ERROR][2016/07/02 18:03:54839][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1495)
+ [ERROR][2016/07/02 18:03:54840][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:519)
+ [ERROR][2016/07/02 18:03:54840][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:138)
+ [ERROR][2016/07/02 18:03:54841][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:564)
+ [ERROR][2016/07/02 18:03:54841][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:213)
+ [ERROR][2016/07/02 18:03:54841][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1097)
+ [ERROR][2016/07/02 18:03:54842][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:448)
+ [ERROR][2016/07/02 18:03:54842][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:175)
+ [ERROR][2016/07/02 18:03:54842][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1031)
+ [ERROR][2016/07/02 18:03:54843][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:136)
+ [ERROR][2016/07/02 18:03:54843][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:200)
+ [ERROR][2016/07/02 18:03:54844][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:109)
+ [ERROR][2016/07/02 18:03:54844][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:97)
+ [ERROR][2016/07/02 18:03:54844][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.Server.handle(Server.java:446)
+ [ERROR][2016/07/02 18:03:54845][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:271)
+ [ERROR][2016/07/02 18:03:54845][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:246)
+ [ERROR][2016/07/02 18:03:54845][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.io.AbstractConnection$ReadCallback.run(AbstractConnection.java:358)
+ [ERROR][2016/07/02 18:03:54846][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:601)
+ [ERROR][2016/07/02 18:03:54846][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:532)
+ [ERROR][2016/07/02 18:03:54847][com.muran.api.exception.handler.ExceptionMapperSupport.toResponse(ExceptionMapperSupport.java:43)]
+java.lang.Thread.run(Thread.java:745)
+ [INFO ][2016/07/02 18:04:11817][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:05:11815][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:06:11819][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:07:11816][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:08:11815][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:09:11817][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:10:11819][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:10:13160][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 18:10:13792][org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:862)]
+Closing Root WebApplicationContext: startup date [Sat Jul 02 18:02:09 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 18:10:14462][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:285)]
+Root WebApplicationContext: initialization started
+ [INFO ][2016/07/02 18:10:14546][org.springframework.context.support.AbstractApplicationContext.prepareRefresh(AbstractApplicationContext.java:510)]
+Refreshing Root WebApplicationContext: startup date [Sat Jul 02 18:10:14 CST 2016]; root of context hierarchy
+ [INFO ][2016/07/02 18:10:14591][org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:317)]
+Loading XML bean definitions from class path resource [applicationContext.xml]
+ [INFO ][2016/07/02 18:10:14932][org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:172)]
+Loading properties file from file [/Users/wxz/projects/jwhwxt/target/classes/mysql_spring.properties]
+ [INFO ][2016/07/02 18:10:14938][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.<init>(AutowiredAnnotationBeanPostProcessor.java:153)]
+JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+ [INFO ][2016/07/02 18:10:15222][org.springframework.jdbc.datasource.DriverManagerDataSource.setDriverClassName(DriverManagerDataSource.java:133)]
+Loaded JDBC driver: com.mysql.jdbc.Driver
+ [INFO ][2016/07/02 18:10:15338][org.hibernate.annotations.common.reflection.java.JavaReflectionManager.<clinit>(JavaReflectionManager.java:66)]
+HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+ [INFO ][2016/07/02 18:10:15350][org.hibernate.Version.logVersion(Version.java:54)]
+HHH000412: Hibernate Core {4.3.10.Final}
+ [INFO ][2016/07/02 18:10:15353][org.hibernate.cfg.Environment.<clinit>(Environment.java:239)]
+HHH000206: hibernate.properties not found
+ [INFO ][2016/07/02 18:10:15355][org.hibernate.cfg.Environment.buildBytecodeProvider(Environment.java:346)]
+HHH000021: Bytecode provider name : javassist
+ [INFO ][2016/07/02 18:10:16472][org.hibernate.dialect.Dialect.<init>(Dialect.java:145)]
+HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+ [INFO ][2016/07/02 18:10:16584][org.hibernate.engine.transaction.internal.TransactionFactoryInitiator.initiateService(TransactionFactoryInitiator.java:62)]
+HHH000399: Using default transaction strategy (direct JDBC transactions)
+ [INFO ][2016/07/02 18:10:16646][org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory.<init>(ASTQueryTranslatorFactory.java:47)]
+HHH000397: Using ASTQueryTranslatorFactory
+ [INFO ][2016/07/02 18:10:16692][org.hibernate.validator.util.Version.<clinit>(Version.java:24)]
+Hibernate Validator 4.2.0.Final
+ [INFO ][2016/07/02 18:10:16950][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:207)]
+HHH000228: Running hbm2ddl schema update
+ [INFO ][2016/07/02 18:10:16950][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:218)]
+HHH000102: Fetching database metadata
+ [INFO ][2016/07/02 18:10:16983][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:230)]
+HHH000396: Updating schema
+ [INFO ][2016/07/02 18:10:17333][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:65)]
+HHH000261: Table found: jwhwxt.tb_column_item
+ [INFO ][2016/07/02 18:10:17334][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:66)]
+HHH000037: Columns: [isposter, modifytime, name, posterurl, parentid, isshowposter, type, modifyman, autoid, outurl, columnkey, url]
+ [INFO ][2016/07/02 18:10:17334][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:68)]
+HHH000108: Foreign keys: []
+ [INFO ][2016/07/02 18:10:17335][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:69)]
+HHH000126: Indexes: [primary]
+ [INFO ][2016/07/02 18:10:17350][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:65)]
+HHH000261: Table found: jwhwxt.tb_wechat_user
+ [INFO ][2016/07/02 18:10:17351][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:66)]
+HHH000037: Columns: [nickname, headimg, openid, autoid, watched]
+ [INFO ][2016/07/02 18:10:17351][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:68)]
+HHH000108: Foreign keys: []
+ [INFO ][2016/07/02 18:10:17352][org.hibernate.tool.hbm2ddl.TableMetadata.<init>(TableMetadata.java:69)]
+HHH000126: Indexes: [primary, uk_hgsyryei05qpev9v8ckp45tx8]
+ [INFO ][2016/07/02 18:10:17353][org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:267)]
+HHH000232: Schema update complete
+ [INFO ][2016/07/02 18:10:17498][org.springframework.orm.hibernate4.HibernateTransactionManager.afterPropertiesSet(HibernateTransactionManager.java:360)]
+Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@7411b419] of Hibernate SessionFactory for HibernateTransactionManager
+ [INFO ][2016/07/02 18:10:17662][org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:325)]
+Root WebApplicationContext: initialization completed in 3197 ms
+ [INFO ][2016/07/02 18:10:17663][com.muran.application.MuranServletContextListener.contextInitialized(MuranServletContextListener.java:28)]
+contextInitialized
+ [INFO ][2016/07/02 18:10:17663][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:62)]
+配置文件地址:-->common.properties
+ [INFO ][2016/07/02 18:10:17664][com.muran.application.GlobalConfig.getInstance(GlobalConfig.java:64)]
+配置文件地址:-->file:/Users/wxz/projects/jwhwxt/target/classes/common.properties
+ [INFO ][2016/07/02 18:10:17666][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:10:27447][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:30)]
+getIpAddress(HttpServletRequest) - X-Forwarded-For - String ip=null
+ [INFO ][2016/07/02 18:10:27448][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:37)]
+getIpAddress(HttpServletRequest) - Proxy-Client-IP - String ip=null
+ [INFO ][2016/07/02 18:10:27448][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:43)]
+getIpAddress(HttpServletRequest) - WL-Proxy-Client-IP - String ip=null
+ [INFO ][2016/07/02 18:10:27449][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:49)]
+getIpAddress(HttpServletRequest) - HTTP_CLIENT_IP - String ip=null
+ [INFO ][2016/07/02 18:10:27449][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:55)]
+getIpAddress(HttpServletRequest) - HTTP_X_FORWARDED_FOR - String ip=null
+ [INFO ][2016/07/02 18:10:27449][com.muran.util.net.NetworkUtil.getIpAddress(NetworkUtil.java:61)]
+getIpAddress(HttpServletRequest) - getRemoteAddr - String ip=127.0.0.1
+ [INFO ][2016/07/02 18:11:11818][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:11:17670][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:12:17669][com.muran.application.MuranServletContextListener$1.run(MuranServletContextListener.java:36)]
+执行定时任务
+ [INFO ][2016/07/02 18:13:15915][com.muran.application.MuranServletContextListener.contextDestroyed(MuranServletContextListener.java:21)]
+contextDestroyed
+ [INFO ][2016/07/02 18:13:16943][org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:862)]
+Closing Root WebApplicationContext: startup date [Sat Jul 02 18:10:14 CST 2016]; root of context hierarchy
+ 
