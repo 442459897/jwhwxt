@@ -33,7 +33,7 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 		user.setNickName("name");
 		user.setWatched(true);	
 		try {
-			return Response.status(Status.FOUND).location(new URI("http://nc.mrshare.cn")).build();
+			return Response.status(Status.FOUND).location(new URI("http://n2c.mrshare.cn")).build();
 		} catch (Exception e) {
 			// TODO: handle exception
 			return Response.status(Status.NOT_FOUND).build();
