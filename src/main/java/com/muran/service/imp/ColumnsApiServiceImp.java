@@ -27,6 +27,7 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 	@Override
 	public Response getColumnPosterInfoList(Context context) {
 		// TODO Auto-generated method stub
+		
 		WeChatUser user=new WeChatUser();
 		user.setAutoId(1);
 		user.setHeadImg("img");

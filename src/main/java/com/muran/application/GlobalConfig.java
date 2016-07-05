@@ -31,6 +31,12 @@ public class GlobalConfig {
 	public static final String KEY_TEAM_AD_TYPE = "team_ad_type";
 	public static final String KEY_TEAM_AD_SUBTYPE = "team_ad_subType";
 
+	
+	public static final String KEY_APPID = "wx.appid";
+	public static final String KEY_AUTHURL = "wx.authurl";
+	public static final String KEY_REDIRECT_URI = "wx.redirect_uri";
+	public static final String KEY_WEB_URI = "weburi";
+	public static final String KEY_APP_SECRET ="wx.appsecret";
 
 
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
