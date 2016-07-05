@@ -37,7 +37,7 @@ public class MuranServletContextListener implements ServletContextListener {
                 TaskManager.runTask();
             }
         };
-        service.scheduleAtFixedRate(runnable,0,1, TimeUnit.MINUTES);
+        //service.scheduleAtFixedRate(runnable,0,1, TimeUnit.MINUTES);
     }
 
     private void stopScheduleService() {
