@@ -33,7 +33,7 @@ public class WeChatApi extends AbstractApi {
 			throws URISyntaxException {
 		String code = request.getParameter("code");
 		if (code != null && code != "") {
-			log.debug("微信回调，code：" + code);
+			log.info("微信回调，code：" + code);
 			// 微信回调
 			// 根据code获取token 将token存储在缓存中
 			snsToken = SnsAPI.oauth2AccessToken(
@@ -43,7 +43,7 @@ public class WeChatApi extends AbstractApi {
 					+ (snsToken.getExpires_in() - 120) * 1000;// token创建时间
 																// 提前120秒过期
 																// 精确到毫秒
-			log.debug("微信回调，获取token：" + snsToken.getAccess_token() + ",openid:"
+			log.info("微信回调，获取token：" + snsToken.getAccess_token() + ",openid:"
 					+ snsToken.getOpenid());
 			// 获取用户信息
 			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
@@ -51,12 +51,12 @@ public class WeChatApi extends AbstractApi {
 			// 存储到session
 			request.getSession().setAttribute("user", user);
 
-			log.debug("微信回调，获取userinfo  nickname：" + user.getNickname());
+			log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
 
 		}
 		// token 是否存在
 		if (snsToken == null) {
-			log.debug("第一次调用，token为null，开始请求网页授权……");
+			log.info("第一次调用，token为null，开始请求网页授权……");
 			// 不存在重新授权
 			String oauthUrl = OAuthReposition(uri, "1");
 			return Response.status(Status.FOUND).location(new URI(oauthUrl))
@@ -64,16 +64,16 @@ public class WeChatApi extends AbstractApi {
 		}
 		// 判断token是否过期，过期的话使用refreshtoken刷新
 		if (System.currentTimeMillis() > snsTokenExpiresTime) {
-			log.debug("token过期，开始请求刷新token……");
+			log.info("token过期，开始请求刷新token……");
 			snsToken = SnsAPI.oauth2RefreshToken(GlobalConfig.KEY_APPID,
 					snsToken.getRefresh_token());
 			snsTokenExpiresTime = System.currentTimeMillis()
 					+ (snsToken.getExpires_in() - 120) * 1000;// token创建时间
 																// 提前120秒过期
 																// 精确到毫秒
-			log.debug("刷新token结果，errcode：" + snsToken.getErrcode());
+			log.info("刷新token结果，errcode：" + snsToken.getErrcode());
 			if (snsToken.getErrcode().equals("42002")) {
-				log.debug("刷新token失败，重新授权开始……");
+				log.info("刷新token失败，重新授权开始……");
 				// freshToken超时 即过期 重新授权
 				String oauthUrl = OAuthReposition(uri, "1");
 				return Response.status(Status.FOUND)
@@ -82,11 +82,11 @@ public class WeChatApi extends AbstractApi {
 		}
 		// 检查用户信息是否存在
 		if (request.getSession().getAttribute("user") == null) {
-			log.debug("用户信息不存在，重新获取用户信息……");
+			log.info("用户信息不存在，重新获取用户信息……");
 			// 获取用户信息
 			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 					snsToken.getOpenid(), "zh_CN");
-			log.debug("重新获取用户信息,结果：" + user.getErrcode());
+			log.info("重新获取用户信息,结果：" + user.getErrcode());
 			// 存储到session
 			request.getSession().setAttribute("user", user);
 		}
