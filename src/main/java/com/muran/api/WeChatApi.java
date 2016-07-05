@@ -31,18 +31,17 @@ public class WeChatApi extends AbstractApi {
 	@Produces({ "application/json" })
 	public Response WeChatOAuth2(@QueryParam("uri") String uri)
 			throws URISyntaxException {
-		//如果没有获取到路由 默认为无路由
-		if (uri==null) {
-			uri="";
+		// 如果没有获取到路由 默认为无路由
+		if (uri == null) {
+			uri = "";
 		}
-		
+
 		String code = request.getParameter("code");
 		if (code != null && code != "") {
 			log.info("微信回调，code：" + code);
 			// 微信回调
 			// 根据code获取token 将token存储在缓存中
-			snsToken = SnsAPI.oauth2AccessToken(
-					GlobalConfig.KEY_APPID,
+			snsToken = SnsAPI.oauth2AccessToken(GlobalConfig.KEY_APPID,
 					GlobalConfig.KEY_APP_SECRET, code);
 			snsTokenExpiresTime = System.currentTimeMillis()
 					+ (snsToken.getExpires_in() - 120) * 1000;// token创建时间
@@ -53,8 +52,10 @@ public class WeChatApi extends AbstractApi {
 			// 获取用户信息
 			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 					snsToken.getOpenid(), "zh_CN");
-			// 存储到session
-			request.getSession().setAttribute("user", user);
+			if (user.isSuccess()) {
+				// 存储到session
+				request.getSession().setAttribute("user", user);
+			}
 
 			log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
 
@@ -92,8 +93,10 @@ public class WeChatApi extends AbstractApi {
 			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 					snsToken.getOpenid(), "zh_CN");
 			log.info("重新获取用户信息,结果：" + user.getErrcode());
-			// 存储到session
-			request.getSession().setAttribute("user", user);
+			if (user.isSuccess()) {
+				// 存储到session
+				request.getSession().setAttribute("user", user);
+			}
 		}
 		// 存在则直接跳转到响应的路由
 		return Response.status(Status.FOUND)
