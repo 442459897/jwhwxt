@@ -31,6 +31,11 @@ public class WeChatApi extends AbstractApi {
 	@Produces({ "application/json" })
 	public Response WeChatOAuth2(@QueryParam("uri") String uri)
 			throws URISyntaxException {
+		//如果没有获取到路由 默认为无路由
+		if (uri==null) {
+			uri="";
+		}
+		
 		String code = request.getParameter("code");
 		if (code != null && code != "") {
 			log.info("微信回调，code：" + code);
