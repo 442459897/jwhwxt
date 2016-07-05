@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import weixin.popular.api.SnsAPI;
+import weixin.popular.api.UserAPI;
 import weixin.popular.bean.sns.SnsToken;
 import weixin.popular.bean.user.User;
 
@@ -50,8 +51,10 @@ public class WeChatApi extends AbstractApi {
 			log.info("微信回调，获取token：" + snsToken.getAccess_token() + ",openid:"
 					+ snsToken.getOpenid());
 			// 获取用户信息
-			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
-					snsToken.getOpenid(), "zh_CN");
+			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
+			// snsToken.getOpenid(), "zh_CN"); 这种获取方法必须使用 snsapi_userinfo
+			User user = UserAPI.userInfo(snsToken.getAccess_token(),
+					snsToken.getOpenid());
 			if (user.isSuccess()) {
 				// 存储到session
 				request.getSession().setAttribute("user", user);
@@ -64,7 +67,7 @@ public class WeChatApi extends AbstractApi {
 		if (snsToken == null) {
 			log.info("第一次调用，token为null，开始请求网页授权……");
 			// 不存在重新授权
-			String oauthUrl = OAuthReposition(uri, "1");
+			String oauthUrl = OAuthReposition(uri, "1", "snsapi_base");
 			return Response.status(Status.FOUND).location(new URI(oauthUrl))
 					.build();
 		}
@@ -81,7 +84,7 @@ public class WeChatApi extends AbstractApi {
 			if (snsToken.getErrcode().equals("42002")) {
 				log.info("刷新token失败，重新授权开始……");
 				// freshToken超时 即过期 重新授权
-				String oauthUrl = OAuthReposition(uri, "1");
+				String oauthUrl = OAuthReposition(uri, "1", "snsapi_base");
 				return Response.status(Status.FOUND)
 						.location(new URI(oauthUrl)).build();
 			}
@@ -90,8 +93,10 @@ public class WeChatApi extends AbstractApi {
 		if (request.getSession().getAttribute("user") == null) {
 			log.info("用户信息不存在，重新获取用户信息……");
 			// 获取用户信息
-			User user = SnsAPI.userinfo(snsToken.getAccess_token(),
-					snsToken.getOpenid(), "zh_CN");
+			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
+			// snsToken.getOpenid(), "zh_CN");
+			User user = UserAPI.userInfo(snsToken.getAccess_token(),
+					snsToken.getOpenid());
 			log.info("重新获取用户信息,结果：" + user.getErrcode());
 			if (user.isSuccess()) {
 				// 存储到session
@@ -104,7 +109,7 @@ public class WeChatApi extends AbstractApi {
 
 	}
 
-	public static String OAuthReposition(String uri, String state) {
+	public static String OAuthReposition(String uri, String state, String scope) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(GlobalConfig.KEY_AUTHURL);
 		sb.append("?appid=");
@@ -114,7 +119,7 @@ public class WeChatApi extends AbstractApi {
 		sb.append(GlobalConfig.KEY_REDIRECT_URI);
 		sb.append("?uri=" + uri);
 		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
-		sb.append("&response_type=code&scope=snsapi_userinfo&state=");
+		sb.append("&response_type=code&scope=" + scope + "&state=");
 		sb.append(state);
 		sb.append("#wechat_redirect");
 		return sb.toString();
