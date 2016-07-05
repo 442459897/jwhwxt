@@ -106,7 +106,7 @@ public class WeChatApi extends AbstractApi {
 		sb.append(GlobalConfig.KEY_REDIRECT_URI);
 		sb.append("?uri=" + uri);
 		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
-		sb.append("&response_type=code&scope=snsapi_base&state=");
+		sb.append("&response_type=code&scope=snsapi_userinfo&state=");
 		sb.append(state);
 		sb.append("#wechat_redirect");
 		return sb.toString();
