@@ -14,8 +14,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import weixin.popular.api.SnsAPI;
+import weixin.popular.api.TokenAPI;
 import weixin.popular.api.UserAPI;
 import weixin.popular.bean.sns.SnsToken;
+import weixin.popular.bean.token.Token;
 import weixin.popular.bean.user.User;
 
 import com.muran.application.GlobalConfig;
@@ -25,6 +27,7 @@ import com.muran.application.GlobalConfig;
 public class WeChatApi extends AbstractApi {
 
 	public static SnsToken snsToken;
+	public static Token token;
 	public static long snsTokenExpiresTime;
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
 
@@ -53,19 +56,25 @@ public class WeChatApi extends AbstractApi {
 			// 获取用户信息
 			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 			// snsToken.getOpenid(), "zh_CN"); 这种获取方法必须使用 snsapi_userinfo
-			User user = UserAPI.userInfo(snsToken.getAccess_token(),
-					snsToken.getOpenid());
-			if (user.isSuccess()) {
-				// 存储到session
-				request.getSession().setAttribute("user", user);
-			}
 
-			log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
+			// 获取基础token信息 与snstoken不同
+			token = TokenAPI.token(GlobalConfig.KEY_APPID,
+					GlobalConfig.KEY_APP_SECRET);
+
+			if (token.isSuccess()) {
+				User user = UserAPI.userInfo(token.getAccess_token(),
+						snsToken.getOpenid());
+				if (user.isSuccess()) {
+					// 存储到session
+					request.getSession().setAttribute("user", user);
+				}
+				log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
+			}
 
 		}
 		// token 是否存在
-		if (snsToken == null) {
-			log.info("第一次调用，token为null，开始请求网页授权……");
+		if (snsToken == null || token == null) {
+			log.info("第一次调用，snstoken为null，开始请求网页授权……");
 			// 不存在重新授权
 			String oauthUrl = OAuthReposition(uri, "1", "snsapi_base");
 			return Response.status(Status.FOUND).location(new URI(oauthUrl))
@@ -81,13 +90,18 @@ public class WeChatApi extends AbstractApi {
 																// 提前120秒过期
 																// 精确到毫秒
 			log.info("刷新token结果，errcode：" + snsToken.getErrcode());
-			if (snsToken.getErrcode().equals("42002")) {
+
+			if (!snsToken.isSuccess()) {
 				log.info("刷新token失败，重新授权开始……");
 				// freshToken超时 即过期 重新授权
 				String oauthUrl = OAuthReposition(uri, "1", "snsapi_base");
 				return Response.status(Status.FOUND)
 						.location(new URI(oauthUrl)).build();
 			}
+
+			// 重新获取基础token信息 与snstoken不同
+			token = TokenAPI.token(GlobalConfig.KEY_APPID,
+					GlobalConfig.KEY_APP_SECRET);
 		}
 		// 检查用户信息是否存在
 		if (request.getSession().getAttribute("user") == null) {
@@ -95,7 +109,8 @@ public class WeChatApi extends AbstractApi {
 			// 获取用户信息
 			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 			// snsToken.getOpenid(), "zh_CN");
-			User user = UserAPI.userInfo(snsToken.getAccess_token(),
+
+			User user = UserAPI.userInfo(token.getAccess_token(),
 					snsToken.getOpenid());
 			log.info("重新获取用户信息,结果：" + user.getErrcode());
 			if (user.isSuccess()) {
