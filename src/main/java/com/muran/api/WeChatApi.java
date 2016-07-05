@@ -36,7 +36,8 @@ public class WeChatApi extends AbstractApi {
 			log.debug("微信回调，code：" + code);
 			// 微信回调
 			// 根据code获取token 将token存储在缓存中
-			snsToken = SnsAPI.oauth2AccessToken(GlobalConfig.KEY_APPID,
+			snsToken = SnsAPI.oauth2AccessToken(
+					GlobalConfig.KEY_APPID,
 					GlobalConfig.KEY_APP_SECRET, code);
 			snsTokenExpiresTime = System.currentTimeMillis()
 					+ (snsToken.getExpires_in() - 120) * 1000;// token创建时间

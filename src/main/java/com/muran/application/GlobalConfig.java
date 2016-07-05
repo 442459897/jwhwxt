@@ -11,11 +11,9 @@ import org.springframework.core.io.ClassPathResource;
 
 public class GlobalConfig {
 	/*
-	  	debug=true
-	 	qiniu_key=hYI5i25STq8lpV3LdWLKUS625DdpdoMhpInJrBvR
-	 	qiniu_secret=Fzr3BHhK9rm7IAvwg8bNL2_jRB_2tG04YTU_hHvG
-	 	qiniu_img_bucket=wxbox
-	 	qiniu_html_buketname=mxhtml
+	 * debug=true qiniu_key=hYI5i25STq8lpV3LdWLKUS625DdpdoMhpInJrBvR
+	 * qiniu_secret=Fzr3BHhK9rm7IAvwg8bNL2_jRB_2tG04YTU_hHvG
+	 * qiniu_img_bucket=wxbox qiniu_html_buketname=mxhtml
 	 */
 
 	public static final String KEY_DEBUG = "debug";
@@ -31,18 +29,16 @@ public class GlobalConfig {
 	public static final String KEY_TEAM_AD_TYPE = "team_ad_type";
 	public static final String KEY_TEAM_AD_SUBTYPE = "team_ad_subType";
 
-	
-	public static final String KEY_APPID = "wx.appid";
-	public static final String KEY_AUTHURL = "wx.authurl";
-	public static final String KEY_REDIRECT_URI = "wx.redirect_uri";
-	public static final String KEY_WEB_URI = "weburi";
-	public static final String KEY_APP_SECRET ="wx.appsecret";
-
-
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
 	private final static String COMMON_CONFIG_FILE = "WEB-INF" + File.separator
 			+ "classes" + File.separator + "common.properties";
 	Properties pro = new Properties();
+
+	public static String KEY_APPID;
+	public static String KEY_AUTHURL;
+	public static String KEY_REDIRECT_URI;
+	public static String KEY_WEB_URI;
+	public static String KEY_APP_SECRET;
 
 	private GlobalConfig(String configFileName) {
 		try {
@@ -51,6 +47,7 @@ public class GlobalConfig {
 			log.error("未找到配置文件common.properties");
 		}
 	}
+
 	private GlobalConfig(InputStream is) {
 		try {
 			pro.load(is);
@@ -63,13 +60,20 @@ public class GlobalConfig {
 
 	public synchronized static GlobalConfig getInstance(ServletContext context) {
 		if (instance == null) {
-			ClassPathResource comcrs = new ClassPathResource("common.properties");
-			//String path = context.getRealPath(File.separator);//使用classpath获取文件
+			ClassPathResource comcrs = new ClassPathResource(
+					"common.properties");
+			// String path =
+			// context.getRealPath(File.separator);//使用classpath获取文件
 			log.info("配置文件地址:-->" + comcrs.getPath());
 			try {
 				log.info("配置文件地址:-->" + comcrs.getURL());
-				//instance = new GlobalConfig(comcrs.getURL().toString());
+				// instance = new GlobalConfig(comcrs.getURL().toString());
 				instance = new GlobalConfig(comcrs.getInputStream());
+				KEY_APPID = instance.getConfig("wx.appid");
+				KEY_AUTHURL = instance.getConfig("wx.authurl");
+				KEY_REDIRECT_URI = instance.getConfig("wx.redirect_uri");
+				KEY_WEB_URI = instance.getConfig("weburi");
+				KEY_APP_SECRET = instance.getConfig("wx.appsecret");
 			} catch (IOException e) {
 				log.error(e, e);
 			}
@@ -90,9 +94,7 @@ public class GlobalConfig {
 	}
 
 	public String getConfig(String key) {
-		return pro.getProperty(key,"");
+		return pro.getProperty(key, "");
 	}
-
-	
 
 }
