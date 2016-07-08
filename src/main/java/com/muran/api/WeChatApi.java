@@ -4,31 +4,49 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import weixin.popular.api.MediaAPI;
 import weixin.popular.api.SnsAPI;
+import weixin.popular.api.TicketAPI;
 import weixin.popular.api.TokenAPI;
 import weixin.popular.api.UserAPI;
+import weixin.popular.bean.media.MediaGetResult;
 import weixin.popular.bean.sns.SnsToken;
+import weixin.popular.bean.ticket.Ticket;
 import weixin.popular.bean.token.Token;
 import weixin.popular.bean.user.User;
 
+import com.muran.api.exception.Code;
 import com.muran.application.GlobalConfig;
+import com.muran.dto.WxConfig;
+import com.muran.util.FileUtil;
+import com.muran.util.GenratorUtil;
+import com.muran.util.WxConfigUtil;
+import com.muran.util.GenratorUtil.SecurityCodeLevel;
+import com.muran.util.SecuritySHA;
+import com.muran.util.dataVerify.CommonVerify;
 
 @Path("/oauth2")
 @Component
 public class WeChatApi extends AbstractApi {
 
-	public static SnsToken snsToken;
-	public static Token token;
-	public static long snsTokenExpiresTime;
+	public static SnsToken snsToken;// 网页授权token
+	public static Token token;// 全局基础token
+	public static long snsTokenExpiresTime;// 网页授权token过期时间
+
+	public static Ticket ticket;// jsapi_ticket
+	public static long ticketExpiresTime;// jsapi_ticket过期时间
+
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
 
 	@GET
@@ -138,5 +156,116 @@ public class WeChatApi extends AbstractApi {
 		sb.append(state);
 		sb.append("#wechat_redirect");
 		return sb.toString();
+	}
+
+	@Path("/wxconfig")
+	@GET
+	@Produces({ "application/json" })
+	public Response WeChatOAuth2JsApi(@QueryParam("url") String url)
+			throws URISyntaxException {
+		if (!CommonVerify.verifyUrl(url)) {
+			// 若地址不正确 则提示参数错误
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
+		// 检测ticket是否存在或过期
+		if (ticket == null || System.currentTimeMillis() > ticketExpiresTime) {
+			// 请求ticket
+			// 检测token
+			if (System.currentTimeMillis() > snsTokenExpiresTime) {
+				return Response
+						.ok()
+						.location(
+								new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+										+ Code.BadRequestParams.getCode()))
+						.build();
+			}
+
+			// 获取ticket
+			ticket = TicketAPI.ticketGetticket(snsToken.getAccess_token());
+			if (!ticket.isSuccess()) {
+				ticket = null;
+				return Response
+						.ok()
+						.location(
+								new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+										+ Code.BadRequestParams.getCode()))
+						.build();
+			}
+
+			// 获取成功
+			ticketExpiresTime = System.currentTimeMillis()
+					+ (ticket.getExpires_in() - 120) * 1000;// ticket创建时间
+															// 提前120秒过期
+															// 精确到毫秒
+		}
+		// 若ticket存在并且有效 生成JS-SDK权限验证的签名
+		String noncestr = GenratorUtil.getSecurityCode(16,
+				SecurityCodeLevel.Hard, true);
+		int timestamp = Integer.parseInt(String.valueOf(System
+				.currentTimeMillis() / 1000));
+		// 组建签名体
+		StringBuilder sb = new StringBuilder();
+		sb.append("noncestr=" + noncestr + "&");
+		sb.append("jsapi_ticket=" + ticket.getTicket() + "&");
+		sb.append("timestamp=" + String.valueOf(timestamp) + "&");
+		sb.append("url=" + url);
+		// 进行sha1签名
+		String signature = SecuritySHA.SHA1(sb.toString());
+		// 组建返回实体
+		WxConfig config = new WxConfig();
+		config.setDebug(false);
+		config.setAppId(GlobalConfig.KEY_APPID);
+		config.setNoncestr(noncestr);
+		config.setSignature(signature);
+		config.setJsApiList(WxConfigUtil.jsApiList);
+		// 返回
+		return Response.ok().entity(config).build();
+
+	}
+
+	@Path("/wxmedia")
+	@POST
+	@Produces({ "application/json" })
+	public Response WeChatDownloadMedia(@FormParam("mediaId") String mediaId)
+			throws URISyntaxException {
+		// 获取用户信息
+		User user = (User) request.getSession().getAttribute("user");
+		if (user == null) {
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
+		// 检测token
+		if (token == null || System.currentTimeMillis() > snsTokenExpiresTime) {
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
+		// 获取临时素材
+		MediaGetResult result = MediaAPI.mediaGet(token.getAccess_token(),
+				mediaId, true);
+		if (!result.isSuccess()) {
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
+		// 将文件下载到本地
+		String basePath = request.getSession().getServletContext()
+				.getRealPath("/");
+		String path = basePath + "\\upload\\wx\\" + user.getOpenid();
+		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
+		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/" + user.getOpenid()
+				+ "/" + result.getFilename();
+		return Response.ok().entity(url).build();
 	}
 }

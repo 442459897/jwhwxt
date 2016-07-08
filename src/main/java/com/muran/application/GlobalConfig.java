@@ -39,6 +39,8 @@ public class GlobalConfig {
 	public static String KEY_REDIRECT_URI;
 	public static String KEY_WEB_URI;
 	public static String KEY_APP_SECRET;
+	public static String KEY_ERROR_PAGE;
+	public static String KEY_WEB_BASE;
 
 	private GlobalConfig(String configFileName) {
 		try {
@@ -74,6 +76,8 @@ public class GlobalConfig {
 				KEY_REDIRECT_URI = instance.getConfig("wx.redirect_uri");
 				KEY_WEB_URI = instance.getConfig("weburi");
 				KEY_APP_SECRET = instance.getConfig("wx.appsecret");
+				KEY_ERROR_PAGE = instance.getConfig("errorpage");
+				KEY_WEB_BASE = instance.getConfig("webbase");
 			} catch (IOException e) {
 				log.error(e, e);
 			}

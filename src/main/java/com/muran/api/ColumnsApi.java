@@ -27,7 +27,7 @@ import javax.ws.rs.*;
 @Consumes({ "application/json" })
 @Produces({ "application/json" })
 @io.swagger.annotations.Api(description = "the columns API")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-02T10:24:45.752+08:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class ColumnsApi extends AbstractApi {
     @Autowired
     ColumnsApiService service;
@@ -35,7 +35,7 @@ public class ColumnsApi extends AbstractApi {
     @Path("/{columnKey}/posters")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u83B7\u53D6\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", response = ColumnPosterInfo.class, tags={  })
+    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u83B7\u53D6\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", response = ColumnPosterInfo.class, tags={ "columns(栏目相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F\u83B7\u53D6\u6210\u529F\u3002", response = ColumnPosterInfo.class),
         
@@ -47,7 +47,7 @@ public class ColumnsApi extends AbstractApi {
     @Path("/posters")
     @Consumes({ "application/json" })
     @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u83B7\u53D6\u680F\u76EE\u6D77\u62A5\u4FE1\u606F\u5217\u8868", response = ColumnPosterInfoList.class, tags={  })
+    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u83B7\u53D6\u680F\u76EE\u6D77\u62A5\u4FE1\u606F\u5217\u8868", response = ColumnPosterInfoList.class, tags={ "columns(栏目相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F\u83B7\u53D6\u6210\u529F\u3002", response = ColumnPosterInfoList.class),
         
@@ -71,7 +71,7 @@ public class ColumnsApi extends AbstractApi {
     @Path("/{columnKey}/posters")
     @Consumes({ "application/x-www-form-urlencoded" })
     @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u8BBE\u7F6E\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", response = GeneralString.class, tags={  })
+    @io.swagger.annotations.ApiOperation(value = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", notes = "\u8BBE\u7F6E\u680F\u76EE\u6D77\u62A5\u4FE1\u606F", response = GeneralString.class, tags={ "columns(栏目相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u680F\u76EE\u6D77\u62A5\u8BBE\u7F6E\u6210\u529F\u3002", response = GeneralString.class),
         

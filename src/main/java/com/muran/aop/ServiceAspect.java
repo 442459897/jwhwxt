@@ -3,7 +3,7 @@ package com.muran.aop;
 import com.muran.api.Context;
 import com.muran.api.Session;
 import com.muran.api.exception.ServerException;
-import com.muran.service.AbstractService;
+import com.muran.api.service.AbstractService;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

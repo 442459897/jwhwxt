@@ -15,7 +15,7 @@ import java.util.List;
  **/
 
 @ApiModel(description = "\u680F\u76EE\u6D77\u62A5\u4FE1\u606F\u5217\u8868")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-02T10:24:45.752+08:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class ColumnPosterInfoList   {
   
   private List<ColumnPosterInfo> posters = new ArrayList<ColumnPosterInfo>();

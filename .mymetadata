@@ -3,7 +3,7 @@
   type="WEB"
   name="jwhwxt"
   id="myeclipse.1467283149861"
-  context-root="/propertyServer"
+  context-root="/jwhwxtServer"
   j2ee-spec="1.7"
   archive="jwhwxt.war">
   <attributes>

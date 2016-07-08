@@ -1,17 +1,15 @@
 package com.muran.api;
 
-import com.muran.api.ClientInfo;
-import com.muran.api.Context;
-import com.muran.api.Session;
-import com.muran.application.GlobalConfig;
-import com.muran.application.SpringContextHolder;
-import com.muran.application.cache.ServerCache;
-import com.muran.util.net.NetworkUtil;
-import org.apache.log4j.Logger;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.Enumeration;
+
+import org.apache.log4j.Logger;
+
+import com.muran.application.GlobalConfig;
+import com.muran.application.cache.ServerCache;
+import com.muran.util.UserTokenUtil;
+import com.muran.util.net.NetworkUtil;
 
 /**
  * Created by Steven on 4/29/16.
@@ -29,6 +27,50 @@ public abstract class AbstractApi {
 	@javax.ws.rs.core.Context
 	HttpServletRequest request;
 
+	public String getUsername() {
+		return UserTokenUtil.getUserName(getUserToken());
+	}
+
+	// 获取用户token UserToken
+	public String getUserToken() {
+		// to do
+		return request.getHeader("UserToken");
+	}
+	
+	public String getUserSys() {
+		String str = request.getHeader("UserSys");
+		if (str == null)
+			str = "";
+		return str;
+	}
+
+	// 获取请求时间戳 time
+	public Date getRequestTime() {
+		// to do
+		String timeStr = getTimeInMill();
+		if (timeStr == null)
+			return null;
+		try {
+			long timeLong = Long.parseLong(timeStr);
+			Date time = new Date();
+			time.setTime(timeLong);
+			return time;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	// 获取请求时间戳字符串 Time
+	public String getTimeInMill() {
+		return request.getHeader("Time");
+	}
+
+	// 获取SignCode
+	public String getSignCode() {
+		return request.getHeader("SignCode");
+	}
+
 	public Context context() {
 		if (GlobalConfig.getInstance().getConfig(GlobalConfig.KEY_DEBUG)
 				.equals("true")
@@ -37,7 +79,7 @@ public abstract class AbstractApi {
 			Context context = new Context();
 			Session session = new Session("debug_" + new Date().getTime());
 			session.setCreateTime(new Date());
-			//根据用户类型不同调用不同的验证
+			// 根据用户类型不同调用不同的验证
 			String userType = request.getHeader("userType");
 			if (userType == "user") {
 				session.setUserInfo(null);
@@ -86,16 +128,16 @@ public abstract class AbstractApi {
 				.get(HEADER_KEY_SESSION_ID + sessionId);
 		if (session == null) {
 			session = new Session(sessionId);
-//			// 从数据中读出来用户信息.(由于一天内未使用,清楚了缓存数据).
-//			UserInfo userInfo = null;
-//			IUserService userService = SpringContextHolder
-//					.getBean(IUserService.class);
-//			if (openId != null)
-//				userInfo = userService.getUserInfoByOpenId(openId);
-//			if (userInfo == null)
-//				userInfo = userService.getUserInfoBySessionId(sessionId);
-//			session.setUserInfo(userInfo);
-//			cache.put(HEADER_KEY_SESSION_ID + sessionId, session);
+			// // 从数据中读出来用户信息.(由于一天内未使用,清楚了缓存数据).
+			// UserInfo userInfo = null;
+			// IUserService userService = SpringContextHolder
+			// .getBean(IUserService.class);
+			// if (openId != null)
+			// userInfo = userService.getUserInfoByOpenId(openId);
+			// if (userInfo == null)
+			// userInfo = userService.getUserInfoBySessionId(sessionId);
+			// session.setUserInfo(userInfo);
+			// cache.put(HEADER_KEY_SESSION_ID + sessionId, session);
 		}
 		session.setClientInfo(clientInfo);
 		context.setSession(session);

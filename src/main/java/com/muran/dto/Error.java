@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "\u7F51\u7EDC\u4EA4\u4E92\u51FA\u73B0\u9519\u8BEF\u7684\u65F6\u5019\u8FD4\u56DE\u4FE1\u606F\u3002")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-02T10:24:45.752+08:00")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class Error   {
   
   private Integer code = null;
