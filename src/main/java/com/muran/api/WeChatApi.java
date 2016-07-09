@@ -1,8 +1,10 @@
 package com.muran.api;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.websocket.EncodeException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -58,8 +60,9 @@ public class WeChatApi extends AbstractApi {
 
 	@GET
 	@Produces({ "application/json" })
-	public Response WeChatOAuth2(@QueryParam("uri") String uri)
-			throws URISyntaxException {
+	public Response WeChatOAuth2(@QueryParam("uri") String uri,
+			@QueryParam("type") String type) throws URISyntaxException,
+			UnsupportedEncodingException {
 		// 如果没有获取到路由 默认为无路由
 		if (uri == null) {
 			uri = "";
@@ -143,9 +146,22 @@ public class WeChatApi extends AbstractApi {
 				request.getSession().setAttribute("user", user);
 			}
 		}
-		// 存在则直接跳转到响应的路由
-		return Response.status(Status.FOUND)
-				.location(new URI(GlobalConfig.KEY_WEB_URI + uri)).build();
+		// 存在则直接跳转到响应的路由或者地址
+		log.info("uri:" + uri);
+		if (type.equals("router")) {
+			return Response.status(Status.FOUND)
+					.location(new URI(GlobalConfig.KEY_WEB_URI + uri)).build();
+		} else if (type.equals("url")) {
+			uri = java.net.URLDecoder.decode(uri, "utf-8");
+			log.info("uri:" + uri);
+			return Response.status(Status.FOUND).location(new URI(uri)).build();
+		} else {
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
 
 	}
 
