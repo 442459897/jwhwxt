@@ -1,10 +1,10 @@
 package com.muran.dao;
 
-import org.springframework.stereotype.Repository;
-import com.muran.model.ColumnItem;
+import java.util.List;
+
 import com.muran.dao.operation.IOperations;
+import com.muran.model.ColumnItem;
 
-@Repository("ColumnItemDao")
-public interface IColumnItemDao extends IOperations<ColumnItem>  {
-
+public interface IColumnItemDao extends IOperations<ColumnItem> {
+	public List<ColumnItem> getList(Long parentId);
 }

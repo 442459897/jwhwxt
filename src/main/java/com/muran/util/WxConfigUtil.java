@@ -8,6 +8,7 @@ public class WxConfigUtil {
 	public static List<String> jsApiList = new ArrayList<String>();
 	
 	static {
+		//jsapi  授权配置
 		jsApiList.add("checkJsApi");
 		jsApiList.add("onMenuShareTimeline");
 		jsApiList.add("onMenuShareAppMessage");
@@ -42,5 +43,6 @@ public class WxConfigUtil {
 		jsApiList.add("addCard");
 		jsApiList.add("chooseCard");
 		jsApiList.add("openCard");
+		
 	}
 }

@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import weixin.popular.api.MediaAPI;
@@ -27,8 +28,11 @@ import weixin.popular.bean.token.Token;
 import weixin.popular.bean.user.User;
 
 import com.muran.api.exception.Code;
+import com.muran.api.service.ColumnsApiService;
+import com.muran.api.service.ICommonService;
 import com.muran.application.GlobalConfig;
 import com.muran.dto.WxConfig;
+import com.muran.dto.WxMenu;
 import com.muran.util.FileUtil;
 import com.muran.util.GenratorUtil;
 import com.muran.util.WxConfigUtil;
@@ -48,6 +52,9 @@ public class WeChatApi extends AbstractApi {
 	public static long ticketExpiresTime;// jsapi_ticket过期时间
 
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
+
+	@Autowired
+	ICommonService service;
 
 	@GET
 	@Produces({ "application/json" })
@@ -264,8 +271,16 @@ public class WeChatApi extends AbstractApi {
 				.getRealPath("/");
 		String path = basePath + "\\upload\\wx\\" + user.getOpenid();
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
-		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/" + user.getOpenid()
-				+ "/" + result.getFilename();
+		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
+				+ user.getOpenid() + "/" + result.getFilename();
 		return Response.ok().entity(url).build();
+	}
+
+	@Path("/menus")
+	@POST
+	@Produces({ "application/json" })
+	public Response WeChatCreateMenu() throws URISyntaxException {
+		WxMenu menu = service.getWxMenu();
+		return Response.ok().entity(menu).build();
 	}
 }

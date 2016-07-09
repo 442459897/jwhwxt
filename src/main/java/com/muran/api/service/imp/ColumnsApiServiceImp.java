@@ -1,7 +1,6 @@
 package com.muran.api.service.imp;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -9,10 +8,10 @@ import javax.ws.rs.core.Response.Status;
 import org.springframework.stereotype.Service;
 
 import com.muran.api.Context;
+import com.muran.api.service.AbstractService;
 import com.muran.api.service.ColumnsApiService;
 import com.muran.dto.ColumnPosterInfo;
 import com.muran.model.WeChatUser;
-import com.muran.api.service.AbstractService;
 
 @Service
 public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiService {
