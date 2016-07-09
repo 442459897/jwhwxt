@@ -313,6 +313,6 @@ public class WeChatApi extends AbstractApi {
 							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
 									+ Code.CreateMenuFail.getCode())).build();
 		}
-		return Response.ok().location(new URI(GlobalConfig.KEY_WEB_BASE + "?result=success")).build();
+		return Response.ok().location(new URI(GlobalConfig.KEY_WEB_BASE + "createMenu.jsp?result=success")).build();
 	}
 }
