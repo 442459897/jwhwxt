@@ -32,7 +32,7 @@
 		String oath2url = GlobalConfig.KEY_WEB_BASE
 				+ "api/oauth2?type=url&uri=" + createUrl;
 	%>
-	<div style="width:100%;text-align:center;">
+	<div style="width:100%;text-align:center;margin-top:200px;">
 		<a href="<%=oath2url%>" style="font-size:50px;">创建微信菜单</a>
 	</div>
 

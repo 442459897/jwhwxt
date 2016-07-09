@@ -28,7 +28,7 @@
 	String createUrl = GlobalConfig.KEY_WEB_BASE + "api/oauth2/menus";
 %>
 <body>
-	<form id="myform" action="<%=createUrl%>"></form>
+	<form id="myform" action="<%=createUrl%>" method="post"></form>
 	<script type="text/javascript">
 		document.getElementById("myform").submit();
 	</script>
