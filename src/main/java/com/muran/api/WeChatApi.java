@@ -148,6 +148,7 @@ public class WeChatApi extends AbstractApi {
 		}
 		// 存在则直接跳转到响应的路由或者地址
 		log.info("uri:" + uri);
+		log.info("type:" + type);
 		if (type.equals("router")) {
 			return Response.status(Status.FOUND)
 					.location(new URI(GlobalConfig.KEY_WEB_URI + uri)).build();

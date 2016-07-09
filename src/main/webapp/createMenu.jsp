@@ -28,7 +28,7 @@
 <body>
 	<%
 		String createUrl = java.net.URLEncoder.encode(
-				GlobalConfig.KEY_WEB_BASE + "createMenu2,jsp", "utf-8");
+				GlobalConfig.KEY_WEB_BASE + "createMenu2.jsp", "utf-8");
 		String oath2url = GlobalConfig.KEY_WEB_BASE
 				+ "api/oauth2?type=url&uri=" + createUrl;
 	%>

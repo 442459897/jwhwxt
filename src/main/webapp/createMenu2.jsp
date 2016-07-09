@@ -25,7 +25,7 @@
 
 </head>
 <%
-	String createUrl = GlobalConfig.KEY_WEB_BASE + "api/oatth2/menus";
+	String createUrl = GlobalConfig.KEY_WEB_BASE + "api/oauth2/menus";
 %>
 <body>
 	<form id="myform" action="<%=createUrl%>"></form>
