@@ -4,13 +4,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.websocket.EncodeException;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -19,27 +18,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import weixin.popular.api.MediaAPI;
+import weixin.popular.api.MenuAPI;
 import weixin.popular.api.SnsAPI;
 import weixin.popular.api.TicketAPI;
 import weixin.popular.api.TokenAPI;
 import weixin.popular.api.UserAPI;
+import weixin.popular.bean.BaseResult;
 import weixin.popular.bean.media.MediaGetResult;
 import weixin.popular.bean.sns.SnsToken;
 import weixin.popular.bean.ticket.Ticket;
 import weixin.popular.bean.token.Token;
 import weixin.popular.bean.user.User;
+import weixin.popular.util.JsonUtil;
 
 import com.muran.api.exception.Code;
-import com.muran.api.service.ColumnsApiService;
 import com.muran.api.service.ICommonService;
 import com.muran.application.GlobalConfig;
 import com.muran.dto.WxConfig;
 import com.muran.dto.WxMenu;
 import com.muran.util.FileUtil;
 import com.muran.util.GenratorUtil;
-import com.muran.util.WxConfigUtil;
 import com.muran.util.GenratorUtil.SecurityCodeLevel;
 import com.muran.util.SecuritySHA;
+import com.muran.util.WxConfigUtil;
 import com.muran.util.dataVerify.CommonVerify;
 
 @Path("/oauth2")
@@ -298,6 +299,20 @@ public class WeChatApi extends AbstractApi {
 	@Produces({ "application/json" })
 	public Response WeChatCreateMenu() throws URISyntaxException {
 		WxMenu menu = service.getWxMenu();
-		return Response.ok().entity(menu).build();
+		String menuJson = JsonUtil.toJSONString(menu);
+		log.info("创建菜单的json串：" + menuJson);
+		// 调用微信接口
+		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(),
+				menuJson);
+
+		if (!result.isSuccess()) {
+			// 失败 返回失败信息
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.CreateMenuFail.getCode())).build();
+		}
+		return Response.ok().location(new URI(GlobalConfig.KEY_WEB_BASE + "?result=success")).build();
 	}
 }

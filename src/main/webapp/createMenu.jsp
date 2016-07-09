@@ -31,10 +31,16 @@
 				GlobalConfig.KEY_WEB_BASE + "createMenu2.jsp", "utf-8");
 		String oath2url = GlobalConfig.KEY_WEB_BASE
 				+ "api/oauth2?type=url&uri=" + createUrl;
+
+		String result = (String) request.getParameter("result");
+		result = result == "success" ? "创建菜单成功!" : "";
 	%>
 	<div style="width:100%;text-align:center;margin-top:200px;">
 		<a href="<%=oath2url%>" style="font-size:50px;">创建微信菜单</a>
 	</div>
 
+	<div style="width:100%;text-align:center;margin-top:50px;">
+		<span><%=result%></span>
+	</div>
 </body>
 </html>

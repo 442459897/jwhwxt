@@ -41,8 +41,9 @@ public enum Code implements ResponseCode {
 			"验证码错误或者已过期"), MoblieHasRegister(1005, "手机号已注册"), UserOrPasswordErrorException(
 			1006, "密码或账户错误"), PasswordUnCorrect(1007, "密码错误"), PasswordLengthException(
 			1008, "密码少于6位异常"), UserNotFound(1009, "用户不存在"), FrequentSendCode(
-			1010, "频繁发送");
-
+			1010, "频繁发送"),
+	// 微信错误：7**
+	CreateMenuFail(9001, "创建微信菜单失败！");
 	Code() {
 	}
 
@@ -87,13 +88,13 @@ public enum Code implements ResponseCode {
 			lookup.put(String.valueOf(e.code), e);
 		}
 	}
-	
-	public static Code find(String code){
+
+	public static Code find(String code) {
 		Code value = lookup.get(code);
-        if(value == null){
-            return Code.BadRequestParams;
-        }
-        return value;
-    }
+		if (value == null) {
+			return Code.BadRequestParams;
+		}
+		return value;
+	}
 
 }
