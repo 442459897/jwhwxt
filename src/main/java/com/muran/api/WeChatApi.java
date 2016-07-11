@@ -114,14 +114,6 @@ public class WeChatApi extends AbstractApi {
 			}
 
 		}
-		// 获取用户session信息
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
-		if (wechatUser == null && cookie != null && cookie.getValue() != null
-				&& cookie.getValue() != "") {
-			// 如果session存在 获取用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
-					.getValue());
-		}
 
 		// token 是否存在
 		if (snsToken == null || token == null) {
@@ -154,10 +146,19 @@ public class WeChatApi extends AbstractApi {
 			token = TokenAPI.token(GlobalConfig.KEY_APPID,
 					GlobalConfig.KEY_APP_SECRET);
 		}
+		// 获取用户session信息
+		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		if (wechatUser == null && cookie != null && cookie.getValue() != null
+				&& cookie.getValue() != "") {
+			// 如果session存在 获取用户信息
+			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
+					.getValue());
+		}
 		// 检查用户信息是否存在
-		if (wechatUser == null
-				|| !wechatUserService.IsUserExistOrExpire(wechatUser
-						.getSessionId())) {
+		if (wechatUser == null) {
+			// ||
+			// !wechatUserService.IsUserExistOrExpire(wechatUser.getSessionId())
+
 			log.info("用户信息不存在，重新获取用户信息……");
 			// 获取用户信息
 			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
