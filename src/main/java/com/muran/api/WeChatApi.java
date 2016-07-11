@@ -75,6 +75,15 @@ public class WeChatApi extends AbstractApi {
 
 		WeChatUser wechatUser = null;
 
+		// 参数处理
+		if (type == null) {
+			return Response
+					.ok()
+					.location(
+							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+									+ Code.BadRequestParams.getCode())).build();
+		}
+
 		// 如果没有获取到路由 默认为无路由
 		if (uri == null) {
 			uri = "";
@@ -119,7 +128,7 @@ public class WeChatApi extends AbstractApi {
 		if (snsToken == null || token == null) {
 			log.info("第一次调用，snstoken为null，开始请求网页授权……");
 			// 不存在重新授权
-			String oauthUrl = OAuthReposition(uri, "1", "snsapi_base");
+			String oauthUrl = OAuthReposition(uri, "1", "snsapi_base", type);
 			return Response.status(Status.FOUND).location(new URI(oauthUrl))
 					.build();
 		}
@@ -199,6 +208,23 @@ public class WeChatApi extends AbstractApi {
 	}
 
 	public static String OAuthReposition(String uri, String state, String scope) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(GlobalConfig.KEY_AUTHURL);
+		sb.append("?appid=");
+		sb.append(GlobalConfig.KEY_APPID);
+		sb.append("&redirect_uri=");
+		// 获取服务器域名
+		sb.append(GlobalConfig.KEY_REDIRECT_URI);
+		sb.append("?uri=" + uri);
+		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
+		sb.append("&response_type=code&scope=" + scope + "&state=");
+		sb.append(state);
+		sb.append("#wechat_redirect");
+		return sb.toString();
+	}
+
+	public static String OAuthReposition(String uri, String state,
+			String scope, String type) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(GlobalConfig.KEY_AUTHURL);
 		sb.append("?appid=");
