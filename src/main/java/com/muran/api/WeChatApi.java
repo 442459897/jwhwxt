@@ -240,21 +240,21 @@ public class WeChatApi extends AbstractApi {
 		sb.append(GlobalConfig.KEY_APPID);
 		sb.append("&redirect_uri=");
 		// 获取服务器域名
-		log.info("type  ***:" + type);
-		if (type.equals("url")) {
-			// String u = java.net.URLEncoder.encode(uri, "utf-8");
-			// sb.append(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
-			// + type);
-			// log.info(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
-			// + type);
-			String u = java.net.URLEncoder.encode(GlobalConfig.KEY_REDIRECT_URI
-					+ "?uri=" + uri + "&type=" + type, "utf-8");
-			sb.append(u);
-			log.info("redirect_uri" + u);
-		} else if (type.equals("router")) {
-			sb.append(GlobalConfig.KEY_REDIRECT_URI);
-			sb.append("?uri=" + uri + "&type=" + type);
-		}
+		// log.info("type  ***:" + type);
+		// if (type.equals("url")) {
+		// String u = java.net.URLEncoder.encode(uri, "utf-8");
+		// sb.append(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
+		// + type);
+		// log.info(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
+		// + type);
+		String u = java.net.URLEncoder.encode(GlobalConfig.KEY_REDIRECT_URI
+				+ "?uri=" + uri + "&type=" + type, "utf-8");
+		sb.append(u);
+		log.info("redirect_uri" + u);
+		// } else if (type.equals("router")) {
+		// sb.append(GlobalConfig.KEY_REDIRECT_URI);
+		// sb.append("?uri=" + uri + "&type=" + type);
+		// }
 
 		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
 		sb.append("&response_type=code&scope=" + scope + "&state=");
@@ -403,7 +403,7 @@ public class WeChatApi extends AbstractApi {
 							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
 									+ Code.CreateMenuFail.getCode())).build();
 		}
-		log.info("跳转地址：" +GlobalConfig.KEY_WEB_BASE
+		log.info("跳转地址：" + GlobalConfig.KEY_WEB_BASE
 				+ "createMenu.jsp?result=success");
 		return Response
 				.ok()
