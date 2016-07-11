@@ -164,7 +164,7 @@ public class WeChatUser implements java.io.Serializable {
 	/**
 	 * @return the expireTime
 	 */
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	@Column(name = "expireTime")
 	public Date getExpireTime() {
 		return expireTime;
 	}
