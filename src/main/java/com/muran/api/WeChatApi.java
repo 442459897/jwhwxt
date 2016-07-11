@@ -132,6 +132,8 @@ public class WeChatApi extends AbstractApi {
 			log.info("第一次调用，snstoken为null，开始请求网页授权……");
 			// 不存在重新授权
 			String oauthUrl = OAuthReposition(uri, "1", "snsapi_base", type);
+
+			log.info("oauthUrl:" + oauthUrl);
 			return Response.status(Status.FOUND).location(new URI(oauthUrl))
 					.build();
 		}
@@ -239,11 +241,15 @@ public class WeChatApi extends AbstractApi {
 		sb.append("&redirect_uri=");
 		// 获取服务器域名
 		if (type == "url") {
-			String u = java.net.URLEncoder.encode(uri, "utf-8");
-			sb.append(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
-					+ type);
-			log.info(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
-					+ type);
+			// String u = java.net.URLEncoder.encode(uri, "utf-8");
+			// sb.append(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
+			// + type);
+			// log.info(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
+			// + type);
+			String u = java.net.URLEncoder.encode(GlobalConfig.KEY_REDIRECT_URI
+					+ "?uri=" + uri + "&type=" + type, "utf-8");
+			sb.append(u);
+			log.info("redirect_uri" + u);
 		} else if (type == "router") {
 			sb.append(GlobalConfig.KEY_REDIRECT_URI);
 			sb.append("?uri=" + uri + "&type=" + type);
