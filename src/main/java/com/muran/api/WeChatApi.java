@@ -198,6 +198,7 @@ public class WeChatApi extends AbstractApi {
 			return Response
 					.status(Status.FOUND)
 					.cookie(newCookie)
+					.header("sesstionId", wechatUser.getSessionId())
 					.location(
 							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
 									+ uri)).build();
@@ -205,6 +206,7 @@ public class WeChatApi extends AbstractApi {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
 			log.info("uri:" + uri);
 			return Response.status(Status.FOUND).cookie(newCookie)
+					.header("sesstionId", wechatUser.getSessionId())
 					.location(new URI(uri)).build();
 		} else {
 			return Response
