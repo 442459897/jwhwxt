@@ -211,9 +211,8 @@ public class WeChatApi extends AbstractApi {
 			// new URI(GlobalConfig.KEY_WEB_URI + uri + "?"
 			// + wechatUser.getSessionId() + "/#!" + uri))
 			// .build();
-			String urlString = GlobalConfig.KEY_WEB_URI + uri + "?s="
-					+ wechatUser.getSessionId() + "/#!" + uri + "?s="
-					+ wechatUser.getSessionId();
+			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri
+					+ "?s=" + wechatUser.getSessionId();
 			return Response.status(Status.FOUND).cookie(newCookie)
 					.header("sessionid", wechatUser.getSessionId())
 					.location(new URI(urlString)).build();
