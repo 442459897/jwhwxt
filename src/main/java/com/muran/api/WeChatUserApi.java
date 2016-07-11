@@ -24,7 +24,7 @@ public class WeChatUserApi extends AbstractApi {
 	@GET
 	@Produces({ "application/json" })
 	public Response IsUserExist() throws URISyntaxException {
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionid");
 		if (cookie == null) {
 			return Response.ok().entity(false).build();
 		}

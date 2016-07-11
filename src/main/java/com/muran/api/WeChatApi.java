@@ -188,8 +188,8 @@ public class WeChatApi extends AbstractApi {
 			}
 		}
 
-		log.info("sessionId：" + wechatUser.getSessionId());
-		NewCookie newCookie = new NewCookie("sesstionId",
+		log.info("sessionid：" + wechatUser.getSessionId());
+		NewCookie newCookie = new NewCookie("sessionid",
 				wechatUser.getSessionId());
 		// 存在则直接跳转到响应的路由或者地址
 		log.info("uri:" + uri);
@@ -198,7 +198,7 @@ public class WeChatApi extends AbstractApi {
 			return Response
 					.status(Status.FOUND)
 					.cookie(newCookie)
-					.header("sesstionId", wechatUser.getSessionId())
+					.header("sessionid", wechatUser.getSessionId())
 					.location(
 							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
 									+ uri)).build();
@@ -206,7 +206,7 @@ public class WeChatApi extends AbstractApi {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
 			log.info("uri:" + uri);
 			return Response.status(Status.FOUND).cookie(newCookie)
-					.header("sesstionId", wechatUser.getSessionId())
+					.header("sessionid", wechatUser.getSessionId())
 					.location(new URI(uri)).build();
 		} else {
 			return Response
@@ -343,7 +343,7 @@ public class WeChatApi extends AbstractApi {
 		// User user = (User) request.getSession().getAttribute("user");
 		WeChatUser wechatUser = null;
 
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionid");
 		if (cookie != null && cookie.getValue() != null
 				&& cookie.getValue() != "") {
 			// 如果sessionId存在 获取未过期的用户信息
