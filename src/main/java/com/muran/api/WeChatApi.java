@@ -4,12 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.servlet.http.Cookie;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -33,11 +35,14 @@ import weixin.popular.util.JsonUtil;
 
 import com.muran.api.exception.Code;
 import com.muran.api.service.ICommonService;
+import com.muran.api.service.IWeChatUserService;
 import com.muran.application.GlobalConfig;
 import com.muran.dto.WxConfig;
 import com.muran.dto.WxMenu;
+import com.muran.model.WeChatUser;
 import com.muran.util.FileUtil;
 import com.muran.util.GenratorUtil;
+import com.muran.util.UserTokenUtil;
 import com.muran.util.GenratorUtil.SecurityCodeLevel;
 import com.muran.util.SecuritySHA;
 import com.muran.util.WxConfigUtil;
@@ -57,6 +62,9 @@ public class WeChatApi extends AbstractApi {
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
 
 	@Autowired
+	IWeChatUserService wechatUserService;
+
+	@Autowired
 	ICommonService service;
 
 	@GET
@@ -64,6 +72,9 @@ public class WeChatApi extends AbstractApi {
 	public Response WeChatOAuth2(@QueryParam("uri") String uri,
 			@QueryParam("type") String type) throws URISyntaxException,
 			UnsupportedEncodingException {
+
+		WeChatUser wechatUser = null;
+
 		// 如果没有获取到路由 默认为无路由
 		if (uri == null) {
 			uri = "";
@@ -77,8 +88,8 @@ public class WeChatApi extends AbstractApi {
 			snsToken = SnsAPI.oauth2AccessToken(GlobalConfig.KEY_APPID,
 					GlobalConfig.KEY_APP_SECRET, code);
 			snsTokenExpiresTime = System.currentTimeMillis()
-					+ (snsToken.getExpires_in() - 120) * 1000;// token创建时间
-																// 提前120秒过期
+					+ (snsToken.getExpires_in() - 200) * 1000;// token创建时间
+																// 提前200秒过期
 																// 精确到毫秒
 			log.info("微信回调，获取token：" + snsToken.getAccess_token() + ",openid:"
 					+ snsToken.getOpenid());
@@ -94,13 +105,24 @@ public class WeChatApi extends AbstractApi {
 				User user = UserAPI.userInfo(token.getAccess_token(),
 						snsToken.getOpenid());
 				if (user.isSuccess()) {
-					// 存储到session
-					request.getSession().setAttribute("user", user);
+					// 存储到session 数据库 如果存在会更新 不存在会创建
+					// request.getSession().setAttribute("user", user);
+					wechatUser = wechatUserService
+							.updateOrCreateWeChatUser(user);
 				}
 				log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
 			}
 
 		}
+		// 获取用户session信息
+		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		if (wechatUser == null && cookie != null && cookie.getValue() != null
+				&& cookie.getValue() != "") {
+			// 如果session存在 获取用户信息
+			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
+					.getValue());
+		}
+
 		// token 是否存在
 		if (snsToken == null || token == null) {
 			log.info("第一次调用，snstoken为null，开始请求网页授权……");
@@ -133,7 +155,9 @@ public class WeChatApi extends AbstractApi {
 					GlobalConfig.KEY_APP_SECRET);
 		}
 		// 检查用户信息是否存在
-		if (request.getSession().getAttribute("user") == null) {
+		if (wechatUser == null
+				|| !wechatUserService.IsUserExistOrExpire(wechatUser
+						.getSessionId())) {
 			log.info("用户信息不存在，重新获取用户信息……");
 			// 获取用户信息
 			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
@@ -143,20 +167,26 @@ public class WeChatApi extends AbstractApi {
 					snsToken.getOpenid());
 			log.info("重新获取用户信息,结果：" + user.getErrcode());
 			if (user.isSuccess()) {
-				// 存储到session
-				request.getSession().setAttribute("user", user);
+				// 存储到session 数据库
+				// request.getSession().setAttribute("user", user);
+				wechatUser = wechatUserService.updateOrCreateWeChatUser(user);
 			}
 		}
+
+		log.info("sessionId：" + wechatUser.getSessionId());
+		NewCookie newCookie = new NewCookie("sesstionId",
+				wechatUser.getSessionId());
 		// 存在则直接跳转到响应的路由或者地址
 		log.info("uri:" + uri);
 		log.info("type:" + type);
 		if (type.equals("router")) {
-			return Response.status(Status.FOUND)
+			return Response.status(Status.FOUND).cookie(newCookie)
 					.location(new URI(GlobalConfig.KEY_WEB_URI + uri)).build();
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
 			log.info("uri:" + uri);
-			return Response.status(Status.FOUND).location(new URI(uri)).build();
+			return Response.status(Status.FOUND).cookie(newCookie)
+					.location(new URI(uri)).build();
 		} else {
 			return Response
 					.ok()
@@ -258,8 +288,18 @@ public class WeChatApi extends AbstractApi {
 	public Response WeChatDownloadMedia(@FormParam("mediaId") String mediaId)
 			throws URISyntaxException {
 		// 获取用户信息
-		User user = (User) request.getSession().getAttribute("user");
-		if (user == null) {
+		// User user = (User) request.getSession().getAttribute("user");
+		WeChatUser wechatUser = null;
+
+		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		if (cookie != null && cookie.getValue() != null
+				&& cookie.getValue() != "") {
+			// 如果sessionId存在 获取未过期的用户信息
+			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
+					.getValue());
+		}
+
+		if (wechatUser == null) {
 			return Response
 					.ok()
 					.location(
@@ -287,10 +327,10 @@ public class WeChatApi extends AbstractApi {
 		// 将文件下载到本地
 		String basePath = request.getSession().getServletContext()
 				.getRealPath("/");
-		String path = basePath + "\\upload\\wx\\" + user.getOpenid();
+		String path = basePath + "\\upload\\wx\\" + wechatUser.getOpenId();
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
-				+ user.getOpenid() + "/" + result.getFilename();
+				+ wechatUser.getOpenId() + "/" + result.getFilename();
 		return Response.ok().entity(url).build();
 	}
 
@@ -313,6 +353,18 @@ public class WeChatApi extends AbstractApi {
 							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
 									+ Code.CreateMenuFail.getCode())).build();
 		}
-		return Response.ok().location(new URI(GlobalConfig.KEY_WEB_BASE + "createMenu.jsp?result=success")).build();
+		return Response
+				.ok()
+				.location(
+						new URI(GlobalConfig.KEY_WEB_BASE
+								+ "createMenu.jsp?result=success")).build();
+	}
+
+	@Path("/users")
+	@GET
+	@Produces({ "application/json" })
+	public Response WeChatIsSessionOk() {
+
+		return Response.ok().build();
 	}
 }
