@@ -89,6 +89,9 @@ public class WeChatApi extends AbstractApi {
 			uri = "";
 		}
 
+		log.info("param uri:" + uri);
+		log.info("param type:" + type);
+
 		String code = request.getParameter("code");
 		if (code != null && code != "") {
 			log.info("微信回调，code：" + code);
@@ -228,15 +231,22 @@ public class WeChatApi extends AbstractApi {
 	}
 
 	public static String OAuthReposition(String uri, String state,
-			String scope, String type) {
+			String scope, String type) throws UnsupportedEncodingException {
 		StringBuilder sb = new StringBuilder();
 		sb.append(GlobalConfig.KEY_AUTHURL);
 		sb.append("?appid=");
 		sb.append(GlobalConfig.KEY_APPID);
 		sb.append("&redirect_uri=");
 		// 获取服务器域名
-		sb.append(GlobalConfig.KEY_REDIRECT_URI);
-		sb.append("?uri=" + uri + "&type=" + type);
+		if (type == "url") {
+			String u = java.net.URLEncoder.encode(GlobalConfig.KEY_REDIRECT_URI
+					+ "?type=" + type + "&uri=" + uri, "utf-8");
+			sb.append(u);
+		} else if (type == "router") {
+			sb.append(GlobalConfig.KEY_REDIRECT_URI);
+			sb.append("?uri=" + uri + "&type=" + type);
+		}
+
 		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
 		sb.append("&response_type=code&scope=" + scope + "&state=");
 		sb.append(state);
