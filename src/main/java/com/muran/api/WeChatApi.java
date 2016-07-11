@@ -196,21 +196,7 @@ public class WeChatApi extends AbstractApi {
 		log.info("uri:" + uri);
 		log.info("type:" + type);
 		if (type.equals("router")) {
-			// String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
-			// String htmlText =
-			// "<html><meta http-equiv=\"refresh\" content=\"0;url="
-			// + urlString + "\"></html>";
-			// return Response.ok().cookie(newCookie)
-			// .header("sessionid", wechatUser.getSessionId()).build();
 
-			// return Response
-			// .status(Status.FOUND)
-			// .cookie(newCookie)
-			// .header("sessionid", wechatUser.getSessionId())
-			// .location(
-			// new URI(GlobalConfig.KEY_WEB_URI + uri + "?"
-			// + wechatUser.getSessionId() + "/#!" + uri))
-			// .build();
 			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri
 					+ "?s=" + wechatUser.getSessionId();
 			return Response.status(Status.FOUND).cookie(newCookie)
@@ -422,11 +408,7 @@ public class WeChatApi extends AbstractApi {
 		}
 		log.info("跳转地址：" + GlobalConfig.KEY_WEB_BASE
 				+ "createMenu.jsp?result=success");
-		return Response
-				.ok()
-				.location(
-						new URI(GlobalConfig.KEY_WEB_BASE
-								+ "createMenu.jsp?result=success")).build();
+		return Response.ok().encoding("创建菜单成功！").build();
 	}
 
 	@Path("/users")
