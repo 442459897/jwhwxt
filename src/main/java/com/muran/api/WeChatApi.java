@@ -211,14 +211,12 @@ public class WeChatApi extends AbstractApi {
 			// new URI(GlobalConfig.KEY_WEB_URI + uri + "?"
 			// + wechatUser.getSessionId() + "/#!" + uri))
 			// .build();
-			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
-			return Response
-					.status(Status.FOUND)
-					.cookie(newCookie)
+			String urlString = GlobalConfig.KEY_WEB_URI + uri + "?s="
+					+ wechatUser.getSessionId() + "/#!" + uri + "?s="
+					+ wechatUser.getSessionId();
+			return Response.status(Status.FOUND).cookie(newCookie)
 					.header("sessionid", wechatUser.getSessionId())
-					.location(
-							new URI(GlobalConfig.KEY_WEB_BASE + "temp.jsp?url="
-									+ urlString)).build();
+					.location(new URI(urlString)).build();
 
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
