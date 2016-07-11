@@ -394,7 +394,7 @@ public class WeChatApi extends AbstractApi {
 		// 调用微信接口
 		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(),
 				menuJson);
-
+		log.info("isSuccess：" + result.isSuccess());
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息
 			return Response
@@ -403,6 +403,8 @@ public class WeChatApi extends AbstractApi {
 							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
 									+ Code.CreateMenuFail.getCode())).build();
 		}
+		log.info("跳转地址：" +GlobalConfig.KEY_WEB_BASE
+				+ "createMenu.jsp?result=success");
 		return Response
 				.ok()
 				.location(
