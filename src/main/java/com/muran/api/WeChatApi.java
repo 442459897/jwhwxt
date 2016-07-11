@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -195,19 +196,29 @@ public class WeChatApi extends AbstractApi {
 		log.info("uri:" + uri);
 		log.info("type:" + type);
 		if (type.equals("router")) {
-			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
-			String htmlText = "<html><meta http-equiv=\"refresh\" content=\"0;url="
-					+ urlString + "\"></html>";
+			// String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
+			// String htmlText =
+			// "<html><meta http-equiv=\"refresh\" content=\"0;url="
+			// + urlString + "\"></html>";
+			// return Response.ok().cookie(newCookie)
+			// .header("sessionid", wechatUser.getSessionId()).build();
+
 			// return Response
 			// .status(Status.FOUND)
 			// .cookie(newCookie)
 			// .header("sessionid", wechatUser.getSessionId())
 			// .location(
-			// new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
-			// + uri)).build();
-			return Response.ok().cookie(newCookie)
+			// new URI(GlobalConfig.KEY_WEB_URI + uri + "?"
+			// + wechatUser.getSessionId() + "/#!" + uri))
+			// .build();
+			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
+			return Response
+					.status(Status.FOUND)
+					.cookie(newCookie)
 					.header("sessionid", wechatUser.getSessionId())
-					.entity(htmlText).build();
+					.location(
+							new URI(GlobalConfig.KEY_WEB_BASE + "temp.jsp?url="
+									+ urlString)).build();
 
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
