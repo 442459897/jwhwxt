@@ -199,7 +199,7 @@ public class WeChatApi extends AbstractApi {
 					.status(Status.FOUND)
 					.cookie(newCookie)
 					.location(
-							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!/"
+							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
 									+ uri)).build();
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
