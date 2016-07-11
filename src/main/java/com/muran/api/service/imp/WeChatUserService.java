@@ -47,7 +47,7 @@ public class WeChatUserService extends AbstractService implements
 		if (weUser == null) {
 			weUser = new WeChatUser();
 			weUser.setExpireTime(new Date(System.currentTimeMillis()
-					+ WxConfigUtil.sessionExpireTime));
+					+ WxConfigUtil.sessionExpireTime * 1000));
 			weUser.setHeadImg(user.getHeadimgurl());
 			weUser.setNickName(user.getNickname());
 			weUser.setOpenId(user.getOpenid());
@@ -58,7 +58,7 @@ public class WeChatUserService extends AbstractService implements
 		}
 
 		weUser.setExpireTime(new Date(System.currentTimeMillis()
-				+ WxConfigUtil.sessionExpireTime));
+				+ WxConfigUtil.sessionExpireTime * 1000));
 		weUser.setHeadImg(user.getHeadimgurl());
 		weUser.setNickName(user.getNickname());
 		weUser.setOpenId(user.getOpenid());
@@ -74,7 +74,7 @@ public class WeChatUserService extends AbstractService implements
 		// TODO Auto-generated method stub
 		WeChatUser weUser = new WeChatUser();
 		weUser.setExpireTime(new Date(System.currentTimeMillis()
-				+ WxConfigUtil.sessionExpireTime));
+				+ WxConfigUtil.sessionExpireTime * 1000));
 		weUser.setHeadImg(user.getHeadimgurl());
 		weUser.setNickName(user.getNickname());
 		weUser.setOpenId(user.getOpenid());

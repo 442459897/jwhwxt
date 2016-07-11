@@ -190,8 +190,12 @@ public class WeChatApi extends AbstractApi {
 		log.info("uri:" + uri);
 		log.info("type:" + type);
 		if (type.equals("router")) {
-			return Response.status(Status.FOUND).cookie(newCookie)
-					.location(new URI(GlobalConfig.KEY_WEB_URI + uri)).build();
+			return Response
+					.status(Status.FOUND)
+					.cookie(newCookie)
+					.location(
+							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!/"
+									+ uri)).build();
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
 			log.info("uri:" + uri);
@@ -232,7 +236,7 @@ public class WeChatApi extends AbstractApi {
 		sb.append("&redirect_uri=");
 		// 获取服务器域名
 		sb.append(GlobalConfig.KEY_REDIRECT_URI);
-		sb.append("?uri=" + uri);
+		sb.append("?uri=" + uri + "&type=" + type);
 		// 如要获取用户详细信息snsapi_base须改为snsapi_userinfo
 		sb.append("&response_type=code&scope=" + scope + "&state=");
 		sb.append(state);
