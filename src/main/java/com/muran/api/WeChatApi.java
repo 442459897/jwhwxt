@@ -195,13 +195,20 @@ public class WeChatApi extends AbstractApi {
 		log.info("uri:" + uri);
 		log.info("type:" + type);
 		if (type.equals("router")) {
-			return Response
-					.status(Status.FOUND)
-					.cookie(newCookie)
+			String urlString = GlobalConfig.KEY_WEB_URI + uri + "/#!" + uri;
+			String htmlText = "<html><meta http-equiv=\"refresh\" content=\"0;url="
+					+ urlString + "\"></html>";
+			// return Response
+			// .status(Status.FOUND)
+			// .cookie(newCookie)
+			// .header("sessionid", wechatUser.getSessionId())
+			// .location(
+			// new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
+			// + uri)).build();
+			return Response.ok().cookie(newCookie)
 					.header("sessionid", wechatUser.getSessionId())
-					.location(
-							new URI(GlobalConfig.KEY_WEB_URI + uri + "/#!"
-									+ uri)).build();
+					.entity(htmlText).build();
+
 		} else if (type.equals("url")) {
 			uri = java.net.URLDecoder.decode(uri, "utf-8");
 			log.info("uri:" + uri);
