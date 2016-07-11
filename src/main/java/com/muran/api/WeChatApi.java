@@ -240,6 +240,7 @@ public class WeChatApi extends AbstractApi {
 		sb.append(GlobalConfig.KEY_APPID);
 		sb.append("&redirect_uri=");
 		// 获取服务器域名
+		log.info("type  ***:" + type);
 		if (type == "url") {
 			// String u = java.net.URLEncoder.encode(uri, "utf-8");
 			// sb.append(GlobalConfig.KEY_REDIRECT_URI + "?uri=" + u + "&type="
