@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	 http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 	 http://www.springframework.org/schema/aop   
@@ -11,7 +12,8 @@
 	xmlns:tx="http://www.springframework.org/schema/tx">
 
 	<bean class="com.muran.application.SpringContextHolder" lazy-init="false"></bean>
-	<bean class="com.muran.application.MuranSpringApplicationListener" lazy-init="false"></bean>
+	<bean class="com.muran.application.MuranSpringApplicationListener"
+		lazy-init="false"></bean>
 	<context:property-placeholder location="classpath:*_spring.properties" />
 
 	<bean id="sessionFactory"
@@ -22,7 +24,7 @@
 				<value>com.muran.model</value>
 			</list>
 		</property>
-		<!--配置model-->
+		<!--配置model -->
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -57,12 +59,14 @@
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<bean id="ServiceAspect" class="com.muran.aop.ServiceAspect"></bean>
-
+	<bean id="UserSecurityVerify" class="com.muran.aop.annotation.UserSecurityVerify"></bean>
 	<bean id="CrossDomainFilter" class="com.muran.filter.CrossDomainFilter"></bean>
-	
+	<bean id="UserSysCheck" class="com.muran.filter.UserSysFilter">
+	</bean>
+
 	<bean id="UserTokenDao" class="com.muran.dao.imp.UserTokenDao"></bean>
 	<bean id="UserTokenService" class="com.muran.api.service.imp.UserTokenService"></bean>
-	
+
 	<!-- Authority -->
 	<bean id="RoleDao" class="com.muran.dao.imp.RoleDao"></bean>
 	<bean id="RoleService" class="com.muran.api.service.imp.RoleService"></bean>
@@ -72,24 +76,19 @@
 	<bean id="MenuService" class="com.muran.api.service.imp.MenuService"></bean>
 	<bean id="MenuDao" class="com.muran.dao.imp.MenuDao"></bean>
 
-	<bean id="MenuGroupResource"
-		class="com.muran.api.MenuGroupResource"></bean>
+	<bean id="MenuGroupResource" class="com.muran.api.MenuGroupResource"></bean>
 	<bean id="MenuGroupService" class="com.muran.api.service.imp.MenuGroupService"></bean>
 	<bean id="MenuGroupDao" class="com.muran.dao.imp.MenuGroupDao"></bean>
 
-	<bean id="UserMenuGroupResource"
-		class="com.muran.api.UserMenuGroupResource"></bean>
-	<bean id="UserMenuGroupService"
-		class="com.muran.api.service.imp.UserMenuGroupService"></bean>
+	<bean id="UserMenuGroupResource" class="com.muran.api.UserMenuGroupResource"></bean>
+	<bean id="UserMenuGroupService" class="com.muran.api.service.imp.UserMenuGroupService"></bean>
 	<bean id="UserMenuGroupDao" class="com.muran.dao.imp.UserMenuGroupDao"></bean>
 
-	<bean id="GroupMenuResource"
-		class="com.muran.api.GroupMenuResource"></bean>
+	<bean id="GroupMenuResource" class="com.muran.api.GroupMenuResource"></bean>
 	<bean id="GroupMenuService" class="com.muran.api.service.imp.GroupMenuService"></bean>
 	<bean id="GroupMenuDao" class="com.muran.dao.imp.GroupMenuDao"></bean>
-	
-	<bean id="UploadApi"
-		class="com.muran.api.UploadApi"></bean>
+
+	<bean id="UploadApi" class="com.muran.api.UploadApi"></bean>
 
 	<context:component-scan base-package="com.muran" />
 

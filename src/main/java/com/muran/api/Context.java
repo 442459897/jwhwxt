@@ -14,6 +14,12 @@ public class Context {
     
     private String userToken;
     private String username;
+    
+    private String sessionId;
+    private Boolean sessionIsExpire;
+    private String openId;
+    
+    private String userSys;
 
     public void put(String key,Object value){
         keyValues.put(key,value);
@@ -68,5 +74,53 @@ public class Context {
 	 */
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	/**
+	 * @return the sessionId
+	 */
+	public String getSessionId() {
+		return sessionId;
+	}
+	/**
+	 * @param sessionId the sessionId to set
+	 */
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	/**
+	 * @return the openId
+	 */
+	public String getOpenId() {
+		return openId;
+	}
+	/**
+	 * @param openId the openId to set
+	 */
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+	/**
+	 * @return the userSys
+	 */
+	public String getUserSys() {
+		return userSys;
+	}
+	/**
+	 * @param userSys the userSys to set
+	 */
+	public void setUserSys(String userSys) {
+		this.userSys = userSys;
+	}
+	/**
+	 * @return the sessionIsExpire
+	 */
+	public Boolean getSessionIsExpire() {
+		return sessionIsExpire;
+	}
+	/**
+	 * @param sessionIsExpire the sessionIsExpire to set
+	 */
+	public void setSessionIsExpire(Boolean sessionIsExpire) {
+		this.sessionIsExpire = sessionIsExpire;
 	}
 }

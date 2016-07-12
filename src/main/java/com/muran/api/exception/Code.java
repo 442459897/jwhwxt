@@ -43,7 +43,8 @@ public enum Code implements ResponseCode {
 			1008, "密码少于6位异常"), UserNotFound(1009, "用户不存在"), FrequentSendCode(
 			1010, "频繁发送"),
 	// 微信错误：7**
-	CreateMenuFail(9001, "创建微信菜单失败！");
+	CreateMenuFail(9001, "创建微信菜单失败！"),
+	Please(8001, "请重新授权！");
 	Code() {
 	}
 

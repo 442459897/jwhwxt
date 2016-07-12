@@ -11,20 +11,17 @@
 	 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
 	xmlns:tx="http://www.springframework.org/schema/tx">
 
-	<bean class="com.muran.application.SpringContextHolder"
+	<bean class="com.muran.application.SpringContextHolder" lazy-init="false"></bean>
+	<bean class="com.muran.application.MuranSpringApplicationListener"
 		lazy-init="false"></bean>
-		<bean class="com.muran.application.MuranSpringApplicationListener" lazy-init="false"></bean>
 	<context:property-placeholder location="classpath:*_spring.properties" />
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- jar包中的类 -->
-<!-- 		<property name="annotatedClasses">
-			<list>
-				<value>com.muran.cloudlife.model.UserToken</value>
-			</list>
-		</property> -->
+		<!-- <property name="annotatedClasses"> <list> <value>com.muran.cloudlife.model.UserToken</value> 
+			</list> </property> -->
 		<property name="packagesToScan">
 			<list>
 				<value>com.muran.model</value>
@@ -62,14 +59,15 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
+	<bean id="BussAspect" class="com.muran.aop.BussAspect"></bean>
 	<bean id="ServiceAspect" class="com.muran.aop.ServiceAspect"></bean>
-
+	<bean id="UserSecurityVerify" class="com.muran.aop.annotation.UserSecurityVerify"></bean>
 	<bean id="CrossDomainFilter" class="com.muran.filter.CrossDomainFilter"></bean>
-	
+	<bean id="UserSysCheck" class="com.muran.filter.UserSysFilter"></bean>
+
 	<bean id="UserTokenDao" class="com.muran.dao.imp.UserTokenDao"></bean>
 	<bean id="UserTokenService" class="com.muran.api.service.imp.UserTokenService"></bean>
-	
+
 	<!-- Authority -->
 	<bean id="RoleDao" class="com.muran.dao.imp.RoleDao"></bean>
 	<bean id="RoleService" class="com.muran.api.service.imp.RoleService"></bean>
@@ -79,24 +77,19 @@
 	<bean id="MenuService" class="com.muran.api.service.imp.MenuService"></bean>
 	<bean id="MenuDao" class="com.muran.dao.imp.MenuDao"></bean>
 
-	<bean id="MenuGroupResource"
-		class="com.muran.api.MenuGroupResource"></bean>
+	<bean id="MenuGroupResource" class="com.muran.api.MenuGroupResource"></bean>
 	<bean id="MenuGroupService" class="com.muran.api.service.imp.MenuGroupService"></bean>
 	<bean id="MenuGroupDao" class="com.muran.dao.imp.MenuGroupDao"></bean>
 
-	<bean id="UserMenuGroupResource"
-		class="com.muran.api.UserMenuGroupResource"></bean>
-	<bean id="UserMenuGroupService"
-		class="com.muran.api.service.imp.UserMenuGroupService"></bean>
+	<bean id="UserMenuGroupResource" class="com.muran.api.UserMenuGroupResource"></bean>
+	<bean id="UserMenuGroupService" class="com.muran.api.service.imp.UserMenuGroupService"></bean>
 	<bean id="UserMenuGroupDao" class="com.muran.dao.imp.UserMenuGroupDao"></bean>
 
-	<bean id="GroupMenuResource"
-		class="com.muran.api.GroupMenuResource"></bean>
+	<bean id="GroupMenuResource" class="com.muran.api.GroupMenuResource"></bean>
 	<bean id="GroupMenuService" class="com.muran.api.service.imp.GroupMenuService"></bean>
 	<bean id="GroupMenuDao" class="com.muran.dao.imp.GroupMenuDao"></bean>
-	
-	<bean id="UploadApi"
-		class="com.muran.api.UploadApi"></bean>
+
+	<bean id="UploadApi" class="com.muran.api.UploadApi"></bean>
 
 	<context:component-scan base-package="com.muran" />
 

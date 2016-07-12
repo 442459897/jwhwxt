@@ -26,4 +26,5 @@ public interface ArticlesApiService {
     Response getArticlesPageList(Integer pageSize,Integer pageIdex,Long startTime,Long endTime,String columnKey,String title,String keyword,String source,String status,Context context);
     Response publishArticle(Long autoId,Context context);
     Response updateArticle(Long articleId,AddArticle article,Context context);
+    Response getArticleWxContent(Long articleId,Context context);
 }

@@ -5,9 +5,13 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.muran.api.service.ArticlesApiService;
+import com.muran.api.service.IWeChatUserService;
 import com.muran.application.GlobalConfig;
 import com.muran.application.cache.ServerCache;
+import com.muran.model.WeChatUser;
 import com.muran.util.UserTokenUtil;
 import com.muran.util.net.NetworkUtil;
 
@@ -27,6 +31,9 @@ public abstract class AbstractApi {
 	@javax.ws.rs.core.Context
 	HttpServletRequest request;
 
+	@Autowired
+	IWeChatUserService service;
+
 	public String getUsername() {
 		return UserTokenUtil.getUserName(getUserToken());
 	}
@@ -36,7 +43,12 @@ public abstract class AbstractApi {
 		// to do
 		return request.getHeader("UserToken");
 	}
-	
+
+	public String getSessionId() {
+		// to do
+		return request.getHeader("SessionId");
+	}
+
 	public String getUserSys() {
 		String str = request.getHeader("UserSys");
 		if (str == null)
@@ -66,6 +78,14 @@ public abstract class AbstractApi {
 		return request.getHeader("Time");
 	}
 
+	public String getUrl() {
+		return request.getRequestURL().toString();
+	}
+
+	public String getBussData() {
+		return request.getAttribute("bussData").toString();
+	}
+
 	// 获取SignCode
 	public String getSignCode() {
 		return request.getHeader("SignCode");
@@ -81,10 +101,21 @@ public abstract class AbstractApi {
 			session.setCreateTime(new Date());
 			// 根据用户类型不同调用不同的验证
 			String userType = request.getHeader("userType");
-			
-			context.setUsername(getUsername());
-			context.setUserToken(getUserToken());
-			
+			String userSys = request.getHeader("UserSys");
+
+			context.setUserSys(userSys);
+
+			if (userSys.equals("wx") && getSessionId() != null
+					&& !getSessionId().equals("")) {
+				WeChatUser user = service.getWeChatUser(getSessionId());
+
+				context.setSessionId(getSessionId());
+				context.setOpenId(user == null ? null : user.getOpenId());
+				context.setSessionIsExpire(System.currentTimeMillis() > user.getExpireTime().getTime());
+			} else {
+				context.setUsername(getUsername());
+				context.setUserToken(getUserToken());
+			}
 			if (userType == "user") {
 				session.setUserInfo(null);
 			} else if (userType == "admin") {
