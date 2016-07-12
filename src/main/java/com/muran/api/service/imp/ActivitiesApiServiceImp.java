@@ -26,12 +26,14 @@ import com.muran.util.Data;
 @Service
 public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
-	private final static Logger log = Logger.getLogger(UserLoginService.class);
+	private final static Logger log = Logger
+			.getLogger(ActivitiesApiServiceImp.class);
 	@Resource(name = "ActivityDao")
 	private IActivityDao activityDao;
 
-	@Resource(name="ActivitySignupDao")
+	@Resource(name = "ActivitySignupDao")
 	private IActivitySignUpDao signupDao;
+
 	/**
 	 * 
 	 * 添加活动
@@ -55,7 +57,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setCreateTime(new Date());
 		model.setCreateUser(context.getUsername());
 		model.setEnable(true);
-		
+
 		model = activityDao.merge(model);
 		return Response.ok().entity(model).build();
 	}
@@ -93,10 +95,12 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 分页查询（后台）
 	 * */
 	@Override
-	public Response getActivityPageList(Integer pageSize, Integer pageIndex, Long startTime, Long endTime, String title,
-			String keyword, String status, Context context) {
+	public Response getActivityPageList(Integer pageSize, Integer pageIndex,
+			Long startTime, Long endTime, String title, String keyword,
+			String status, Context context) {
 		// TODO Auto-generated method stub
-		Data<Activity> data = activityDao.getActivityPageList(pageSize, pageIndex, startTime, endTime, title, keyword, status);
+		Data<Activity> data = activityDao.getActivityPageList(pageSize,
+				pageIndex, startTime, endTime, title, keyword, status);
 		return Response.ok().entity(data).build();
 	}
 
@@ -104,10 +108,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 微信端：获取list
 	 * */
 	@Override
-	public Response getActivityWxList(Integer num, String upOrDown, Long time, String title, String keyword,
-			Context context) {
+	public Response getActivityWxList(Integer num, String upOrDown, Long time,
+			String title, String keyword, Context context) {
 		// TODO Auto-generated method stub
-		List<ActivityInfo> list=activityDao.getActivityWxList(num, upOrDown, time, title, keyword);
+		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown,
+				time, title, keyword);
 		return Response.ok().entity(list).build();
 	}
 
@@ -115,8 +120,10 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 微信端：获取报名信息
 	 * */
 	@Override
-	public Response getSignupInfo(Long autoId, Integer num, String upOrDown, Long time, Context context) {
-		List<SignupWxInfo> list=activityDao.getSignupInfo(autoId, num, upOrDown, time);
+	public Response getSignupInfo(Long autoId, Integer num, String upOrDown,
+			Long time, Context context) {
+		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num,
+				upOrDown, time);
 		return Response.ok().entity(list).build();
 	}
 
@@ -124,33 +131,35 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 后台：获取报名信息分页
 	 * **/
 	@Override
-	public Response getSignupInfoPageList(Long autoId, Integer pageSize, Integer pageIndex, Context context) {
-		Data<ActivitySignup> data=signupDao.getActivitySignupPageList(autoId, pageSize, pageIndex);
+	public Response getSignupInfoPageList(Long autoId, Integer pageSize,
+			Integer pageIndex, Context context) {
+		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId,
+				pageSize, pageIndex);
 		return Response.ok().entity(data).build();
 	}
-
 
 	/**
 	 * 活动报名
 	 * */
 	@Override
-	public Response signupActivity(Long autoId, SignupActivity signupinfo, Context context) {
+	public Response signupActivity(Long autoId, SignupActivity signupinfo,
+			Context context) {
 		Activity model = new Activity();
 		model = activityDao.findOne(autoId);
 		if (model == null) {
 			throw new ServerException(Code.ActivityNoExisted, "活动不存在！");
 		}
-		if (model.getSignupTop()<=signupDao.getSignUpNum(autoId)) {
-			throw new ServerException(Code.SignUpTopOver,"报名已满");
+		if (model.getSignupTop() <= signupDao.getSignUpNum(autoId)) {
+			throw new ServerException(Code.SignUpTopOver, "报名已满");
 		}
-		
-		ActivitySignup signup=new ActivitySignup(); 
-		//重复检查
-		signup=signupDao.getOneByOpenId(autoId, "");
-		if (signup!=null) {
-			throw new ServerException(Code.DataExisted,"已报名");
+
+		ActivitySignup signup = new ActivitySignup();
+		// 重复检查
+		signup = signupDao.getOneByOpenId(autoId, "");
+		if (signup != null) {
+			throw new ServerException(Code.DataExisted, "已报名");
 		}
-		signup=new ActivitySignup();
+		signup = new ActivitySignup();
 		signup.setActivity(autoId);
 		signup.setGender(signupinfo.getGender());
 		signup.setMobile(signupinfo.getMobile());
@@ -158,8 +167,8 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		signup.setOpenId("");
 		signup.setRemark(signupinfo.getRemark());
 		signup.setSignupTime(new Date());
-		signup=signupDao.merge(signup);
-		
+		signup = signupDao.merge(signup);
+
 		return Response.ok().entity(signup).build();
 	}
 
@@ -177,9 +186,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setStatus(Long.parseLong("2"));
 		model.setBackTime(new Date());
 		model.setBackMan(context.getUsername());
-		
-		model=activityDao.update(model);
-		
+
+		model = activityDao.update(model);
+
 		return Response.ok().entity(model).build();
 	}
 
@@ -207,7 +216,8 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 更新活动信息
 	 * */
 	@Override
-	public Response updateActivity(Long autoId, AddActivity activity, Context context) {
+	public Response updateActivity(Long autoId, AddActivity activity,
+			Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
 		model = activityDao.findOne(autoId);
@@ -228,9 +238,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 		model.setModifyTime(new Date());
 		model.setModifyUser(context.getUsername());
-		
-		model=activityDao.update(model);
-		
+
+		model = activityDao.update(model);
+
 		return Response.ok().entity(model).build();
 	}
 
