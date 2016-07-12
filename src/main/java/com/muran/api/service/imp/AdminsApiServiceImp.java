@@ -7,6 +7,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
 import com.muran.api.exception.Code;
@@ -31,6 +32,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	private IUserDao userDao;
 
 	@Override
+	@Transactional
 	public Response addAdmin(AddAdmin admin, Context context) {
 		// TODO Auto-generated method stub
 		// 检查用户信息是否存在
@@ -67,6 +69,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response deleteAdminInfo(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Admin admin = adminDao.findOne(autoId);
@@ -84,6 +87,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getAdminInfo(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Admin admin = adminDao.findOne(autoId);
@@ -91,6 +95,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getAdminPageList(Integer pageSize, Integer pageIdex,
 			String name, Context context) {
 		// TODO Auto-generated method stub
@@ -99,6 +104,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response updateAdmin(Long autoId, String name, Boolean gender,
 			String mobile, String email, String idNumber, Context context) {
 		// TODO Auto-generated method stub
