@@ -81,6 +81,10 @@ public abstract class AbstractApi {
 			session.setCreateTime(new Date());
 			// 根据用户类型不同调用不同的验证
 			String userType = request.getHeader("userType");
+			
+			context.setUsername(getUsername());
+			context.setUserToken(getUserToken());
+			
 			if (userType == "user") {
 				session.setUserInfo(null);
 			} else if (userType == "admin") {

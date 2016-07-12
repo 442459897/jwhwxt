@@ -11,6 +11,9 @@ public class Context {
     private Session session;
     private ClientInfo clientInfo;
     private Map<String,Object> keyValues = new HashMap<String,Object>();
+    
+    private String userToken;
+    private String username;
 
     public void put(String key,Object value){
         keyValues.put(key,value);
@@ -42,4 +45,28 @@ public class Context {
     public void setKeyValues(Map<String, Object> keyValues) {
         this.keyValues = keyValues;
     }
+	/**
+	 * @return the userToken
+	 */
+	public String getUserToken() {
+		return userToken;
+	}
+	/**
+	 * @param userToken the userToken to set
+	 */
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
+	}
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

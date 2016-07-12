@@ -1,20 +1,69 @@
 package com.muran.api.service.imp;
 
+import java.util.Date;
+
+import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.muran.api.Context;
 import com.muran.api.service.ArticlesApiService;
+import com.muran.dao.IArticleDao;
+import com.muran.dao.IAttachDao;
 import com.muran.dto.AddArticle;
+import com.muran.model.Article;
+import com.muran.model.Attach;
 
 @Service
 public class ArticlesApiServiceImp implements ArticlesApiService {
 
+	@Resource(name = "ArticleDao")
+	private IArticleDao dao;
+
+	@Resource(name = "ArticleDao")
+	private IAttachDao attachDao;
+
 	@Override
 	public Response addArticle(AddArticle article, Context context) {
+
 		// TODO Auto-generated method stub
-		return null;
+		Article articleInfo = new Article();
+		articleInfo.setColumeKey(article.getColumeKey());
+		articleInfo.setContent(article.getContent());
+		articleInfo.setCoverUrl(StringUtils.join(article.getCoverUrl()
+				.toArray(), ','));
+		articleInfo.setCreateMan(context.getUsername());
+		articleInfo.setCreateTime(new Date());
+		articleInfo.setEnable(true);
+		articleInfo.setKeywords(article.getKeyword());
+		articleInfo.setModifyMan(context.getUsername());
+		articleInfo.setModifyTime(new Date());
+		if (article.getStatus() == 1) {
+			articleInfo.setPublishMan(context.getUsername());
+			articleInfo.setPublishTime(new Date());
+		}
+		articleInfo.setShowType(article.getShowType());
+		articleInfo.setSource(article.getSource());
+		articleInfo.setTitle(article.getTitle());
+		articleInfo.setVideoUrl(article.getVideoUrl());
+		articleInfo.setWriter(article.getWriter());
+		articleInfo.setStatus(article.getStatus());
+		articleInfo = dao.merge(articleInfo);
+
+		// 新增附件
+		String[] array = article.getAttachUrl().split(",");
+		for (int i = 0; i < array.length; i++) {
+			Attach attach = new Attach();
+			attach.setColumnKey(article.getColumeKey());
+			attach.setEnable(true);
+			attach.setExtension("");
+			attach.setItemId(articleInfo.getAutoId());
+			attach.setUrl(array[i]);
+			attachDao.merge(attach);
+		}
+		return Response.ok().entity(articleInfo).build();
 	}
 
 	@Override

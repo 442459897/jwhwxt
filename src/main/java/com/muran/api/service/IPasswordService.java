@@ -13,5 +13,7 @@ public interface IPasswordService {
 			String userToken);
 
 	public void verifyPassword(String userToken, String password);
+	
+	public void resetPassword(String username);
 
 }

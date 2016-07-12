@@ -104,4 +104,15 @@ public class PasswordService extends AbstractService implements
 		}
 	}
 
+	@Override
+	@BussAnnotation(bussName = "重置登陆密码", login = true, role = "")
+	public void resetPassword(String username) {
+		// TODO Auto-generated method stub
+		String newHashPwd = PasswordHash.createHash("88888888");
+		int i = userDao.updatePassword(username, newHashPwd, "admin");
+		if (i <= 0) {
+			throw new ServerException(Code.OperationFailed);
+		}
+	}
+
 }

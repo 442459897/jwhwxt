@@ -48,6 +48,7 @@ public class Article implements java.io.Serializable {
 	private Date modifyTime=new Date();
 	private String modifyMan;
 	private Boolean enable;
+	private Long status;
 	/**
 	 * @return the autoId
 	 */
@@ -343,5 +344,17 @@ public class Article implements java.io.Serializable {
 		this.modifyTime = modifyTime;
 		this.modifyMan = modifyMan;
 		this.enable = enable;
+	}
+	/**
+	 * @return the status
+	 */
+	public Long getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(Long status) {
+		this.status = status;
 	}
 }
