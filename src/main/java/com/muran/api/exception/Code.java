@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.muran.model.Activity;
+
 @XmlRootElement
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public enum Code implements ResponseCode {
@@ -42,6 +44,10 @@ public enum Code implements ResponseCode {
 			1006, "密码或账户错误"), PasswordUnCorrect(1007, "密码错误"), PasswordLengthException(
 			1008, "密码少于6位异常"), UserNotFound(1009, "用户不存在"), FrequentSendCode(
 			1010, "频繁发送"),
+	
+	ActivityNoExisted(1050,"活动不存在"),
+	SignUpTopOver(1051,"报名已满"),
+	DataExisted(1052,"数据已存在"),
 	// 微信错误：7**
 	CreateMenuFail(9001, "创建微信菜单失败！");
 	Code() {

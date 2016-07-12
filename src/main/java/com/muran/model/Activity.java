@@ -52,7 +52,7 @@ public class Activity implements java.io.Serializable {
 
 	private Date publishTime;
 	private String publishMan;
-	private Long signupTop;
+	private Long signupTop;//最大人数
 
 	private Date signupEndTime = new Date();
 
