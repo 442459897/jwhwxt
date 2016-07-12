@@ -1,10 +1,8 @@
 package com.muran.dao;
 
 import com.muran.dao.operation.IOperations;
-import com.muran.model.Activity;
 import com.muran.model.ActivitySignup;
 import com.muran.util.Data;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 
 /**
  * @author jerry.zheng

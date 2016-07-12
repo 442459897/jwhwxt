@@ -21,9 +21,7 @@ import com.muran.dto.SignupActivity;
 import com.muran.dto.SignupWxInfo;
 import com.muran.model.Activity;
 import com.muran.model.ActivitySignup;
-import com.muran.model.Admin;
 import com.muran.util.Data;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.iconType;
 
 @Service
 public class ActivitiesApiServiceImp implements ActivitiesApiService {
