@@ -22,7 +22,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	@Resource(name = "ArticleDao")
 	private IArticleDao dao;
 
-	@Resource(name = "ArticleDao")
+	@Resource(name = "AttachDao")
 	private IAttachDao attachDao;
 
 	@Override

@@ -25,7 +25,7 @@ import com.muran.util.PasswordHash;
 public class AdminsApiServiceImp implements AdminsApiService {
 
 	private final static Logger log = Logger.getLogger(UserLoginService.class);
-	@Resource(name = "UserTokenDao")
+	@Resource(name = "AdminDao")
 	private IAdminDao adminDao;
 	@Resource(name = "UserDao")
 	private IUserDao userDao;
