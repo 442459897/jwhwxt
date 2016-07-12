@@ -153,18 +153,19 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 			throw new ServerException(Code.SignUpTopOver, "报名已满");
 		}
 
-		ActivitySignup signup = new ActivitySignup();
-		// 重复检查
-		signup = signupDao.getOneByOpenId(autoId, "");
-		if (signup != null) {
-			throw new ServerException(Code.DataExisted, "已报名");
+		
+		ActivitySignup signup=new ActivitySignup(); 
+		//重复检查
+		signup=signupDao.getOneByOpenId(autoId, context.getOpenId());
+		if (signup!=null) {
+			throw new ServerException(Code.DataExisted,"已报名");
 		}
 		signup = new ActivitySignup();
 		signup.setActivity(autoId);
 		signup.setGender(signupinfo.getGender());
 		signup.setMobile(signupinfo.getMobile());
 		signup.setName(signupinfo.getName());
-		signup.setOpenId("");
+		signup.setOpenId(context.getOpenId());
 		signup.setRemark(signupinfo.getRemark());
 		signup.setSignupTime(new Date());
 		signup = signupDao.merge(signup);
