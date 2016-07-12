@@ -146,7 +146,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		
 		ActivitySignup signup=new ActivitySignup(); 
 		//重复检查
-		signup=signupDao.getOneByOpenId(autoId, "");
+		signup=signupDao.getOneByOpenId(autoId, context.getOpenId());
 		if (signup!=null) {
 			throw new ServerException(Code.DataExisted,"已报名");
 		}
@@ -155,7 +155,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		signup.setGender(signupinfo.getGender());
 		signup.setMobile(signupinfo.getMobile());
 		signup.setName(signupinfo.getName());
-		signup.setOpenId("");
+		signup.setOpenId(context.getOpenId());
 		signup.setRemark(signupinfo.getRemark());
 		signup.setSignupTime(new Date());
 		signup=signupDao.merge(signup);
