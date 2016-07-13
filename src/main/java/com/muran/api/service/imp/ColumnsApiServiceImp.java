@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
 import com.muran.api.service.AbstractService;
@@ -24,6 +25,7 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 	}
 
 	@Override
+	@Transactional
 	public Response getColumnPosterInfoList(Context context) {
 		// TODO Auto-generated method stub
 		
@@ -43,12 +45,14 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 	}
 
 	@Override
+	@Transactional
 	public Response getCommunityUrl(Context context) {
 		// TODO Auto-generated method stub	
 		return Response.ok().entity("测试一下！").build();
 	}
 
 	@Override
+	@Transactional
 	public Response setColumnPosterInfo(String columnKey, Boolean isShowPoster,
 			String posterUrl, Context context) {
 		// TODO Auto-generated method stub
@@ -61,6 +65,7 @@ public class ColumnsApiServiceImp extends AbstractService implements ColumnsApiS
 	}
 
 	@Override
+	@Transactional
 	public Response setCommunityUrl(String outUrl, Context context) {
 		// TODO Auto-generated method stub
 		return null;

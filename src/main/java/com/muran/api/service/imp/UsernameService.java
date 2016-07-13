@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.muran.aop.annotation.BussAnnotation;
 import com.muran.api.service.AbstractService;
 import com.muran.api.service.IUsernameService;
@@ -19,6 +21,7 @@ public class UsernameService extends AbstractService implements
 	private IUserDao userDao;
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "检查用户名", login = false, role = "")
 	public int checkUserName(String username, String userSys) {
 

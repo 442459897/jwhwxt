@@ -28,6 +28,7 @@ public class UserService extends AbstractService implements IUserService {
 	private IUserDao userDao;
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "用户名注册", login = false, role = "")
 	public void signUp(String username, String pwd, String userSys,
 			String invitationCode) {
@@ -49,6 +50,7 @@ public class UserService extends AbstractService implements IUserService {
 	}
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "添加管理员", login = false, role = "")
 	public void addAdmin(String username, String pwd, String userSys) {
 		pwd = pwd.toUpperCase();
@@ -67,6 +69,7 @@ public class UserService extends AbstractService implements IUserService {
 	}
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "注销用户", login = true, role = "")
 	public void deleteUser(String username, String userSys) {
 		User user = userDao.getUser(username, userSys);

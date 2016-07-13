@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
 import com.muran.api.exception.Code;
@@ -38,6 +39,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	private ICommentDao commentDao;
 
 	@Override
+	@Transactional
 	public Response addArticle(AddArticle article, Context context) {
 
 		// TODO Auto-generated method stub
@@ -79,6 +81,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response deleteArticle(Long articleId, Context context) {
 		// TODO Auto-generated method stub
 		dao.deleteById(articleId);
@@ -86,6 +89,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticleContent(Long articleId, Context context) {
 		// TODO Auto-generated method stub
 		Article article = dao.findOne(articleId);
@@ -93,6 +97,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticles(Integer num, String upOrDown, Long time,
 			String columnKey, String title, String keyword, String source,
 			String status, Context context) {
@@ -123,6 +128,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticlesKeywords(String columnKey, Context context) {
 		// TODO Auto-generated method stub
 		List<Article> list = dao.getRandomList(columnKey, 6);
@@ -139,6 +145,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticlesPageList(Integer pageSize, Integer pageIdex,
 			Long startTime, Long endTime, String columnKey, String title,
 			String keyword, String source, String status, Context context) {
@@ -149,6 +156,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response updateArticle(Long articleId, AddArticle article,
 			Context context) {
 		// TODO Auto-generated method stub
@@ -183,6 +191,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response backArticle(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
@@ -198,6 +207,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response publishArticle(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
@@ -213,6 +223,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticleWxContent(Long articleId, Context context) {
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();

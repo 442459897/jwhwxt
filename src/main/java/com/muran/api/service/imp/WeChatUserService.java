@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import weixin.popular.bean.user.User;
 
@@ -24,6 +25,7 @@ public class WeChatUserService extends AbstractService implements
 	private IWeChatUserDao dao;
 
 	@Override
+	@Transactional
 	public boolean IsUserExistOrExpire(String sessionId) {
 		// TODO Auto-generated method stub
 		WeChatUser user = new WeChatUser();
@@ -39,6 +41,7 @@ public class WeChatUserService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	public WeChatUser updateOrCreateWeChatUser(User user) {
 		// TODO Auto-generated method stub
 
@@ -70,6 +73,7 @@ public class WeChatUserService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	public WeChatUser createWeChatUser(User user) {
 		// TODO Auto-generated method stub
 		WeChatUser weUser = new WeChatUser();
@@ -85,6 +89,7 @@ public class WeChatUserService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	public WeChatUser getWeChatUser(String sessionId) {
 		// TODO Auto-generated method stub
 		WeChatUser weUser = new WeChatUser();
@@ -93,6 +98,7 @@ public class WeChatUserService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	public WeChatUser getUserExistAndNoExpire(String sessionId) {
 		// TODO Auto-generated method stub
 		WeChatUser user = new WeChatUser();

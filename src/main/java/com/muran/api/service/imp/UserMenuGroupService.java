@@ -54,6 +54,7 @@ public class UserMenuGroupService extends AbstractService
 	}
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "获取用户菜单组", login = true, role = "")
 	public List<MenuGroup> getMenuGroupListByUsername(String username) {
 		// TODO Auto-generated method stub

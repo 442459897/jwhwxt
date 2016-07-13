@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
 import com.muran.api.service.AttachesApiService;
@@ -20,6 +21,7 @@ public class AttachesApiServiceImp implements AttachesApiService {
 	IAttachDao dao;
 
 	@Override
+	@Transactional
 	public Response getAttachInfo(String columnKey, Integer itemId,
 			Context context) {
 		// TODO Auto-generated method stub

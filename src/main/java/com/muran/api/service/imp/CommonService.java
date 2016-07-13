@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.service.AbstractService;
 import com.muran.api.service.ICommonService;
@@ -21,6 +22,7 @@ public class CommonService extends AbstractService implements ICommonService {
 	private IColumnItemDao dao;
 
 	@Override
+	@Transactional
 	public WxMenu getWxMenu() {
 		// TODO Auto-generated method stub
 		List<ColumnItem> listParent = new ArrayList<ColumnItem>();

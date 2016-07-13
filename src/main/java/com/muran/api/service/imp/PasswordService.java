@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.aop.annotation.BussAnnotation;
 import com.muran.api.exception.Code;
@@ -37,6 +38,7 @@ public class PasswordService extends AbstractService implements
 	private IUserTokenDao userTokenDao;
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "修改登陆密码", login = true, role = "")
 	public void modifyPassword(String oldPassword, String newPassword,
 			String userToken) {
@@ -78,6 +80,7 @@ public class PasswordService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "验证登陆密码", login = true, role = "")
 	public void verifyPassword(String userToken, String password) {
 		// TODO Auto-generated method stub
@@ -105,6 +108,7 @@ public class PasswordService extends AbstractService implements
 	}
 
 	@Override
+	@Transactional
 	@BussAnnotation(bussName = "重置登陆密码", login = true, role = "")
 	public void resetPassword(String username) {
 		// TODO Auto-generated method stub
