@@ -22,9 +22,9 @@ import com.muran.util.DateTimeSerializer;
 import com.muran.util.UserNameVerify;
 
 @Entity
-@Table(name = "TB_USER", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "userSys", "username" }),
-		@UniqueConstraint(columnNames = { "userSys", "mobile" }) })
+@Table(name = "TB_USER", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"userSys", "username" }) })
+// ,@UniqueConstraint(columnNames = { "userSys", "mobile" }
 @XmlRootElement
 @DynamicInsert(true)
 @DynamicUpdate(true)
@@ -80,7 +80,7 @@ public class User implements java.io.Serializable {
 	}
 
 	private String userSys;// 用户来自那个系统：
-							// 
+							//
 
 	@Column(length = 20)
 	public String getUsername() {
