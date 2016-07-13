@@ -60,6 +60,7 @@ public class AdminsApi extends AbstractApi {
     public Response getAdminInfo(@ApiParam(value = "\u4EBA\u5458\u4FE1\u606FautoId",required=true) @PathParam("autoId") Long autoId,@Context  SecurityContext securityContext){
         return service.getAdminInfo(autoId,context());
     }
+    
     @GET
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "\u83B7\u53D6\u4EBA\u5458\u4FE1\u606F\u5217\u8868", notes = "", response = PageData.class, responseContainer = "List", tags={ "admins(人员管理相关)", })
@@ -68,6 +69,7 @@ public class AdminsApi extends AbstractApi {
     public Response getAdminPageList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761",required=true) @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41",required=true) @QueryParam("pageIdex") Integer pageIdex,@ApiParam(value = "\u4EBA\u5458\u59D3\u540D") @QueryParam("name") String name,@Context  SecurityContext securityContext){
         return service.getAdminPageList(pageSize,pageIdex,name,context());
     }
+    
     @PUT
     @Path("/{autoId}")
     @Produces({ "application/json" })
