@@ -61,8 +61,6 @@ public class AdminsApi extends AbstractApi {
         return service.getAdminInfo(autoId,context());
     }
     @GET
-    
-    @Consumes({ "application/json" })
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "\u83B7\u53D6\u4EBA\u5458\u4FE1\u606F\u5217\u8868", notes = "", response = PageData.class, responseContainer = "List", tags={ "admins(人员管理相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
@@ -72,7 +70,6 @@ public class AdminsApi extends AbstractApi {
     }
     @PUT
     @Path("/{autoId}")
-    @Consumes({ "application/json" })
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "\u4FEE\u6539\u4EBA\u5458\u4FE1\u606F", notes = "", response = AdminInfo.class, tags={ "admins(人员管理相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
