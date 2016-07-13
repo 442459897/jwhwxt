@@ -44,7 +44,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
-		articleInfo.setColumeKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
 		articleInfo.setCoverUrl(StringUtils.join(article.getCoverUrl()
 				.toArray(), ','));
@@ -165,7 +165,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		if (articleInfo == null) {
 			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
 		}
-		articleInfo.setColumeKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
 		articleInfo.setCoverUrl(StringUtils.join(article.getCoverUrl()
 				.toArray(), ','));
@@ -246,7 +246,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 		// 获取评论数量
 		List<Comment> list = new ArrayList<Comment>();
-		list = commentDao.getList(articleInfo.getColumeKey(), articleId, 1l);
+		list = commentDao.getList(articleInfo.getColumnKey(), articleId, 1l);
 		long num = list == null ? 0 : list.size();
 
 		article.setCommentNum(num);

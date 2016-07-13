@@ -30,7 +30,7 @@ public class Article implements java.io.Serializable {
 	}
 
 	private Long autoId;
-	private String columeKey;
+	private String columnKey;
 	private String title;
 	private String keywords;
 	private String showType;
@@ -68,14 +68,14 @@ public class Article implements java.io.Serializable {
 	 * @return the columeKey
 	 */
 	@Column(name="columnKey",length = 50)
-	public String getColumeKey() {
-		return columeKey;
+	public String getColumnKey() {
+		return columnKey;
 	}
 	/**
 	 * @param columeKey the columeKey to set
 	 */
-	public void setColumeKey(String columeKey) {
-		this.columeKey = columeKey;
+	public void setColumnKey(String columnKey) {
+		this.columnKey = columnKey;
 	}
 	/**
 	 * @return the title
@@ -319,14 +319,14 @@ public class Article implements java.io.Serializable {
 	 * @param modifyMan
 	 * @param enable
 	 */
-	public Article(Long autoId, String columeKey, String title,
+	public Article(Long autoId, String columnKey, String title,
 			String keywords, String showType, String coverUrl, String videoUrl,
 			String content, String source, String writer, Date publishTime,
 			String publishMan, Date backTime, String backMan, Date createTime,
 			String createMan, Date modifyTime, String modifyMan, Boolean enable) {
 		super();
 		this.autoId = autoId;
-		this.columeKey = columeKey;
+		this.columnKey = columnKey;
 		this.title = title;
 		this.keywords = keywords;
 		this.showType = showType;
