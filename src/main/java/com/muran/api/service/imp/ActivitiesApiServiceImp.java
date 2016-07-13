@@ -55,7 +55,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setKeywords(activity.getKeywords());
 		model.setSignupEndTime(activity.getSignupEndTime());
 		model.setOverUrl(activity.getCoverUrl());
-		model.setSignupTop(activity.getSignupTop());
+		model.setSignupTop(activity.getSignupTop().longValue());
 		model.setHoster(activity.getHoster());
 		model.setStatus(Long.parseLong("0"));
 
@@ -248,9 +248,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setKeywords(activity.getKeywords());
 		model.setSignupEndTime(activity.getSignupEndTime());
 		model.setOverUrl(activity.getCoverUrl());
-		model.setSignupTop(activity.getSignupTop());
+		model.setSignupTop(activity.getSignupTop().longValue());
 		model.setHoster(activity.getHoster());
-		model.setStatus(activity.getStatus());
+		model.setStatus(activity.getStatus().longValue());
 
 		model.setModifyTime(new Date());
 		model.setModifyUser(context.getUsername());

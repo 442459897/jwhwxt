@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -24,9 +26,9 @@ public class AddActivity   {
   private Date signupEndTime = null;
   private String content = null;
   private String coverUrl = null;
-  private Long signupTop = null;
+  private BigInteger signupTop = null;
   private String hoster = null;
-  private Long status = null;
+  private BigInteger status = null;
 
   /**
    **/
@@ -166,7 +168,7 @@ public class AddActivity   {
 
   /**
    **/
-  public AddActivity signupTop(Long signupTop) {
+  public AddActivity signupTop(BigInteger signupTop) {
     this.signupTop = signupTop;
     return this;
   }
@@ -174,10 +176,10 @@ public class AddActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("signupTop")
-  public Long getSignupTop() {
+  public BigInteger getSignupTop() {
     return signupTop;
   }
-  public void setSignupTop(Long signupTop) {
+  public void setSignupTop(BigInteger signupTop) {
     this.signupTop = signupTop;
   }
 
@@ -200,7 +202,7 @@ public class AddActivity   {
 
   /**
    **/
-  public AddActivity status(Long status) {
+  public AddActivity status(BigInteger status) {
     this.status = status;
     return this;
   }
@@ -208,10 +210,10 @@ public class AddActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("status")
-  public Long getStatus() {
+  public BigInteger getStatus() {
     return status;
   }
-  public void setStatus(Long status) {
+  public void setStatus(BigInteger status) {
     this.status = status;
   }
 

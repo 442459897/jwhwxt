@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -16,7 +18,7 @@ import java.util.Date;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class SignupActivity   {
   
-  private Long activity = null;
+  private BigInteger activity = null;
   private String name = null;
   private String mobile = null;
   private Boolean gender = null;
@@ -25,7 +27,7 @@ public class SignupActivity   {
 
   /**
    **/
-  public SignupActivity activity(Long activity) {
+  public SignupActivity activity(BigInteger activity) {
     this.activity = activity;
     return this;
   }
@@ -33,10 +35,10 @@ public class SignupActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("activity")
-  public Long getActivity() {
+  public BigInteger getActivity() {
     return activity;
   }
-  public void setActivity(Long activity) {
+  public void setActivity(BigInteger activity) {
     this.activity = activity;
   }
 
