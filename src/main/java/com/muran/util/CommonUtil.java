@@ -26,4 +26,13 @@ public class CommonUtil {
 		}
 		return list;
 	}
+
+	public static String getStringList(List<GeneralString> list) {
+		String result = "";
+		for (GeneralString string : list) {
+			result += string.getValue() + ",";
+		}
+		result = result.substring(0, result.length() - 1);
+		return result;
+	}
 }
