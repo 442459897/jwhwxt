@@ -89,7 +89,7 @@ public class Activity implements java.io.Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "province", length = 100)
+	@Column(name = "location", length = 100)
 	public String getLocation() {
 		return location;
 	}
