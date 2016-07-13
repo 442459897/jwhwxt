@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
+import com.muran.api.exception.AssertNull;
 import com.muran.api.exception.Code;
 import com.muran.api.exception.ServerException;
 import com.muran.api.service.ActivitiesApiService;
@@ -27,8 +28,7 @@ import com.muran.util.Data;
 @Service
 public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
-	private final static Logger log = Logger
-			.getLogger(ActivitiesApiServiceImp.class);
+	private final static Logger log = Logger.getLogger(ActivitiesApiServiceImp.class);
 	@Resource(name = "ActivityDao")
 	private IActivityDao activityDao;
 
@@ -44,6 +44,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	public Response addActivity(AddActivity activity, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
+		AssertNull.assertNull(activity.getTitle(), activity.getClass(), activity.getKeywords(), activity.getStartTime(),
+				activity.getEndTime(), activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
+				activity.getSignupTop(), activity.getHoster());
 		model.setTitle(activity.getTitle());
 		model.setContent(activity.getContent());
 		model.setStartTime(activity.getStartTime());
@@ -54,7 +57,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setOverUrl(activity.getCoverUrl());
 		model.setSignupTop(activity.getSignupTop());
 		model.setHoster(activity.getHoster());
-		model.setStatus(activity.getStatus());
+		model.setStatus(Long.parseLong("0"));
 
 		model.setCreateTime(new Date());
 		model.setCreateUser(context.getUsername());
@@ -97,62 +100,61 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 	/**
 	 * 分页查询（后台）
-	 * */
+	 */
 	@Override
 	@Transactional
-	public Response getActivityPageList(Integer pageSize, Integer pageIndex,
-			Long startTime, Long endTime, String title, String keyword,
-			String status, Context context) {
+	public Response getActivityPageList(Integer pageSize, Integer pageIndex, Long startTime, Long endTime, String title,
+			String keyword, String status, Context context) {
 		// TODO Auto-generated method stub
-		Data<Activity> data = activityDao.getActivityPageList(pageSize,
-				pageIndex, startTime, endTime, title, keyword, status);
+		AssertNull.assertNull(pageIndex, pageSize);
+		Data<Activity> data = activityDao.getActivityPageList(pageSize, pageIndex, startTime, endTime, title, keyword,
+				status);
 		return Response.ok().entity(data).build();
 	}
 
 	/**
 	 * 微信端：获取list
-	 * */
+	 */
 	@Override
 	@Transactional
-	public Response getActivityWxList(Integer num, String upOrDown, Long time,
-			String title, String keyword, Context context) {
+	public Response getActivityWxList(Integer num, String upOrDown, Long time, String title, String keyword,
+			Context context) {
 		// TODO Auto-generated method stub
-		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown,
-				time, title, keyword);
+		AssertNull.assertNull(upOrDown);
+		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown, time, title, keyword);
 		return Response.ok().entity(list).build();
 	}
 
 	/**
 	 * 微信端：获取报名信息
-	 * */
+	 */
 	@Override
 	@Transactional
-	public Response getSignupInfo(Long autoId, Integer num, String upOrDown,
-			Long time, Context context) {
-		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num,
-				upOrDown, time);
+	public Response getSignupInfo(Long autoId, Integer num, String upOrDown, Long time, Context context) {
+		AssertNull.assertNull(upOrDown);
+		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num, upOrDown, time);
 		return Response.ok().entity(list).build();
 	}
 
 	/**
 	 * 后台：获取报名信息分页
-	 * **/
+	 **/
 	@Override
 	@Transactional
-	public Response getSignupInfoPageList(Long autoId, Integer pageSize,
-			Integer pageIndex, Context context) {
-		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId,
-				pageSize, pageIndex);
+	public Response getSignupInfoPageList(Long autoId, Integer pageSize, Integer pageIndex, Context context) {
+		AssertNull.assertNull(pageIndex, pageSize);
+		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId, pageSize, pageIndex);
 		return Response.ok().entity(data).build();
 	}
 
 	/**
 	 * 活动报名
-	 * */
+	 */
 	@Override
 	@Transactional
-	public Response signupActivity(Long autoId, SignupActivity signupinfo,
-			Context context) {
+	public Response signupActivity(Long autoId, SignupActivity signupinfo, Context context) {
+		AssertNull.assertNull(signupinfo.getActivity(), signupinfo.getMobile(), context.getOpenId(),
+				signupinfo.getName());
 		Activity model = new Activity();
 		model = activityDao.findOne(autoId);
 		if (model == null) {
@@ -162,12 +164,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 			throw new ServerException(Code.SignUpTopOver, "报名已满");
 		}
 
-		
-		ActivitySignup signup=new ActivitySignup(); 
-		//重复检查
-		signup=signupDao.getOneByOpenId(autoId, context.getOpenId());
-		if (signup!=null) {
-			throw new ServerException(Code.DataExisted,"已报名");
+		ActivitySignup signup = new ActivitySignup();
+		// 重复检查
+		signup = signupDao.getOneByOpenId(autoId, context.getOpenId());
+		if (signup != null) {
+			throw new ServerException(Code.DataExisted, "已报名");
 		}
 		signup = new ActivitySignup();
 		signup.setActivity(autoId);
@@ -184,7 +185,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 	/**
 	 * 收回活动
-	 * */
+	 */
 	@Override
 	@Transactional
 	public Response backActivity(Long autoId, Context context) {
@@ -226,12 +227,14 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 	/**
 	 * 更新活动信息
-	 * */
+	 */
 	@Override
 	@Transactional
-	public Response updateActivity(Long autoId, AddActivity activity,
-			Context context) {
-		// TODO Auto-generated method stub
+	public Response updateActivity(Long autoId, AddActivity activity, Context context) {
+		AssertNull.assertNull(activity.getTitle(), activity.getClass(), activity.getKeywords(), activity.getStartTime(),
+				activity.getEndTime(), activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
+				activity.getSignupTop(), activity.getHoster());
+
 		Activity model = new Activity();
 		model = activityDao.findOne(autoId);
 		if (model == null) {
