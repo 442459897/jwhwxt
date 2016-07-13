@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -16,7 +18,7 @@ import java.util.Date;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class ActivityInfo   {
   
-  private Long autoId = null;
+  private BigInteger autoId = null;
   private String title = null;
   private String overUrl = null;
   private String hoster = null;
@@ -34,7 +36,7 @@ public class ActivityInfo   {
 
   /**
    **/
-  public ActivityInfo autoId(Long autoId) {
+  public ActivityInfo autoId(BigInteger autoId) {
     this.autoId = autoId;
     return this;
   }
@@ -42,10 +44,10 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("autoId")
-  public Long getAutoId() {
+  public BigInteger getAutoId() {
     return autoId;
   }
-  public void setAutoId(Long autoId) {
+  public void setAutoId(BigInteger autoId) {
     this.autoId = autoId;
   }
 
