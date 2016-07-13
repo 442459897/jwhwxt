@@ -47,8 +47,8 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 			hql += " and publishTime<'" + DateUtil.timestampToDateStr(endTime.toString()) + "'";
 		}
 
-		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(Activity.class));
+		Query query = getCurrentSession().createQuery(hql);
+				
 		List<Activity> list = query.list();
 
 		Data<Activity> data = new Data<Activity>();
