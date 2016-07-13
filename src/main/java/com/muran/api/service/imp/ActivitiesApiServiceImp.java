@@ -120,7 +120,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	public Response getActivityWxList(Integer num, String upOrDown, Long time, String title, String keyword,
 			Context context) {
 		// TODO Auto-generated method stub
-		AssertNull.assertNull(upOrDown);
+		AssertNull.assertNull(num,upOrDown);
 		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown, time, title, keyword);
 		return Response.ok().entity(list).build();
 	}
@@ -131,7 +131,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	@Override
 	@Transactional
 	public Response getSignupInfo(Long autoId, Integer num, String upOrDown, Long time, Context context) {
-		AssertNull.assertNull(upOrDown);
+		AssertNull.assertNull(num,upOrDown);
 		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num, upOrDown, time);
 		return Response.ok().entity(list).build();
 	}
