@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+
 import com.muran.dao.IArticleDao;
 import com.muran.model.Article;
 import com.muran.util.Data;
@@ -58,12 +59,13 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 	@Override
 	public List<Article> getRandomList(String columnKey, int num) {
 		// TODO Auto-generated method stub
-		String hql = " from Article where 1=1 ";
+		String hql = "select * from tb_article where 1=1 ";
 		if (columnKey != null && !columnKey.equals("")) {
 			hql += " and columnKey='" + columnKey + "'";
 		}
 		hql += " order by rand() limit " + num;
-		Query query = getCurrentSession().createQuery(hql);
+		Query query = getCurrentSession().createSQLQuery(hql).setResultTransformer(
+				Transformers.aliasToBean(Article.class));;
 		return query.list();
 	}
 
