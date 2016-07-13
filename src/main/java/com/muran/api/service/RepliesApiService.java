@@ -14,5 +14,7 @@ import com.muran.api.Context;
 
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public interface RepliesApiService {
-    Response reply(AddReply reply,Context context);
+	Response reply(AddReply reply, Context context);
+
+	Response auditReply(Long autoId, Long status, Context context);
 }

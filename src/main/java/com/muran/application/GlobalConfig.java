@@ -41,6 +41,8 @@ public class GlobalConfig {
 	public static String KEY_APP_SECRET;
 	public static String KEY_ERROR_PAGE;
 	public static String KEY_WEB_BASE;
+	public static String KEY_JWH_HEADIMG;
+	public static String KEY_JWH_NAME;
 
 	private GlobalConfig(String configFileName) {
 		try {
@@ -78,6 +80,8 @@ public class GlobalConfig {
 				KEY_APP_SECRET = instance.getConfig("wx.appsecret");
 				KEY_ERROR_PAGE = instance.getConfig("errorpage");
 				KEY_WEB_BASE = instance.getConfig("webbase");
+				KEY_JWH_HEADIMG= instance.getConfig("jwh_headimg");
+				KEY_JWH_NAME= instance.getConfig("jwh_name");
 			} catch (IOException e) {
 				log.error(e, e);
 			}

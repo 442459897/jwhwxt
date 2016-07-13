@@ -26,16 +26,27 @@ import javax.ws.rs.*;
 @io.swagger.annotations.Api(description = "the replies API")
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class RepliesApi extends AbstractApi {
-    @Autowired
-    RepliesApiService service;
-    @POST
-    
-    @Consumes({ "application/json" })
-    @Produces({ "application/json" })
-    @io.swagger.annotations.ApiOperation(value = "\u56DE\u590D \u7559\u8A00\u8BC4\u8BBA/\u6211\u6709\u8BDD\u8BF4/\u56DE\u590D\u4FE1\u606F", notes = "", response = void.class, tags={ "replies(回复信息相关)", })
-    @io.swagger.annotations.ApiResponses(value = { 
-        @io.swagger.annotations.ApiResponse(code = 200, message = "\u56DE\u590D\u6210\u529F", response = void.class) })
-    public Response reply(@ApiParam(value = "\u56DE\u590Dbody" ,required=true) AddReply reply,@Context  SecurityContext securityContext){
-        return service.reply(reply,context());
-    }
+	@Autowired
+	RepliesApiService service;
+
+	@POST
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	@io.swagger.annotations.ApiOperation(value = "\u56DE\u590D \u7559\u8A00\u8BC4\u8BBA/\u6211\u6709\u8BDD\u8BF4/\u56DE\u590D\u4FE1\u606F", notes = "", response = void.class, tags = { "replies(回复信息相关)", })
+	@io.swagger.annotations.ApiResponses(value = { @io.swagger.annotations.ApiResponse(code = 200, message = "\u56DE\u590D\u6210\u529F", response = void.class) })
+	public Response reply(
+			@ApiParam(value = "\u56DE\u590Dbody", required = true) AddReply reply,
+			@Context SecurityContext securityContext) {
+		return service.reply(reply, context());
+	}
+
+	@PUT
+	@Consumes({ "application/json" })
+	@Produces({ "application/json" })
+	@Path("/{autoId}")
+	public Response auditReply(@PathParam("autoId") Long autoId,
+			@FormParam("status") Long status,
+			@Context SecurityContext securityContext) {
+		return service.auditReply(autoId, status, context());
+	}
 }
