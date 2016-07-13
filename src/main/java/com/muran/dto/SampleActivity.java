@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -16,21 +18,21 @@ import java.util.Date;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class SampleActivity   {
   
-  private Long autoId = null;
+  private BigInteger autoId = null;
   private String title = null;
   private String overUrl = null;
   private String hoster = null;
   private Date startTime = null;
   private Date endTime = null;
   private String location = null;
-  private Long signNum = null;
+  private BigInteger signNum = null;
   private Date publishTime = null;
   private String publishMan = null;
-  private Long status = null;
+  private BigInteger status = null;
 
   /**
    **/
-  public SampleActivity autoId(Long autoId) {
+  public SampleActivity autoId(BigInteger autoId) {
     this.autoId = autoId;
     return this;
   }
@@ -38,10 +40,10 @@ public class SampleActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("autoId")
-  public Long getAutoId() {
+  public BigInteger getAutoId() {
     return autoId;
   }
-  public void setAutoId(Long autoId) {
+  public void setAutoId(BigInteger autoId) {
     this.autoId = autoId;
   }
 
@@ -149,7 +151,7 @@ public class SampleActivity   {
 
   /**
    **/
-  public SampleActivity signNum(Long signNum) {
+  public SampleActivity signNum(BigInteger signNum) {
     this.signNum = signNum;
     return this;
   }
@@ -157,10 +159,10 @@ public class SampleActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("signNum")
-  public Long getSignNum() {
+  public BigInteger getSignNum() {
     return signNum;
   }
-  public void setSignNum(Long signNum) {
+  public void setSignNum(BigInteger signNum) {
     this.signNum = signNum;
   }
 
@@ -200,7 +202,7 @@ public class SampleActivity   {
 
   /**
    **/
-  public SampleActivity status(Long status) {
+  public SampleActivity status(BigInteger status) {
     this.status = status;
     return this;
   }
@@ -208,10 +210,10 @@ public class SampleActivity   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("status")
-  public Long getStatus() {
+  public BigInteger getStatus() {
     return status;
   }
-  public void setStatus(Long status) {
+  public void setStatus(BigInteger status) {
     this.status = status;
   }
 

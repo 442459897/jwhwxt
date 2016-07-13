@@ -4,6 +4,8 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -16,25 +18,25 @@ import java.util.Date;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class ActivityInfo   {
   
-  private Long autoId = null;
+  private BigInteger autoId = null;
   private String title = null;
   private String overUrl = null;
   private String hoster = null;
   private Date startTime = null;
   private Date endTime = null;
   private String location = null;
-  private Long signNum = null;
+  private BigInteger signNum = null;
   private Date publishTime = null;
   private String publishMan = null;
   private String content = null;
-  private Long signupTop = null;
-  private Long commentNum = null;
-  private Long status = null;
+  private BigInteger signupTop = null;
+  private BigInteger commentNum = null;
+  private BigInteger status = null;
   private Date signupEndTime = null;
 
   /**
    **/
-  public ActivityInfo autoId(Long autoId) {
+  public ActivityInfo autoId(BigInteger autoId) {
     this.autoId = autoId;
     return this;
   }
@@ -42,10 +44,10 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("autoId")
-  public Long getAutoId() {
+  public BigInteger getAutoId() {
     return autoId;
   }
-  public void setAutoId(Long autoId) {
+  public void setAutoId(BigInteger autoId) {
     this.autoId = autoId;
   }
 
@@ -153,7 +155,7 @@ public class ActivityInfo   {
 
   /**
    **/
-  public ActivityInfo signNum(Long signNum) {
+  public ActivityInfo signNum(BigInteger signNum) {
     this.signNum = signNum;
     return this;
   }
@@ -161,10 +163,10 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("signNum")
-  public Long getSignNum() {
+  public BigInteger getSignNum() {
     return signNum;
   }
-  public void setSignNum(Long signNum) {
+  public void setSignNum(BigInteger signNum) {
     this.signNum = signNum;
   }
 
@@ -221,7 +223,7 @@ public class ActivityInfo   {
 
   /**
    **/
-  public ActivityInfo signupTop(Long signupTop) {
+  public ActivityInfo signupTop(BigInteger signupTop) {
     this.signupTop = signupTop;
     return this;
   }
@@ -229,16 +231,16 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("signupTop")
-  public Long getSignupTop() {
+  public BigInteger getSignupTop() {
     return signupTop;
   }
-  public void setSignupTop(Long signupTop) {
+  public void setSignupTop(BigInteger signupTop) {
     this.signupTop = signupTop;
   }
 
   /**
    **/
-  public ActivityInfo commentNum(Long commentNum) {
+  public ActivityInfo commentNum(BigInteger commentNum) {
     this.commentNum = commentNum;
     return this;
   }
@@ -246,16 +248,16 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("commentNum")
-  public Long getCommentNum() {
+  public BigInteger getCommentNum() {
     return commentNum;
   }
-  public void setCommentNum(Long commentNum) {
+  public void setCommentNum(BigInteger commentNum) {
     this.commentNum = commentNum;
   }
 
   /**
    **/
-  public ActivityInfo status(Long status) {
+  public ActivityInfo status(BigInteger status) {
     this.status = status;
     return this;
   }
@@ -263,10 +265,10 @@ public class ActivityInfo   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("status")
-  public Long getStatus() {
+  public BigInteger getStatus() {
     return status;
   }
-  public void setStatus(Long status) {
+  public void setStatus(BigInteger status) {
     this.status = status;
   }
 
