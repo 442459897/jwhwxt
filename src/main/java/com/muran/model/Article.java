@@ -184,7 +184,6 @@ public class Article implements java.io.Serializable {
 	/**
 	 * @return the publishTime
 	 */
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getPublishTime() {
 		return publishTime;
 	}
@@ -210,7 +209,6 @@ public class Article implements java.io.Serializable {
 	/**
 	 * @return the backTime
 	 */
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getBackTime() {
 		return backTime;
 	}
@@ -237,7 +235,6 @@ public class Article implements java.io.Serializable {
 	/**
 	 * @return the createTime
 	 */
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -263,7 +260,6 @@ public class Article implements java.io.Serializable {
 	/**
 	 * @return the modifyTime
 	 */
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	public Date getModifyTime() {
 		return modifyTime;
 	}
