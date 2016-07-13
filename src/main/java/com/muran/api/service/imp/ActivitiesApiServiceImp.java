@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
 import com.muran.api.exception.Code;
@@ -39,6 +40,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 添加活动
 	 **/
 	@Override
+	@Transactional
 	public Response addActivity(AddActivity activity, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -66,6 +68,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 根据活动id，删除活动
 	 */
 	@Override
+	@Transactional
 	public Response deleteActivity(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -81,6 +84,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 根据id,获取活动信息
 	 */
 	@Override
+	@Transactional
 	public Response getActivity(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -95,6 +99,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 分页查询（后台）
 	 * */
 	@Override
+	@Transactional
 	public Response getActivityPageList(Integer pageSize, Integer pageIndex,
 			Long startTime, Long endTime, String title, String keyword,
 			String status, Context context) {
@@ -108,6 +113,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 微信端：获取list
 	 * */
 	@Override
+	@Transactional
 	public Response getActivityWxList(Integer num, String upOrDown, Long time,
 			String title, String keyword, Context context) {
 		// TODO Auto-generated method stub
@@ -120,6 +126,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 微信端：获取报名信息
 	 * */
 	@Override
+	@Transactional
 	public Response getSignupInfo(Long autoId, Integer num, String upOrDown,
 			Long time, Context context) {
 		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num,
@@ -131,6 +138,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 后台：获取报名信息分页
 	 * **/
 	@Override
+	@Transactional
 	public Response getSignupInfoPageList(Long autoId, Integer pageSize,
 			Integer pageIndex, Context context) {
 		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId,
@@ -142,6 +150,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 活动报名
 	 * */
 	@Override
+	@Transactional
 	public Response signupActivity(Long autoId, SignupActivity signupinfo,
 			Context context) {
 		Activity model = new Activity();
@@ -177,6 +186,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 收回活动
 	 * */
 	@Override
+	@Transactional
 	public Response backActivity(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -197,6 +207,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 发布活动
 	 */
 	@Override
+	@Transactional
 	public Response publishActivity(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -217,6 +228,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 * 更新活动信息
 	 * */
 	@Override
+	@Transactional
 	public Response updateActivity(Long autoId, AddActivity activity,
 			Context context) {
 		// TODO Auto-generated method stub
