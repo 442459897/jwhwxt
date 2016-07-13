@@ -67,7 +67,7 @@ public class Article implements java.io.Serializable {
 	/**
 	 * @return the columeKey
 	 */
-	@Column(length = 50)
+	@Column(name="columnKey",length = 50)
 	public String getColumeKey() {
 		return columeKey;
 	}
