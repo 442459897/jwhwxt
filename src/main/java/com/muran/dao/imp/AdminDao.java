@@ -26,10 +26,10 @@ public class AdminDao extends AbstractHibernateDao<Admin> implements IAdminDao {
 		// TODO Auto-generated method stub
 		String hql = " from Admin where 1=1 ";
 		if (name != null && !name.equals("")) {
-			hql += " and name='" + name + "'";
+			hql += " and name like '%" + name + "%'";
 		}
-		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(Admin.class));
+		Query query = getCurrentSession().createQuery(hql);
+		//.setResultTransformer(Transformers.aliasToBean(Admin.class))
 		List<Admin> list = query.list();
 
 		Data<Admin> data = new Data<Admin>();
