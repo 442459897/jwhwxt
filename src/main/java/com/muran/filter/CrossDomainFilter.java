@@ -38,7 +38,8 @@ public class CrossDomainFilter extends GenericFilterBean {
 			response.setHeader("Access-Control-Max-Age", "3600000000000");
 			response.setHeader(
 					"Access-Control-Allow-Headers",
-					"session-id");
+					"X-Requested-With,UserToken,UserSys,SessionId,Content-Type");
+			//"X-Requested-With,UserToken,UserSys,Time,SignCode,Content-Type"
 			// response.setHeader("Access-Control-Allow-Headers",
 			// "X-Requested-With,session-id,client-ip,client-key,client-net-env,Content-Type,version,open-id");
 		} else {
