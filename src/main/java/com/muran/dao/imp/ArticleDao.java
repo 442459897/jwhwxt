@@ -47,8 +47,8 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 			hql += " and publishTime < '"
 					+ DateUtil.timestampToDateStr(time.toString()) + "'";
 		}
-		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(Article.class));
+		hql += " order by publishTime desc ";
+		Query query = getCurrentSession().createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(num);
 
@@ -94,8 +94,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		if (status != null && !status.equals("")) {
 			hql += " and status='" + status + "'";
 		}
-		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(Article.class));
+		Query query = getCurrentSession().createQuery(hql);
 		List<Article> list = query.list();
 
 		Data<Article> data = new Data<Article>();
