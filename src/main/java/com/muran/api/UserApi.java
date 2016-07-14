@@ -1,10 +1,10 @@
 package com.muran.api;
 
-import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -33,10 +33,10 @@ public class UserApi extends AbstractApi {
 	IPasswordService pwdService;
 
 	@POST
-	@Path("/{username}/login")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Path("/login")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
-	public Response login(@PathParam("username") String username,
+	public Response login(@FormParam("username") String username,
 			@FormParam("password") String password) {
 		UserToken token = loginService.login(username, password, "admin");
 		return Response.ok().entity(token).build();
@@ -44,7 +44,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/loginout")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response loginOut() {
 		loginService.loginOut(getUserToken());
@@ -53,7 +53,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/{username}/password")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response modifyPwd(@PathParam("username") String username,
 			@FormParam("newpwd") String newpwd,
@@ -64,7 +64,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/{username}/password/reset")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response resetPwd(@PathParam("username") String username) {
 		pwdService.resetPassword(username);
