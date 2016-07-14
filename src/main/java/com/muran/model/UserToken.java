@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -120,8 +120,8 @@ public class UserToken implements Serializable {
 		}
 	}
 
-	@JsonIgnore
 	@Transient
+	@JsonIgnore
 	public Date getUserLoginTime() {
 		String[] strs = userToken.split(":");
 		Calendar c = Calendar.getInstance();
