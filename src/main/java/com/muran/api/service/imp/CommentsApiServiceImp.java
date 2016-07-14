@@ -135,6 +135,7 @@ public class CommentsApiServiceImp implements CommentsApiService {
 		Comment comment = new Comment();
 		comment.setColumnKey(signupinfo.getColumnKey());
 		comment.setCommentTime(new Date());
+		comment.setContent(signupinfo.getContent());
 		comment.setEnable(true);
 		comment.setItemId(signupinfo.getItemId());
 		comment.setOpenId(context.getOpenId());
