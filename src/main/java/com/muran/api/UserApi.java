@@ -1,10 +1,10 @@
 package com.muran.api;
 
-import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +34,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/login")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response login(@FormParam("username") String username,
 			@FormParam("password") String password) {
