@@ -127,7 +127,16 @@ public class AdminsApiServiceImp implements AdminsApiService {
 	@Transactional
 	public Response getAdminByUsername(String username, Context context) {
 		AssertNull.assertNull(username);
-		Admin admin = adminDao.getAdminByUsername(username);
+		Admin admin=new Admin();
+		if (username.equalsIgnoreCase("admin")) {
+			User user=userDao.getUserByUsername(username,context.getUserSys());
+			admin.setName("超级管理员");
+			admin.setUsername(user.getUsername());
+			admin.setMobile(user.getMobile());
+		}
+		else{
+			 admin = adminDao.getAdminByUsername(username);
+		}
 		if (admin == null) {
 			throw new ServerException(Code.UserNoExisted, "用户不存在！");
 		}
