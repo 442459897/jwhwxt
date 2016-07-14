@@ -33,10 +33,10 @@ public class UserApi extends AbstractApi {
 	IPasswordService pwdService;
 
 	@POST
-	@Path("/{username}/login")
+	@Path("/login")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ "application/json" })
-	public Response login(@PathParam("username") String username,
+	public Response login(@FormParam("username") String username,
 			@FormParam("password") String password) {
 		UserToken token = loginService.login(username, password, "admin");
 		return Response.ok().entity(token).build();
