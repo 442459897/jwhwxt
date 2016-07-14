@@ -21,4 +21,6 @@ public interface AdminsApiService {
     Response getAdminInfo(Long autoId,Context context);
     Response getAdminPageList(Integer pageSize,Integer pageIdex,String name,Context context);
     Response updateAdmin(Long autoId,String name,Boolean gender,String mobile,String email,String idNumber,Context context);
+    Response getAdminByUsername(String username,Context context);
+    
 }

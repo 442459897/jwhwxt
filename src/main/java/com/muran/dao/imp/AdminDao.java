@@ -12,7 +12,7 @@ import com.muran.dao.IAdminDao;
 
 @SuppressWarnings("unchecked")
 @Repository("AdminDao")
-public class AdminDao extends AbstractHibernateDao<Admin> implements IAdminDao {
+public class AdminDao extends AbstractHibernateDao<Admin>implements IAdminDao {
 
 	public AdminDao() {
 		// TODO Auto-generated constructor stub
@@ -21,15 +21,14 @@ public class AdminDao extends AbstractHibernateDao<Admin> implements IAdminDao {
 	}
 
 	@Override
-	public Data<Admin> getAdminPageList(Integer pageSize, Integer pageIndex,
-			String name) {
+	public Data<Admin> getAdminPageList(Integer pageSize, Integer pageIndex, String name) {
 		// TODO Auto-generated method stub
 		String hql = " from Admin where 1=1 ";
 		if (name != null && !name.equals("")) {
 			hql += " and name like '%" + name + "%'";
 		}
 		Query query = getCurrentSession().createQuery(hql);
-		//.setResultTransformer(Transformers.aliasToBean(Admin.class))
+		// .setResultTransformer(Transformers.aliasToBean(Admin.class))
 		List<Admin> list = query.list();
 
 		Data<Admin> data = new Data<Admin>();
@@ -46,6 +45,19 @@ public class AdminDao extends AbstractHibernateDao<Admin> implements IAdminDao {
 		data.setData(list);
 
 		return data;
+	}
+
+	@Override
+	public Admin getAdminByUsername(String username) {
+		String hql = " from Admin where 1=1 and username='" + username + "'";
+
+		Query query = getCurrentSession().createQuery(hql);
+
+		List<Admin> list = query.list();
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 }

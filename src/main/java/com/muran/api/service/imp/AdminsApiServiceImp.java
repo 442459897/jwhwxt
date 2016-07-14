@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.muran.api.Context;
+import com.muran.api.exception.AssertNull;
 import com.muran.api.exception.Code;
 import com.muran.api.exception.ServerException;
 import com.muran.api.service.AdminsApiService;
@@ -118,6 +119,17 @@ public class AdminsApiServiceImp implements AdminsApiService {
 		admin.setMobile(mobile);
 		admin.setIdNumber(idNumber);
 		admin = adminDao.update(admin);
+		return Response.ok().entity(admin).build();
+	}
+
+	@Override
+	@Transactional
+	public Response getAdminByUsername(String username, Context context) {
+		AssertNull.assertNull(username);
+		Admin admin = adminDao.getAdminByUsername(username);
+		if (admin == null) {
+			throw new ServerException(Code.UserNoExisted, "用户不存在！");
+		}
 		return Response.ok().entity(admin).build();
 	}
 
