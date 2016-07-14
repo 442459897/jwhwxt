@@ -8,5 +8,7 @@ public interface IAdminDao extends IOperations<Admin> {
 	
 	public Data<Admin> getAdminPageList(Integer pageSize, Integer pageIdex,
 			String name);
+	
+	public Admin getAdminByUsername(String username);
 
 }
