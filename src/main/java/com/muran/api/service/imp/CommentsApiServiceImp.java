@@ -17,6 +17,9 @@ import com.muran.api.exception.Code;
 import com.muran.api.exception.ServerException;
 import com.muran.api.service.CommentsApiService;
 import com.muran.application.GlobalConfig;
+import com.muran.dao.IActivityDao;
+import com.muran.dao.IArticleDao;
+import com.muran.dao.IColumnItemDao;
 import com.muran.dao.ICommentDao;
 import com.muran.dao.IReplyDao;
 import com.muran.dao.IWeChatUserDao;
@@ -24,6 +27,9 @@ import com.muran.dto.AddComment;
 import com.muran.dto.CommentSampleInfo;
 import com.muran.dto.CommentWxInfo;
 import com.muran.dto.ReplyWxInfo;
+import com.muran.model.Activity;
+import com.muran.model.Article;
+import com.muran.model.ColumnItem;
 import com.muran.model.Comment;
 import com.muran.model.Reply;
 import com.muran.model.WeChatUser;
@@ -40,6 +46,15 @@ public class CommentsApiServiceImp implements CommentsApiService {
 
 	@Resource(name = "ReplyDao")
 	private IReplyDao replyDao;
+
+	@Resource(name = "ActivityDao")
+	private IActivityDao activityDao;
+
+	@Resource(name = "ArticleDao")
+	private IArticleDao articleDao;
+
+	@Resource(name = "ColumnItemDao")
+	private IColumnItemDao columnDao;
 
 	@Override
 	@Transactional
@@ -105,12 +120,25 @@ public class CommentsApiServiceImp implements CommentsApiService {
 				CommentSampleInfo info = new CommentSampleInfo();
 				info.setAutoId(comment.getAutoId());
 				info.setColumnKey(comment.getColumnKey());
-				info.setColumnName("");
+
 				info.setCommentTime(comment.getCommentTime());
 				info.setContent(comment.getContent());
 
 				info.setItemId(comment.getItemId());
-				info.setItemTitle("");
+				// 获取文章或活动的信息
+				if (comment.getColumnKey().equals("column_activities")) {
+					Activity activity = new Activity();
+					activity = activityDao.findOne(comment.getItemId());
+					info.setItemTitle(activity.getTitle());
+
+				} else {
+					Article article = new Article();
+					article = articleDao.findOne(comment.getItemId());
+					info.setItemTitle(article.getTitle());
+				}
+				ColumnItem item = new ColumnItem();
+				item = columnDao.getColumnItemByKey(comment.getColumnKey());
+				info.setColumnName(item.getName());
 
 				info.setReplies(getWxList(0l, comment.getAutoId(), null));
 				info.setStatus(comment.getStatus());
@@ -135,6 +163,7 @@ public class CommentsApiServiceImp implements CommentsApiService {
 		Comment comment = new Comment();
 		comment.setColumnKey(signupinfo.getColumnKey());
 		comment.setCommentTime(new Date());
+		comment.setContent(signupinfo.getContent());
 		comment.setEnable(true);
 		comment.setItemId(signupinfo.getItemId());
 		comment.setOpenId(context.getOpenId());

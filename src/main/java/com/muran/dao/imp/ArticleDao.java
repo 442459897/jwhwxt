@@ -43,9 +43,24 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		if (status != null && !status.equals("")) {
 			hql += " and status='" + status + "'";
 		}
+		if (num == null) {
+			num = 8;
+		}
+		if (upOrDown == null) {
+			upOrDown = "down";
+		}
+		if (upOrDown.equals("down")) {
+			if (time != null) {
+				hql += " and publishTime > '"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
+			}
+
+		}
 		if (upOrDown.equals("up")) {
-			hql += " and publishTime < '"
-					+ DateUtil.timestampToDateStr(time.toString()) + "'";
+			if (time != null) {
+				hql += " and publishTime < '"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
+			}
 		}
 		hql += " order by publishTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
@@ -66,7 +81,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		Query query = getCurrentSession().createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(num);
-		
+
 		return query.list();
 	}
 
@@ -79,11 +94,13 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		if (columnKey != null && !columnKey.equals("")) {
 			hql += " and columnKey='" + columnKey + "'";
 		}
-		if (startTime!=null) {
-			hql += " and modifyTime >='" + DateUtil.timestampToDateStr(startTime.toString()) + "'";
+		if (startTime != null) {
+			hql += " and modifyTime >='"
+					+ DateUtil.timestampToDateStr(startTime.toString()) + "'";
 		}
-		if (endTime!=null) {
-			hql += " and modifyTime <='" + DateUtil.timestampToDateStr(endTime.toString()) + "'";
+		if (endTime != null) {
+			hql += " and modifyTime <='"
+					+ DateUtil.timestampToDateStr(endTime.toString()) + "'";
 		}
 		if (title != null && !title.equals("")) {
 			hql += " and title like '%" + title + "%'";

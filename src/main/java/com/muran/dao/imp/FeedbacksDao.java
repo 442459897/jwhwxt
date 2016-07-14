@@ -38,7 +38,7 @@ public class FeedbacksDao extends AbstractHibernateDao<FeedBack>implements IFeed
 		}
 		hql+=" order by sayTime DESC";
 		Query query = getCurrentSession().createQuery(hql);
-		query.setFirstResult(1); 
+		query.setFirstResult(0); 
 		query.setMaxResults(Integer.parseInt(num.toString())); 
 		List<FeedBack> list = query.list();
 		return list;

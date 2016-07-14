@@ -15,12 +15,28 @@ import com.muran.util.DateUtil;
 @Repository("CommentDao")
 public class CommentDao extends AbstractHibernateDao<Comment> implements
 		ICommentDao {
+	
+	public CommentDao() {
+		// TODO Auto-generated constructor stub
+		super();
+		setClazz(Comment.class);
+	}
 
 	@Override
 	public List<Comment> getList(String columnKey, Long itemId, Long status) {
 		// TODO Auto-generated method stub
-
-		return null;
+		String hql = " from Comment where 1=1 ";
+		if (columnKey != null && !columnKey.equals("")) {
+			hql += " and columnKey='" + columnKey + "'";
+		}
+		if (itemId != null) {
+			hql += " and itemId=" + itemId;
+		}
+		if (status != null) {
+			hql += " and status=" + status;
+		}
+		Query query = getCurrentSession().createQuery(hql);
+		return query.list();
 	}
 
 	@Override
