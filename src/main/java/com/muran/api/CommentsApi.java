@@ -32,7 +32,7 @@ public class CommentsApi extends AbstractApi {
     CommentsApiService service;
     @PUT
     @Path("/{autoId}")
-    @Consumes({ "application/json" })
+    @Consumes({ "application/x-www-form-urlencoded" })
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "\u5BA1\u6838\u7559\u8A00\u8BC4\u8BBA\u4FE1\u606F", notes = "", response = void.class, tags={ "comments(留言评论相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
