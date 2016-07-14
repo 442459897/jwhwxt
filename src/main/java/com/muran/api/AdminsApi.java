@@ -107,10 +107,10 @@ public class AdminsApi extends AbstractApi {
 	}
 
 	@GET
-	@Path("/getbyusername")
+	@Path("/getbyusername/{username}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
-	public Response login(@QueryParam("username") String username, @Context SecurityContext securityContext) {
+	public Response login(@PathParam("username") String username, @Context SecurityContext securityContext) {
 		return service.getAdminByUsername(username, context());
 	}
 }
