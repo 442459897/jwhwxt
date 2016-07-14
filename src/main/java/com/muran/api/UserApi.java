@@ -44,7 +44,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/loginout")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response loginOut() {
 		loginService.loginOut(getUserToken());
@@ -53,7 +53,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/{username}/password")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response modifyPwd(@PathParam("username") String username,
 			@FormParam("newpwd") String newpwd,
@@ -64,7 +64,7 @@ public class UserApi extends AbstractApi {
 
 	@POST
 	@Path("/{username}/password/reset")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response resetPwd(@PathParam("username") String username) {
 		pwdService.resetPassword(username);
