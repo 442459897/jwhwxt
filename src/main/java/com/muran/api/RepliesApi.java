@@ -41,7 +41,7 @@ public class RepliesApi extends AbstractApi {
 	}
 
 	@PUT
-	@Consumes({ "application/json" })
+	@Consumes({ "application/x-www-form-urlencoded" })
 	@Produces({ "application/json" })
 	@Path("/{autoId}")
 	public Response auditReply(@PathParam("autoId") Long autoId,
