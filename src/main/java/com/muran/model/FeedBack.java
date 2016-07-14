@@ -165,5 +165,9 @@ public class FeedBack implements java.io.Serializable {
 		this.image = image;
 		this.mobile = mobile;
 	}
+	
+	public FeedBack(){
+		
+	}
 
 }
