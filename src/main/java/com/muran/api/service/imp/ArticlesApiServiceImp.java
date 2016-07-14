@@ -102,6 +102,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			String columnKey, String title, String keyword, String source,
 			String status, Context context) {
 		// TODO Auto-generated method stub
+		
 		List<Article> list = dao.getWxArticleList(num, upOrDown, time,
 				columnKey, title, keyword, source, status);
 

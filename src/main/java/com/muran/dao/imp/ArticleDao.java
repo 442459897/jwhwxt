@@ -40,9 +40,11 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		if (source != null && !source.equals("")) {
 			hql += " and source like '%" + source + "%'";
 		}
-		if (status != null && !status.equals("")) {
-			hql += " and status='" + status + "'";
-		}
+		// if (status != null && !status.equals("")) {
+		hql += " and status='" + status + "'";
+		// }else{
+		//
+		// }
 		if (num == null) {
 			num = 8;
 		}
