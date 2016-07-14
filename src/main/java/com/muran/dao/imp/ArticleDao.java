@@ -35,7 +35,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 			hql += " and title like '%" + title + "%'";
 		}
 		if (keyword != null && !keyword.equals("")) {
-			hql += " and keyword like '%" + keyword + "%'";
+			hql += " and keywords like '%" + keyword + "%'";
 		}
 		if (source != null && !source.equals("")) {
 			hql += " and source like '%" + source + "%'";
@@ -106,7 +106,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 			hql += " and title like '%" + title + "%'";
 		}
 		if (keyword != null && !keyword.equals("")) {
-			hql += " and keyword like '%" + keyword + "%'";
+			hql += " and keywords like '%" + keyword + "%'";
 		}
 		if (source != null && !source.equals("")) {
 			hql += " and source like '%" + source + "%'";
