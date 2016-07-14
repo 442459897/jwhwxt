@@ -41,7 +41,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 			hql += " and source like '%" + source + "%'";
 		}
 		// if (status != null && !status.equals("")) {
-		hql += " and status='" + status + "'";
+		hql += " and status=1";
 		// }else{
 		//
 		// }
