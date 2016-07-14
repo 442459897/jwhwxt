@@ -19,6 +19,7 @@ import com.muran.dao.IUserDao;
 import com.muran.dao.IUserTokenDao;
 import com.muran.model.User;
 import com.muran.model.UserToken;
+import com.muran.util.MD5;
 import com.muran.util.PasswordHash;
 
 /**
@@ -69,7 +70,7 @@ public class PasswordService extends AbstractService implements
 			throw new ServerException(Code.PasswordUnCorrect);
 		}
 		// 对新密码加密
-		String newHashPwd = PasswordHash.createHash(newPassword);
+		String newHashPwd = PasswordHash.createHash(MD5.MD5(newPassword));
 		// 更新密码
 		int i = userDao.updatePassword(userTokenObject.getUsername(),
 				newHashPwd, userTokenObject.getUserSys());
@@ -112,7 +113,7 @@ public class PasswordService extends AbstractService implements
 	@BussAnnotation(bussName = "重置登陆密码", login = true, role = "")
 	public void resetPassword(String username) {
 		// TODO Auto-generated method stub
-		String newHashPwd = PasswordHash.createHash("88888888");
+		String newHashPwd = PasswordHash.createHash(MD5.MD5("88888888"));
 		int i = userDao.updatePassword(username, newHashPwd, "admin");
 		if (i <= 0) {
 			throw new ServerException(Code.OperationFailed);
