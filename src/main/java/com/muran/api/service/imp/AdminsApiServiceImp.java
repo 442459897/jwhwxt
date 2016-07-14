@@ -21,6 +21,7 @@ import com.muran.dto.AddAdmin;
 import com.muran.model.Admin;
 import com.muran.model.User;
 import com.muran.util.Data;
+import com.muran.util.MD5;
 import com.muran.util.PasswordHash;
 
 @Service
@@ -61,7 +62,7 @@ public class AdminsApiServiceImp implements AdminsApiService {
 		user.setCreateTime(new Date());
 		user.setMobile("");
 		user.setModifyTime(new Date());
-		user.setPassword(PasswordHash.createHash("88888888"));
+		user.setPassword(PasswordHash.createHash(MD5.MD5("88888888")));
 		user.setUsername(admin.getUsername());
 		user.setUserSys("admin");
 		user = userDao.merge(user);
