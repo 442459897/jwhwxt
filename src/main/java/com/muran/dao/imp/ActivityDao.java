@@ -18,7 +18,8 @@ import com.muran.util.DateUtil;
  */
 @SuppressWarnings("unchecked")
 @Repository("ActivityDao")
-public class ActivityDao extends AbstractHibernateDao<Activity>implements IActivityDao {
+public class ActivityDao extends AbstractHibernateDao<Activity> implements
+		IActivityDao {
 
 	public ActivityDao() {
 		// TODO Auto-generated constructor stub
@@ -27,8 +28,9 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 	}
 
 	@Override
-	public Data<Activity> getActivityPageList(Integer pageSize, Integer pageIndex, Long startTime, Long endTime,
-			String title, String keyword, String status) {
+	public Data<Activity> getActivityPageList(Integer pageSize,
+			Integer pageIndex, Long startTime, Long endTime, String title,
+			String keyword, String status) {
 		// TODO Auto-generated method stub
 		String hql = " from Activity where 1=1 ";
 		if (title != null && !title.equals("")) {
@@ -41,14 +43,16 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 			hql += " and status = '" + status + "'";
 		}
 		if (startTime != null) {
-			hql += " and publishTime>'" + DateUtil.timestampToDateStr(startTime.toString()) + "'";
+			hql += " and publishTime>'"
+					+ DateUtil.timestampToDateStr(startTime.toString()) + "'";
 		}
 		if (endTime != null) {
-			hql += " and publishTime<'" + DateUtil.timestampToDateStr(endTime.toString()) + "'";
+			hql += " and publishTime<'"
+					+ DateUtil.timestampToDateStr(endTime.toString()) + "'";
 		}
 
 		Query query = getCurrentSession().createQuery(hql);
-				
+
 		List<Activity> list = query.list();
 
 		Data<Activity> data = new Data<Activity>();
@@ -68,7 +72,8 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 	}
 
 	@Override
-	public List<ActivityInfo> getActivityWxList(Integer num, String upOrDown, Long time, String title, String keyword) {
+	public List<ActivityInfo> getActivityWxList(Integer num, String upOrDown,
+			Long time, String title, String keyword) {
 		// TODO Auto-generated method stub
 		String hql = "SELECT a.autoId,a.title,a.overurl as overUrl,a.hoster,a.startTime,a.endTime,a.location,a.publishTime,a.content,a.signupTop,a.status,a.signupEndTime,b.signNum,c.commentNum FROM jwhwxt.tb_activity a "
 				+ " left join (select count(activity)as signNum,activity from tb_activity_signup) b on b.activity=a.autoID "
@@ -84,25 +89,29 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 		if (time != null) {
 
 			if (upOrDown.equalsIgnoreCase("up")) {
-				hql += " and a.publishTime<'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and a.publishTime<'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			} else if (upOrDown.equalsIgnoreCase("down")) {
-				hql += " and a.publishTime>'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and a.publishTime>'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			}
 		}
 
 		hql += " order by a.publishtime desc limit 0," + num;
 		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(ActivityInfo.class));
+				.setResultTransformer(
+						Transformers.aliasToBean(ActivityInfo.class));
 		List<ActivityInfo> list = query.list();
 
 		return list;
 	}
 
 	@Override
-	public List<SignupWxInfo> getSignupInfo(Long autoId, Integer num, String upOrDown, Long time) {
+	public List<SignupWxInfo> getSignupInfo(Long autoId, Integer num,
+			String upOrDown, Long time) {
 		// TODO Auto-generated method stub
 		String hql = "select a.activity,w.nickName,w.headImg,a.signupTime from tb_activity_signup a "
-				+ " left join tb_wechat_user w on a.openId=w.openId" 
+				+ " left join tb_wechat_user w on a.openId=w.openId"
 				+ " where 1=1 ";
 		if (autoId != null) {
 			hql += " and activity =" + autoId;
@@ -111,18 +120,32 @@ public class ActivityDao extends AbstractHibernateDao<Activity>implements IActiv
 		if (time != null) {
 
 			if (upOrDown.equalsIgnoreCase("up")) {
-				hql += " and signuptime<'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and signuptime<'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			} else if (upOrDown.equalsIgnoreCase("down")) {
-				hql += " and signuptime>'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and signuptime>'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			}
 		}
 
 		hql += " order by signuptime desc limit 0," + num;
 		Query query = getCurrentSession().createSQLQuery(hql)
-				.setResultTransformer(Transformers.aliasToBean(SignupWxInfo.class));
+				.setResultTransformer(
+						Transformers.aliasToBean(SignupWxInfo.class));
 		List<SignupWxInfo> list = query.list();
 
 		return list;
+	}
+
+	@Override
+	public List<Activity> getRandomList(int num) {
+		// TODO Auto-generated method stub
+		String hql = " from Activity where 1=1 ";
+		hql += " order by rand() ";
+		Query query = getCurrentSession().createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(num);
+		return query.list();
 	}
 
 }
