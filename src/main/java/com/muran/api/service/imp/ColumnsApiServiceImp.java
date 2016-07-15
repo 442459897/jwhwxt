@@ -120,7 +120,10 @@ public class ColumnsApiServiceImp extends AbstractService implements
 		item.setOutUrl(outUrl);
 		item = dao.update(item);
 		
-		return Response.ok().entity(item.getOutUrl()).build();
+		GeneralString str=new GeneralString();
+		str.setValue(item.getOutUrl());
+		
+		return Response.ok().entity(str).build();
 	}
 
 }
