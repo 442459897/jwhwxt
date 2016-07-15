@@ -93,6 +93,30 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	public Response getArticleContent(Long articleId, Context context) {
 		// TODO Auto-generated method stub
 		Article article = dao.findOne(articleId);
+		ArticleInfo info = new ArticleInfo();
+		if (article == null) {
+			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
+		}
+
+		info.setAutoId(article.getAutoId());
+		// 查询留言数量
+		List<Comment> list = new ArrayList<Comment>();
+		list = commentDao.getList(article.getColumnKey(), article.getAutoId(),
+				1l);
+		long commentNum = 0;
+		if (list != null) {
+			commentNum = list.size();
+		}
+		info.setCommentNum(commentNum);
+		
+		info.setContent(article.getContent());
+		info.setCoverUrl(CommonUtil.getByStringSplit(article.getCoverUrl(), ","));
+		info.setPublishTime(article.getPublishTime());
+		info.setShowType(article.getShowType());
+		info.setSource(article.getSource());
+		info.setTime(article.getPublishTime().getTime());
+		info.setTitle(article.getTitle());
+		info.setVideoUrl(article.getVideoUrl());
 		return Response.ok().entity(article).build();
 	}
 
@@ -102,7 +126,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			String columnKey, String title, String keyword, String source,
 			String status, Context context) {
 		// TODO Auto-generated method stub
-		
+
 		List<Article> list = dao.getWxArticleList(num, upOrDown, time,
 				columnKey, title, keyword, source, status);
 
@@ -168,7 +192,8 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		}
 		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
-		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
+		articleInfo
+				.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
