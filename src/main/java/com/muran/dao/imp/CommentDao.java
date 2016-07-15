@@ -35,6 +35,7 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 		if (status != null) {
 			hql += " and status=" + status;
 		}
+		hql+=" order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		return query.list();
 	}
@@ -71,6 +72,7 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			}
 		}
+		hql+=" order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(Integer.valueOf(num.toString()));
@@ -101,6 +103,7 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 		if (status != null) {
 			hql += " and status=" + status;
 		}
+		hql+=" order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		
 		List<Comment> list = query.list();
