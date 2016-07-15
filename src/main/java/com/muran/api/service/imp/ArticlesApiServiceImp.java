@@ -108,7 +108,6 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			commentNum = list.size();
 		}
 		info.setCommentNum(commentNum);
-		
 		info.setContent(article.getContent());
 		info.setCoverUrl(CommonUtil.getByStringSplit(article.getCoverUrl(), ","));
 		info.setPublishTime(article.getPublishTime());
@@ -117,7 +116,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setTime(article.getPublishTime().getTime());
 		info.setTitle(article.getTitle());
 		info.setVideoUrl(article.getVideoUrl());
-		return Response.ok().entity(article).build();
+		
+		
+		return Response.ok().entity(info).build();
 	}
 
 	@Override
