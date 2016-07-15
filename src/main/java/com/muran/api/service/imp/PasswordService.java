@@ -70,7 +70,7 @@ public class PasswordService extends AbstractService implements
 			throw new ServerException(Code.PasswordUnCorrect);
 		}
 		// 对新密码加密
-		String newHashPwd = PasswordHash.createHash(MD5.MD5(newPassword));
+		String newHashPwd = PasswordHash.createHash(newPassword);
 		// 更新密码
 		int i = userDao.updatePassword(userTokenObject.getUsername(),
 				newHashPwd, userTokenObject.getUserSys());
