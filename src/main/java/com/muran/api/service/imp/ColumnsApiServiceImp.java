@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider.General;
 import org.hibernate.mapping.Array;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import com.muran.api.service.ColumnsApiService;
 import com.muran.dao.IArticleDao;
 import com.muran.dao.IColumnItemDao;
 import com.muran.dto.ColumnPosterInfo;
+import com.muran.dto.GeneralString;
 import com.muran.model.ColumnItem;
 import com.muran.model.WeChatUser;
 
@@ -76,7 +78,10 @@ public class ColumnsApiServiceImp extends AbstractService implements
 		if (item == null) {
 			throw new ServerException(Code.BadRequestParams, "小区栏目信息不存在！");
 		}
-		return Response.ok().entity(item.getOutUrl()).build();
+		GeneralString str=new GeneralString();
+		str.setValue(item.getOutUrl());
+		
+		return Response.ok().entity(str).build();
 	}
 
 	@Override
