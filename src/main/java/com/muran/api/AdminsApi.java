@@ -82,10 +82,10 @@ public class AdminsApi extends AbstractApi {
 			@io.swagger.annotations.ApiResponse(code = 200, message = "\u83B7\u53D6\u4FE1\u606F\u6210\u529F", response = PageData.class, responseContainer = "List") })
 	public Response getAdminPageList(
 			@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761", required = true) @QueryParam("pageSize") Integer pageSize,
-			@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41", required = true) @QueryParam("pageIdex") Integer pageIdex,
+			@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41", required = true) @QueryParam("pageIndex") Integer pageIndex,
 			@ApiParam(value = "\u4EBA\u5458\u59D3\u540D") @QueryParam("name") String name,
 			@Context SecurityContext securityContext) {
-		return service.getAdminPageList(pageSize, pageIdex, name, context());
+		return service.getAdminPageList(pageSize, pageIndex, name, context());
 	}
 
 	@PUT

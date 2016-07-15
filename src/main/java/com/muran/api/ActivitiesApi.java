@@ -80,8 +80,8 @@ public class ActivitiesApi extends AbstractApi {
     @io.swagger.annotations.ApiOperation(value = "\u83B7\u53D6\u6D3B\u52A8\u5217\u8868", notes = "", response = PageData.class, responseContainer = "List", tags={ "activities(活动相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u6D3B\u52A8\u4FE1\u606F", response = PageData.class, responseContainer = "List") })
-    public Response getActivityPageList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761") @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41") @QueryParam("pageIdex") Integer pageIdex,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("startTime") Long startTime,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("endTime") Long endTime,@ApiParam(value = "\u6D3B\u52A8\u6807\u9898") @QueryParam("title") String title,@ApiParam(value = "\u6D3B\u52A8\u5173\u952E\u5B57") @QueryParam("keyword") String keyword,@ApiParam(value = "\u72B6\u6001,0:\u672A\u53D1\u5E03,1:\u5DF2\u53D1\u5E03,2:\u6536\u56DE") @QueryParam("status") String status,@Context  SecurityContext securityContext){
-        return service.getActivityPageList(pageSize,pageIdex,startTime,endTime,title,keyword,status,context());
+    public Response getActivityPageList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761") @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41") @QueryParam("pageIndex") Integer pageIndex,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("startTime") Long startTime,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("endTime") Long endTime,@ApiParam(value = "\u6D3B\u52A8\u6807\u9898") @QueryParam("title") String title,@ApiParam(value = "\u6D3B\u52A8\u5173\u952E\u5B57") @QueryParam("keyword") String keyword,@ApiParam(value = "\u72B6\u6001,0:\u672A\u53D1\u5E03,1:\u5DF2\u53D1\u5E03,2:\u6536\u56DE") @QueryParam("status") String status,@Context  SecurityContext securityContext){
+        return service.getActivityPageList(pageSize,pageIndex,startTime,endTime,title,keyword,status,context());
     }
     @GET
     @Path("/wxlist")
@@ -110,8 +110,8 @@ public class ActivitiesApi extends AbstractApi {
     @io.swagger.annotations.ApiOperation(value = "\u83B7\u53D6\u6D3B\u52A8\u62A5\u540D\u4FE1\u606F\uFF08\u540E\u53F0\uFF09", notes = "", response = PageData.class, responseContainer = "List", tags={ "activities(活动相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u6D3B\u52A8\u62A5\u540D\u4FE1\u606F", response = PageData.class, responseContainer = "List") })
-    public Response getSignupInfoPageList(@ApiParam(value = "\u6D3B\u52A8id",required=true) @PathParam("autoId") Long autoId,@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761") @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41") @QueryParam("pageIdex") Integer pageIdex,@Context  SecurityContext securityContext){
-        return service.getSignupInfoPageList(autoId,pageSize,pageIdex,context());
+    public Response getSignupInfoPageList(@ApiParam(value = "\u6D3B\u52A8id",required=true) @PathParam("autoId") Long autoId,@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761") @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41") @QueryParam("pageIndex") Integer pageIndex,@Context  SecurityContext securityContext){
+        return service.getSignupInfoPageList(autoId,pageSize,pageIndex,context());
     }
     @PUT
     @Path("/{autoId}/publish")

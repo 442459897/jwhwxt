@@ -47,8 +47,8 @@ public class FeedbacksApi extends AbstractApi {
     @io.swagger.annotations.ApiOperation(value = "\u67E5\u8BE2\u6211\u6709\u8BDD\u8BF4(\u5FAE\u4FE1\u7AEF)", notes = "", response = PageData.class, responseContainer = "List", tags={ "replies(我有话说相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u83B7\u53D6\u4FE1\u606F\u6210\u529F", response = PageData.class, responseContainer = "List") })
-    public Response getFeedbackInfoPageList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761",required=true) @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41",required=true) @QueryParam("pageIdex") Integer pageIdex,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("startTime") Long startTime,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("endTime") Long endTime,@Context  SecurityContext securityContext){
-        return service.getFeedbackInfoPageList(pageSize,pageIdex,startTime,endTime,context());
+    public Response getFeedbackInfoPageList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA410\u6761",required=true) @QueryParam("pageSize") Integer pageSize,@ApiParam(value = "\u8D77\u59CB\u9875.\u9ED8\u8BA41",required=true) @QueryParam("pageIndex") Integer pageIndex,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("startTime") Long startTime,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("endTime") Long endTime,@Context  SecurityContext securityContext){
+        return service.getFeedbackInfoPageList(pageSize,pageIndex,startTime,endTime,context());
     }
     @POST
     
