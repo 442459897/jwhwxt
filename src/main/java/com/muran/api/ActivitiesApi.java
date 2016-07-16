@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
@@ -92,6 +93,16 @@ public class ActivitiesApi extends AbstractApi {
     public Response getActivityWxList(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA45\u6761") @QueryParam("num") Integer num,@ApiParam(value = "up:\u4E0A\u62C9(\u83B7\u53D6time\u4E4B\u524D) down:\u4E0B\u62C9(\u4ECE\u6700\u65B0num*20\u6761\u4E2D\u968F\u673A\u62BD\u53D6num\u6761).\u9ED8\u8BA4up") @QueryParam("upOrDown") String upOrDown,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("time") Long time,@ApiParam(value = "\u6D3B\u52A8\u6807\u9898") @QueryParam("title") String title,@ApiParam(value = "\u6D3B\u52A8\u5173\u952E\u5B57") @QueryParam("keyword") String keyword,@Context  SecurityContext securityContext){
         return service.getActivityWxList(num,upOrDown,time,title,keyword,context());
     }
+    
+	@GET
+	@Path("/wx/{autoId}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces({ "application/json" })
+	public Response getSignupNum(@PathParam("autoId") Long autoId) {
+		
+		return service.getSignupNum(autoId);
+	}
+    
     @GET
     @Path("/{autoId}/wx/signupinfo")
     @Consumes({ "application/json" })
