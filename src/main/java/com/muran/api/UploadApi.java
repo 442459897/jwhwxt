@@ -47,7 +47,7 @@ public class UploadApi extends AbstractApi {
 			@FormDataParam("file") FormDataContentDisposition disposition) {
 
 		basePath = request.getSession().getServletContext().getRealPath("/")
-				+ "/upload/web/";
+				+ "upload/web/";
 		//
 		String fileName = Calendar.getInstance().getTimeInMillis()
 				+ disposition.getFileName();
@@ -81,7 +81,7 @@ public class UploadApi extends AbstractApi {
 			throws UnsupportedEncodingException {
 
 		basePath = request.getSession().getServletContext().getRealPath("/")
-				+ "/upload/web/";
+				+ "upload/web/";
 
 		// 获取文件流
 		FormDataBodyPart filePart = form.getField("file");
