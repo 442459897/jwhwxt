@@ -29,7 +29,7 @@ import com.muran.util.FileUtil;
 public class UploadApi extends AbstractApi {
 
 	private final static Logger log = Logger.getLogger(FileUtil.class);
-	
+
 	private String basePath = "";
 
 	/**
@@ -47,12 +47,15 @@ public class UploadApi extends AbstractApi {
 			@FormDataParam("file") FormDataContentDisposition disposition) {
 
 		basePath = request.getSession().getServletContext().getRealPath("/")
-				+ "\\upload\\web\\";
+				+ "/upload/web/";
 		//
 		String fileName = Calendar.getInstance().getTimeInMillis()
 				+ disposition.getFileName();
 
 		String filePath = basePath + fileName;
+
+		log.info("basePath:" + basePath);
+		log.info("filePath:" + filePath);
 		// 存储
 		FileUtil.saveFile(fileInputStream, filePath);
 		// 网络地址
@@ -78,7 +81,7 @@ public class UploadApi extends AbstractApi {
 			throws UnsupportedEncodingException {
 
 		basePath = request.getSession().getServletContext().getRealPath("/")
-				+ "\\upload\\web\\";
+				+ "/upload/web/";
 
 		// 获取文件流
 		FormDataBodyPart filePart = form.getField("file");
