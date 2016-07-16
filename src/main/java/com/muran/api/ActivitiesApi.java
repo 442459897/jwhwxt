@@ -45,7 +45,6 @@ public class ActivitiesApi extends AbstractApi {
     }
     @PUT
     @Path("/{autoId}/back")
-    @Consumes({ "application/json" })
     @Produces({ "application/json" })
     @io.swagger.annotations.ApiOperation(value = "\u6536\u56DE\u6D3B\u52A8\u4FE1\u606F\uFF08\u540E\u53F0\uFF09", notes = "", response = void.class, tags={ "activities(活动相关)", })
     @io.swagger.annotations.ApiResponses(value = { 
