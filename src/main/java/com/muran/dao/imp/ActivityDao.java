@@ -75,7 +75,7 @@ public class ActivityDao extends AbstractHibernateDao<Activity> implements
 	public List<ActivityInfo> getActivityWxList(Integer num, String upOrDown,
 			Long time, String title, String keyword) {
 		// TODO Auto-generated method stub
-		String hql = "SELECT a.autoId,a.title,a.overurl as overUrl,a.hoster,a.startTime,a.endTime,a.location,a.publishTime,a.content,a.signupTop,a.status,a.signupEndTime,b.signNum,c.commentNum FROM jwhwxt.tb_activity a "
+		String hql = "SELECT a.autoId,a.title,a.overurl as overUrl,a.hoster,a.startTime,a.endTime,a.location,a.publishTime,a.content,a.signupTop,a.status,a.signupEndTime,case when b.signNum is null then 0 else b.signNum end signNum,case when c.commentNum is null then 0 else c.commentNum end commentNum FROM jwhwxt.tb_activity a "
 				+ " left join (select count(activity)as signNum,activity from tb_activity_signup) b on b.activity=a.autoID "
 				+ " left join (select count(itemId)as commentNum,itemId from tb_article_comment where columnKey='column_activities')c on c.itemId=a.autoId"
 				+ " where 1=1 ";
