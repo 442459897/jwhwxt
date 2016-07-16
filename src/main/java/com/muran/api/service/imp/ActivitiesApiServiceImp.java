@@ -264,4 +264,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		return Response.ok().entity(model).build();
 	}
 
+	@Override
+	public Response getSignupNum(Long autoId) {
+		// TODO Auto-generated method stub
+		int num=signupDao.getSignUpNum(autoId);
+		return Response.ok().entity(num).build();
+	}
+
 }
