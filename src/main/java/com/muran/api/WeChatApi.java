@@ -380,7 +380,7 @@ public class WeChatApi extends AbstractApi {
 		// 将文件下载到本地
 		String basePath = request.getSession().getServletContext()
 				.getRealPath("/");
-		String path = basePath + "\\upload\\wx\\" + wechatUser.getOpenId();
+		String path = basePath + "upload/wx/" + wechatUser.getOpenId();
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
 				+ wechatUser.getOpenId() + "/" + result.getFilename();
