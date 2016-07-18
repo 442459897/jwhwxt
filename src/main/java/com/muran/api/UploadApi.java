@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.muran.application.GlobalConfig;
+import com.muran.dto.FileObject;
 import com.muran.util.FileUtil;
 
 @Component
@@ -61,7 +62,9 @@ public class UploadApi extends AbstractApi {
 		// 网络地址
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/web/" + fileName;
 
-		return Response.ok().entity(url).build();
+		FileObject obj = new FileObject(url);
+
+		return Response.ok().entity(obj).build();
 	}
 
 	/**
