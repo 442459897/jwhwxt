@@ -27,7 +27,7 @@ public class ArticleInfo {
 	private Long time = null;
 	private String source = null;
 	private Long commentNum = null;
-	private String columeKey = null;
+	private String columnKey = null;
 	private String keyword = null;
 
 	/**
@@ -88,19 +88,19 @@ public class ArticleInfo {
 
 	/**
 	 **/
-	public ArticleInfo columeKey(String columeKey) {
-		this.columeKey = columeKey;
+	public ArticleInfo columnKey(String columnKey) {
+		this.columnKey = columnKey;
 		return this;
 	}
 
 	@ApiModelProperty(value = "")
 	@JsonProperty("columeKey")
-	public String getColumeKey() {
-		return columeKey;
+	public String getColumnKey() {
+		return columnKey;
 	}
 
-	public void setColumeKey(String columeKey) {
-		this.columeKey = columeKey;
+	public void setColumnKey(String columnKey) {
+		this.columnKey = columnKey;
 	}
 
 	@ApiModelProperty(value = "")
@@ -246,7 +246,7 @@ public class ArticleInfo {
 				&& Objects.equals(videoUrl, articleInfo.videoUrl) && Objects.equals(content, articleInfo.content)
 				&& Objects.equals(publishTime, articleInfo.publishTime) && Objects.equals(time, articleInfo.time)
 				&& Objects.equals(source, articleInfo.source) && Objects.equals(commentNum, articleInfo.commentNum)
-				&& Objects.equals(keyword, articleInfo.keyword) && Objects.equals(columeKey, articleInfo.columeKey);
+				&& Objects.equals(keyword, articleInfo.keyword) && Objects.equals(columnKey, articleInfo.columnKey);
 	}
 
 	@Override
@@ -259,7 +259,7 @@ public class ArticleInfo {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("class ArticleInfo {\n");
-		sb.append("    columeKey: ").append(toIndentedString(columeKey)).append("\n");
+		sb.append("    columeKey: ").append(toIndentedString(columnKey)).append("\n");
 		sb.append("    keyword: ").append(toIndentedString(keyword)).append("\n");
 		sb.append("    autoId: ").append(toIndentedString(autoId)).append("\n");
 		sb.append("    title: ").append(toIndentedString(title)).append("\n");

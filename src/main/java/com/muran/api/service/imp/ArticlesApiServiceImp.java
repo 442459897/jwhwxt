@@ -44,13 +44,13 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
-		articleInfo.setColumnKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumnKey());
 		articleInfo.setContent(article.getContent());
 		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
-		articleInfo.setKeywords(article.getKeyword());
+		articleInfo.setKeywords(article.getKeywords());
 		articleInfo.setModifyMan(context.getUsername());
 		articleInfo.setModifyTime(new Date());
 		if (article.getStatus() == 1) {
@@ -69,7 +69,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		String[] array = article.getAttachUrl().split(",");
 		for (int i = 0; i < array.length; i++) {
 			Attach attach = new Attach();
-			attach.setColumnKey(article.getColumeKey());
+			attach.setColumnKey(article.getColumnKey());
 			attach.setEnable(true);
 			attach.setExtension("");
 			attach.setItemId(articleInfo.getAutoId());
@@ -116,7 +116,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setTime(article.getPublishTime().getTime());
 		info.setTitle(article.getTitle());
 		info.setVideoUrl(article.getVideoUrl());
-		info.setColumeKey(article.getColumnKey());
+		info.setColumnKey(article.getColumnKey());
 		info.setKeyword(article.getKeywords());
 		return Response.ok().entity(info).build();
 	}
@@ -186,13 +186,13 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		if (articleInfo == null) {
 			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
 		}
-		articleInfo.setColumnKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumnKey());
 		articleInfo.setContent(article.getContent());
 		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
-		articleInfo.setKeywords(article.getKeyword());
+		articleInfo.setKeywords(article.getKeywords());
 		articleInfo.setModifyMan(context.getUsername());
 		articleInfo.setModifyTime(new Date());
 		if (article.getStatus() == 1) {
