@@ -271,8 +271,10 @@ public class WeChatApi extends AbstractApi {
 	@Produces({ "application/json" })
 	public Response WeChatOAuth2JsApi(@QueryParam("url") String url)
 			throws URISyntaxException {
+		log.info("url:"+url);
 		if (!CommonVerify.verifyUrl(url)) {
 			// 若地址不正确 则提示参数错误
+			log.info("url:地址不正确");
 			return Response
 					.ok()
 					.location(
@@ -283,7 +285,9 @@ public class WeChatApi extends AbstractApi {
 		if (ticket == null || System.currentTimeMillis() > ticketExpiresTime) {
 			// 请求ticket
 			// 检测token
+			
 			if (System.currentTimeMillis() > snsTokenExpiresTime) {
+				log.info("snstoken:过期");
 				return Response
 						.ok()
 						.location(
@@ -303,7 +307,7 @@ public class WeChatApi extends AbstractApi {
 										+ Code.BadRequestParams.getCode()))
 						.build();
 			}
-
+			log.info("ticket:获取成功");
 			// 获取成功
 			ticketExpiresTime = System.currentTimeMillis()
 					+ (ticket.getExpires_in() - 120) * 1000;// ticket创建时间
@@ -323,6 +327,8 @@ public class WeChatApi extends AbstractApi {
 		sb.append("url=" + url);
 		// 进行sha1签名
 		String signature = SecuritySHA.SHA1(sb.toString());
+		
+		log.info("signature:"+signature);
 		// 组建返回实体
 		WxConfig config = new WxConfig();
 		config.setDebug(false);
@@ -330,6 +336,8 @@ public class WeChatApi extends AbstractApi {
 		config.setNoncestr(noncestr);
 		config.setSignature(signature);
 		config.setJsApiList(WxConfigUtil.jsApiList);
+		
+		log.info("config:"+JsonUtil.toJSONString(config));
 		// 返回
 		return Response.ok().entity(config).build();
 
