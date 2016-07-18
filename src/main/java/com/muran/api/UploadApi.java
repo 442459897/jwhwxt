@@ -50,8 +50,8 @@ public class UploadApi extends AbstractApi {
 		basePath = request.getSession().getServletContext().getRealPath("/")
 				+ "upload/web/";
 		//
-		String fileName = Calendar.getInstance().getTimeInMillis()+Math.round(10)+disposition.getType();
-//				+ disposition.getFileName();
+		String fileName = Calendar.getInstance().getTimeInMillis()
+				+ disposition.getFileName();
 
 		String filePath = basePath + fileName;
 
