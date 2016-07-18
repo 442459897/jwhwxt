@@ -64,6 +64,11 @@
 	<bean id="UserSecurityVerify" class="com.muran.aop.annotation.UserSecurityVerify"></bean>
 	<bean id="CrossDomainFilter" class="com.muran.filter.CrossDomainFilter"></bean>
 	<bean id="UserSysCheck" class="com.muran.filter.UserSysFilter">
+		<property name="externalUrls">
+			<list>
+				<value>/oauth2</value>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="UserTokenDao" class="com.muran.dao.imp.UserTokenDao"></bean>

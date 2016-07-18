@@ -69,14 +69,14 @@ public class UserSysFilter extends GenericFilterBean {
 		// HttpServletResponse httpResponse = (HttpServletResponse) response;
 		// String currentURL = httpRequest.getServletPath();
 		String currentURL = httpRequest.getPathInfo();
-		// log.info("当前请求路由：" + currentURL);
-		// String externalUrlsStr =
-		// this.config.getInitParameter("externalUrls");
-		// externalUrlsList = strToArray(externalUrlsStr);
-		// if (isExternalUrl(currentURL)) {
-		// filterChain.doFilter(servletRequest, servletResponse);
-		// return;
-		// }
+		 log.info("当前请求路由：" + currentURL);
+//		 String externalUrlsStr =
+//		 this.config.getInitParameter("externalUrls");
+//		 externalUrlsList = strToArray(externalUrlsStr);
+		 if (isExternalUrl(currentURL)) {
+		 filterChain.doFilter(servletRequest, servletResponse);
+		 return;
+		 }
 
 		String userSys = request.getHeader("UserSys");
 
