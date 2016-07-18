@@ -67,6 +67,7 @@
 		<property name="externalUrls">
 			<list>
 				<value>/oauth2</value>
+				<value>/oauth2/menus</value>
 			</list>
 		</property>
 	</bean>
