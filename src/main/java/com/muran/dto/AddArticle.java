@@ -22,7 +22,7 @@ public class AddArticle   {
   private String title = null;
   private String keywords = null;
   private String showType = null;
-  private List<GeneralString> coverUrl = new ArrayList<GeneralString>();
+  private String coverUrl = null;
   private String videoUrl = null;
   private String content = null;
   private String source = null;
@@ -100,7 +100,7 @@ public class AddArticle   {
 
   /**
    **/
-  public AddArticle coverUrl(List<GeneralString> coverUrl) {
+  public AddArticle coverUrl(String coverUrl) {
     this.coverUrl = coverUrl;
     return this;
   }
@@ -108,10 +108,10 @@ public class AddArticle   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("coverUrl")
-  public List<GeneralString> getCoverUrl() {
+  public String getCoverUrl() {
     return coverUrl;
   }
-  public void setCoverUrl(List<GeneralString> coverUrl) {
+  public void setCoverUrl(String coverUrl) {
     this.coverUrl = coverUrl;
   }
 
