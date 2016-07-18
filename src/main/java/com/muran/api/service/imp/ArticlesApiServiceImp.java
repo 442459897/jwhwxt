@@ -66,15 +66,17 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		articleInfo = dao.merge(articleInfo);
 
 		// 新增附件
-		String[] array = article.getAttachUrl().split(",");
-		for (int i = 0; i < array.length; i++) {
-			Attach attach = new Attach();
-			attach.setColumnKey(article.getColumnKey());
-			attach.setEnable(true);
-			attach.setExtension("");
-			attach.setItemId(articleInfo.getAutoId());
-			attach.setUrl(array[i]);
-			attachDao.merge(attach);
+		if (article.getAttachUrl() != null && article.getAttachUrl() != "") {
+			String[] array = article.getAttachUrl().split(",");
+			for (int i = 0; i < array.length; i++) {
+				Attach attach = new Attach();
+				attach.setColumnKey(article.getColumnKey());
+				attach.setEnable(true);
+				attach.setExtension("");
+				attach.setItemId(articleInfo.getAutoId());
+				attach.setUrl(array[i]);
+				attachDao.merge(attach);
+			}
 		}
 		return Response.ok().entity(articleInfo).build();
 	}
