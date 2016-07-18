@@ -21,6 +21,7 @@ public interface ArticlesApiService {
     Response backArticle(Long autoId,Context context);
     Response deleteArticle(Long articleId,Context context);
     Response getArticleContent(Long articleId,Context context);
+    Response getArticle(Long articleId,Context context);
     Response getArticles(Integer num,String upOrDown,Long time,String columnKey,String title,String keyword,String source,String status,Context context);
     Response getArticlesKeywords(String columnKey,Context context);
     Response getArticlesPageList(Integer pageSize,Integer pageIdex,Long startTime,Long endTime,String columnKey,String title,String keyword,String source,String status,Context context);

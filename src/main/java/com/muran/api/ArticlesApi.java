@@ -71,6 +71,17 @@ public class ArticlesApi extends AbstractApi {
     public Response getArticleContent(@ApiParam(value = "\u6587\u7AE0id",required=true) @PathParam("articleId") Long articleId,@Context  SecurityContext securityContext){
         return service.getArticleContent(articleId,context());
     }
+    
+    @GET
+    @Path("/web/{articleId}")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "\u83B7\u53D6\u6587\u7AE0\u5185\u5BB9", notes = "", response = ArticleInfo.class, responseContainer = "List", tags={ "article(文章相关)", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "\u6587\u7AE0\u5185\u5BB9", response = ArticleInfo.class, responseContainer = "List") })
+    public Response getArticle(@ApiParam(value = "\u6587\u7AE0id",required=true) @PathParam("articleId") Long articleId,@Context  SecurityContext securityContext){
+        return service.getArticleContent(articleId,context());
+    }
     @GET
     
     @Consumes({ "application/json" })
