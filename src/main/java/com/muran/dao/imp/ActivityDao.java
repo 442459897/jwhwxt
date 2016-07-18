@@ -50,6 +50,8 @@ public class ActivityDao extends AbstractHibernateDao<Activity> implements
 			hql += " and publishTime<'"
 					+ DateUtil.timestampToDateStr(endTime.toString()) + "'";
 		}
+		
+		hql+=" order by publishTime desc, modifyTime desc ";
 
 		Query query = getCurrentSession().createQuery(hql);
 
