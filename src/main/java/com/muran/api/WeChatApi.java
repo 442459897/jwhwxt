@@ -272,15 +272,15 @@ public class WeChatApi extends AbstractApi {
 	public Response WeChatOAuth2JsApi(@QueryParam("url") String url)
 			throws URISyntaxException {
 		log.info("url:"+url);
-		if (!CommonVerify.verifyUrl(url)) {
-			// 若地址不正确 则提示参数错误
-			log.info("url:地址不正确");
-			return Response
-					.ok()
-					.location(
-							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-									+ Code.BadRequestParams.getCode())).build();
-		}
+		// if (!CommonVerify.verifyUrl(url)) {
+		// // 若地址不正确 则提示参数错误
+		// log.info("url:地址不正确");
+		// return Response
+		// .ok()
+		// .location(
+		// new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+		// + Code.BadRequestParams.getCode())).build();
+		// }
 		// 检测ticket是否存在或过期
 		if (ticket == null || System.currentTimeMillis() > ticketExpiresTime) {
 			// 请求ticket
