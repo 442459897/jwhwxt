@@ -18,11 +18,11 @@ import java.util.List;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2016-07-08T09:44:35.726+08:00")
 public class AddArticle   {
   
-  private String columeKey = null;
+  private String columnKey = null;
   private String title = null;
-  private String keyword = null;
+  private String keywords = null;
   private String showType = null;
-  private List<GeneralString> coverUrl = new ArrayList<GeneralString>();
+  private String coverUrl = null;
   private String videoUrl = null;
   private String content = null;
   private String source = null;
@@ -32,19 +32,19 @@ public class AddArticle   {
 
   /**
    **/
-  public AddArticle columeKey(String columeKey) {
-    this.columeKey = columeKey;
+  public AddArticle columnKey(String columnKey) {
+    this.columnKey = columnKey;
     return this;
   }
 
   
   @ApiModelProperty(value = "")
-  @JsonProperty("columeKey")
-  public String getColumeKey() {
-    return columeKey;
+  @JsonProperty("columnKey")
+  public String getColumnKey() {
+    return columnKey;
   }
-  public void setColumeKey(String columeKey) {
-    this.columeKey = columeKey;
+  public void setColumnKey(String columnKey) {
+    this.columnKey = columnKey;
   }
 
   /**
@@ -66,19 +66,19 @@ public class AddArticle   {
 
   /**
    **/
-  public AddArticle keyword(String keyword) {
-    this.keyword = keyword;
+  public AddArticle keywords(String keywords) {
+    this.keywords = keywords;
     return this;
   }
 
   
   @ApiModelProperty(value = "")
-  @JsonProperty("keyword")
-  public String getKeyword() {
-    return keyword;
+  @JsonProperty("keywords")
+  public String getKeywords() {
+    return keywords;
   }
-  public void setKeyword(String keyword) {
-    this.keyword = keyword;
+  public void setKeywords(String keywords) {
+    this.keywords = keywords;
   }
 
   /**
@@ -100,7 +100,7 @@ public class AddArticle   {
 
   /**
    **/
-  public AddArticle coverUrl(List<GeneralString> coverUrl) {
+  public AddArticle coverUrl(String coverUrl) {
     this.coverUrl = coverUrl;
     return this;
   }
@@ -108,10 +108,10 @@ public class AddArticle   {
   
   @ApiModelProperty(value = "")
   @JsonProperty("coverUrl")
-  public List<GeneralString> getCoverUrl() {
+  public String getCoverUrl() {
     return coverUrl;
   }
-  public void setCoverUrl(List<GeneralString> coverUrl) {
+  public void setCoverUrl(String coverUrl) {
     this.coverUrl = coverUrl;
   }
 
@@ -227,9 +227,9 @@ public class AddArticle   {
       return false;
     }
     AddArticle addArticle = (AddArticle) o;
-    return Objects.equals(columeKey, addArticle.columeKey) &&
+    return Objects.equals(columnKey, addArticle.columnKey) &&
         Objects.equals(title, addArticle.title) &&
-        Objects.equals(keyword, addArticle.keyword) &&
+        Objects.equals(keywords, addArticle.keywords) &&
         Objects.equals(showType, addArticle.showType) &&
         Objects.equals(coverUrl, addArticle.coverUrl) &&
         Objects.equals(videoUrl, addArticle.videoUrl) &&
@@ -242,7 +242,7 @@ public class AddArticle   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(columeKey, title, keyword, showType, coverUrl, videoUrl, content, source, writer, attachUrl, status);
+    return Objects.hash(columnKey, title, keywords, showType, coverUrl, videoUrl, content, source, writer, attachUrl, status);
   }
 
   @Override
@@ -250,9 +250,9 @@ public class AddArticle   {
     StringBuilder sb = new StringBuilder();
     sb.append("class AddArticle {\n");
     
-    sb.append("    columeKey: ").append(toIndentedString(columeKey)).append("\n");
+    sb.append("    columeKey: ").append(toIndentedString(columnKey)).append("\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
-    sb.append("    keyword: ").append(toIndentedString(keyword)).append("\n");
+    sb.append("    keyword: ").append(toIndentedString(keywords)).append("\n");
     sb.append("    showType: ").append(toIndentedString(showType)).append("\n");
     sb.append("    coverUrl: ").append(toIndentedString(coverUrl)).append("\n");
     sb.append("    videoUrl: ").append(toIndentedString(videoUrl)).append("\n");

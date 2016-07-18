@@ -37,6 +37,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 	@Resource(name = "CommentDao")
 	private ICommentDao commentDao;
+	
 
 	@Override
 	@Transactional
@@ -44,13 +45,13 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
-		articleInfo.setColumnKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumnKey());
 		articleInfo.setContent(article.getContent());
-		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
+		articleInfo.setCoverUrl(article.getCoverUrl());
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
-		articleInfo.setKeywords(article.getKeyword());
+		articleInfo.setKeywords(article.getKeywords());
 		articleInfo.setModifyMan(context.getUsername());
 		articleInfo.setModifyTime(new Date());
 		if (article.getStatus() == 1) {
@@ -66,15 +67,17 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		articleInfo = dao.merge(articleInfo);
 
 		// 新增附件
-		String[] array = article.getAttachUrl().split(",");
-		for (int i = 0; i < array.length; i++) {
-			Attach attach = new Attach();
-			attach.setColumnKey(article.getColumeKey());
-			attach.setEnable(true);
-			attach.setExtension("");
-			attach.setItemId(articleInfo.getAutoId());
-			attach.setUrl(array[i]);
-			attachDao.merge(attach);
+		if (article.getAttachUrl() != null && article.getAttachUrl() != "") {
+			String[] array = article.getAttachUrl().split(",");
+			for (int i = 0; i < array.length; i++) {
+				Attach attach = new Attach();
+				attach.setColumnKey(article.getColumnKey());
+				attach.setEnable(true);
+				attach.setExtension("");
+				attach.setItemId(articleInfo.getAutoId());
+				attach.setUrl(array[i]);
+				attachDao.merge(attach);
+			}
 		}
 		return Response.ok().entity(articleInfo).build();
 	}
@@ -116,7 +119,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setTime(article.getPublishTime().getTime());
 		info.setTitle(article.getTitle());
 		info.setVideoUrl(article.getVideoUrl());
-		info.setColumeKey(article.getColumnKey());
+		info.setColumnKey(article.getColumnKey());
 		info.setKeyword(article.getKeywords());
 		return Response.ok().entity(info).build();
 	}
@@ -186,13 +189,13 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		if (articleInfo == null) {
 			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
 		}
-		articleInfo.setColumnKey(article.getColumeKey());
+		articleInfo.setColumnKey(article.getColumnKey());
 		articleInfo.setContent(article.getContent());
-		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
-		articleInfo.setCreateMan(context.getUsername());
-		articleInfo.setCreateTime(new Date());
+		articleInfo.setCoverUrl(article.getCoverUrl());
+//		articleInfo.setCreateMan(context.getUsername());
+//		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
-		articleInfo.setKeywords(article.getKeyword());
+		articleInfo.setKeywords(article.getKeywords());
 		articleInfo.setModifyMan(context.getUsername());
 		articleInfo.setModifyTime(new Date());
 		if (article.getStatus() == 1) {
@@ -206,7 +209,20 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		articleInfo.setWriter(article.getWriter());
 		articleInfo.setStatus(article.getStatus());
 		articleInfo = dao.update(articleInfo);
-
+		attachDao.deleteByColumnAndItem(article.getColumnKey(), articleId);//删除附件
+		if (article.getAttachUrl() != null && article.getAttachUrl() != "") {
+			//新增附件
+			String[] array = article.getAttachUrl().split(",");
+			for (int i = 0; i < array.length; i++) {
+				Attach attach = new Attach();
+				attach.setColumnKey(article.getColumnKey());
+				attach.setEnable(true);
+				attach.setExtension("");
+				attach.setItemId(articleInfo.getAutoId());
+				attach.setUrl(array[i]);
+				attachDao.merge(attach);
+			}
+		}
 		return Response.ok().build();
 	}
 
@@ -274,6 +290,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticle(Long articleId, Context context) {
 		Article article = dao.findOne(articleId);
 		if (article == null) {

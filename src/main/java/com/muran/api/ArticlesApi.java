@@ -80,7 +80,7 @@ public class ArticlesApi extends AbstractApi {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u6587\u7AE0\u5185\u5BB9", response = ArticleInfo.class, responseContainer = "List") })
     public Response getArticle(@ApiParam(value = "\u6587\u7AE0id",required=true) @PathParam("articleId") Long articleId,@Context  SecurityContext securityContext){
-        return service.getArticleContent(articleId,context());
+        return service.getArticle(articleId,context());
     }
     @GET
     
