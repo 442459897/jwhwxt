@@ -44,9 +44,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	public Response addActivity(AddActivity activity, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
-		AssertNull.assertNull(activity.getTitle(), activity.getClass(), activity.getKeywords(), activity.getStartTime(),
-				activity.getEndTime(), activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
-				activity.getSignupTop(), activity.getHoster());
+		AssertNull.assertNull(activity.getTitle(), activity.getKeywords(), activity.getStartTime(),
+				activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
+				activity.getSignupTop(), activity.getHoster(),activity.getContent());
 		model.setTitle(activity.getTitle());
 		model.setContent(activity.getContent());
 		model.setStartTime(activity.getStartTime());
@@ -57,7 +57,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setOverUrl(activity.getCoverUrl());
 		model.setSignupTop(activity.getSignupTop().longValue());
 		model.setHoster(activity.getHoster());
-		model.setStatus(Long.parseLong("0"));
+		model.setStatus(Long.parseLong(activity.getStatus().toString()));
 
 		model.setCreateTime(new Date());
 		model.setCreateUser(context.getUsername());
