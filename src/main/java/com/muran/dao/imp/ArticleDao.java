@@ -116,6 +116,7 @@ public class ArticleDao extends AbstractHibernateDao<Article> implements
 		if (status != null && !status.equals("")) {
 			hql += " and status='" + status + "'";
 		}
+		hql += " order by createTime desc,publishTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		List<Article> list = query.list();
 

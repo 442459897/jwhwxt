@@ -273,4 +273,13 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		return Response.ok().entity(article).build();
 	}
 
+	@Override
+	public Response getArticle(Long articleId, Context context) {
+		Article article = dao.findOne(articleId);
+		if (article == null) {
+			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
+		}
+		return Response.ok().entity(article).build();
+	}
+
 }
