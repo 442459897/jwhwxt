@@ -274,6 +274,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getArticle(Long articleId, Context context) {
 		Article article = dao.findOne(articleId);
 		if (article == null) {
