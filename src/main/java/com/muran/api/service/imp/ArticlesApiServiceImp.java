@@ -37,6 +37,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 	@Resource(name = "CommentDao")
 	private ICommentDao commentDao;
+	
 
 	@Override
 	@Transactional
@@ -191,8 +192,8 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		articleInfo.setColumnKey(article.getColumnKey());
 		articleInfo.setContent(article.getContent());
 		articleInfo.setCoverUrl(article.getCoverUrl());
-		articleInfo.setCreateMan(context.getUsername());
-		articleInfo.setCreateTime(new Date());
+//		articleInfo.setCreateMan(context.getUsername());
+//		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
 		articleInfo.setKeywords(article.getKeywords());
 		articleInfo.setModifyMan(context.getUsername());
@@ -208,7 +209,20 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		articleInfo.setWriter(article.getWriter());
 		articleInfo.setStatus(article.getStatus());
 		articleInfo = dao.update(articleInfo);
-
+		attachDao.deleteByColumnAndItem(article.getColumnKey(), articleId);//删除附件
+		if (article.getAttachUrl() != null && article.getAttachUrl() != "") {
+			//新增附件
+			String[] array = article.getAttachUrl().split(",");
+			for (int i = 0; i < array.length; i++) {
+				Attach attach = new Attach();
+				attach.setColumnKey(article.getColumnKey());
+				attach.setEnable(true);
+				attach.setExtension("");
+				attach.setItemId(articleInfo.getAutoId());
+				attach.setUrl(array[i]);
+				attachDao.merge(attach);
+			}
+		}
 		return Response.ok().build();
 	}
 

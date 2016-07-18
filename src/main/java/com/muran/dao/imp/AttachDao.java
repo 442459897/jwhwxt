@@ -33,4 +33,17 @@ public class AttachDao extends AbstractHibernateDao<Attach> implements
 		return query.list();
 	}
 
+	@Override
+	public void deleteByColumnAndItem(String columnKey, Long itemId) {
+		// TODO Auto-generated method stub
+		String hql=" delete Attach where 1=1";
+		if (columnKey != null && !columnKey.equals("")) {
+			hql += " and columnKey='" + columnKey + "'";
+		}
+		if (itemId != null) {
+			hql += " and itemId=" + itemId;
+		}
+		getCurrentSession().createQuery(hql).executeUpdate();
+	}
+
 }
