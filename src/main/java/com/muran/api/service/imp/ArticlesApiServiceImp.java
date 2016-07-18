@@ -116,7 +116,8 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setTime(article.getPublishTime().getTime());
 		info.setTitle(article.getTitle());
 		info.setVideoUrl(article.getVideoUrl());
-
+		info.setColumeKey(article.getColumnKey());
+		info.setKeyword(article.getKeywords());
 		return Response.ok().entity(info).build();
 	}
 
