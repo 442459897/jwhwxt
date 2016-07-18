@@ -46,9 +46,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		Article articleInfo = new Article();
 		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
-		if (article.getCoverUrl() != null && article.getCoverUrl().size() > 0) {
-			articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
-		}
+		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
@@ -109,7 +107,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		}
 		info.setCommentNum(commentNum);
 		info.setContent(article.getContent());
+
 		info.setCoverUrl(CommonUtil.getByStringSplit(article.getCoverUrl(), ","));
+
 		info.setPublishTime(article.getPublishTime());
 		info.setShowType(article.getShowType());
 		info.setSource(article.getSource());

@@ -18,21 +18,26 @@ public class CommonUtil {
 
 	public static List<GeneralString> getByStringSplit(String str, String regex) {
 		List<GeneralString> list = new ArrayList<GeneralString>();
-		String[] array = str.split(regex);
-		for (String string : array) {
-			GeneralString string2 = new GeneralString();
-			string2.setValue(string);
-			list.add(string2);
+		if (str != null && str != "") {
+
+			String[] array = str.split(regex);
+			for (String string : array) {
+				GeneralString string2 = new GeneralString();
+				string2.setValue(string);
+				list.add(string2);
+			}
 		}
 		return list;
 	}
 
 	public static String getStringList(List<GeneralString> list) {
 		String result = "";
-		for (GeneralString string : list) {
-			result += string.getValue() + ",";
+		if (list != null && list.size() > 0) {
+			for (GeneralString string : list) {
+				result += string.getValue() + ",";
+			}
+			result = result.substring(0, result.length() - 1);
 		}
-		result = result.substring(0, result.length() - 1);
 		return result;
 	}
 }
