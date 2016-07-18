@@ -46,8 +46,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		Article articleInfo = new Article();
 		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
-		articleInfo
-				.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
+		if (article.getCoverUrl() != null && article.getCoverUrl().size() > 0) {
+			articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
+		}
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
@@ -101,8 +102,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setAutoId(article.getAutoId());
 		// 查询留言数量
 		List<Comment> list = new ArrayList<Comment>();
-		list = commentDao.getList(article.getColumnKey(), article.getAutoId(),
-				1l);
+		list = commentDao.getList(article.getColumnKey(), article.getAutoId(), 1l);
 		long commentNum = 0;
 		if (list != null) {
 			commentNum = list.size();
@@ -116,20 +116,17 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setTime(article.getPublishTime().getTime());
 		info.setTitle(article.getTitle());
 		info.setVideoUrl(article.getVideoUrl());
-		
-		
+
 		return Response.ok().entity(info).build();
 	}
 
 	@Override
 	@Transactional
-	public Response getArticles(Integer num, String upOrDown, Long time,
-			String columnKey, String title, String keyword, String source,
-			String status, Context context) {
+	public Response getArticles(Integer num, String upOrDown, Long time, String columnKey, String title, String keyword,
+			String source, String status, Context context) {
 		// TODO Auto-generated method stub
 
-		List<Article> list = dao.getWxArticleList(num, upOrDown, time,
-				columnKey, title, keyword, source, status);
+		List<Article> list = dao.getWxArticleList(num, upOrDown, time, columnKey, title, keyword, source, status);
 
 		List<ArticleInfo> list2 = new ArrayList<ArticleInfo>();
 
@@ -139,8 +136,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 				info.setAutoId(article.getAutoId());
 				info.setCommentNum(0l);
 				info.setContent("");
-				info.setCoverUrl(CommonUtil.getByStringSplit(
-						article.getCoverUrl(), ","));
+				info.setCoverUrl(CommonUtil.getByStringSplit(article.getCoverUrl(), ","));
 				info.setPublishTime(article.getPublishTime());
 				info.setShowType(article.getShowType());
 				info.setSource(article.getSource());
@@ -172,19 +168,17 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 	@Override
 	@Transactional
-	public Response getArticlesPageList(Integer pageSize, Integer pageIdex,
-			Long startTime, Long endTime, String columnKey, String title,
-			String keyword, String source, String status, Context context) {
+	public Response getArticlesPageList(Integer pageSize, Integer pageIdex, Long startTime, Long endTime,
+			String columnKey, String title, String keyword, String source, String status, Context context) {
 		// TODO Auto-generated method stub
-		Data<Article> data = dao.getArticlesPageList(pageSize, pageIdex,
-				startTime, endTime, columnKey, title, keyword, source, status);
+		Data<Article> data = dao.getArticlesPageList(pageSize, pageIdex, startTime, endTime, columnKey, title, keyword,
+				source, status);
 		return Response.ok().entity(data).build();
 	}
 
 	@Override
 	@Transactional
-	public Response updateArticle(Long articleId, AddArticle article,
-			Context context) {
+	public Response updateArticle(Long articleId, AddArticle article, Context context) {
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
 		articleInfo = dao.findOne(articleId);
@@ -193,8 +187,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		}
 		articleInfo.setColumnKey(article.getColumeKey());
 		articleInfo.setContent(article.getContent());
-		articleInfo
-				.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
+		articleInfo.setCoverUrl(CommonUtil.getStringList(article.getCoverUrl()));
 		articleInfo.setCreateMan(context.getUsername());
 		articleInfo.setCreateTime(new Date());
 		articleInfo.setEnable(true);
@@ -261,8 +254,7 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		article.setAutoId(articleInfo.getAutoId());
 
 		article.setContent(articleInfo.getContent());
-		article.setCoverUrl(CommonUtil.getByStringSplit(
-				articleInfo.getCoverUrl(), ","));
+		article.setCoverUrl(CommonUtil.getByStringSplit(articleInfo.getCoverUrl(), ","));
 		article.setPublishTime(articleInfo.getPublishTime());
 		article.setShowType(articleInfo.getShowType());
 		article.setSource(articleInfo.getSource());
