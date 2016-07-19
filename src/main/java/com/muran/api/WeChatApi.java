@@ -357,8 +357,9 @@ public class WeChatApi extends AbstractApi {
 				.currentTimeMillis() / 1000));
 		// 组建签名体
 		StringBuilder sb = new StringBuilder();
-		sb.append("noncestr=" + noncestr + "&");
+		
 		sb.append("jsapi_ticket=" + ticket.getTicket() + "&");
+		sb.append("noncestr=" + noncestr + "&");
 		sb.append("timestamp=" + String.valueOf(timestamp) + "&");
 		String result="";
 		try {
