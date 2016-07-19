@@ -337,12 +337,14 @@ public class WeChatApi extends AbstractApi {
 		// 获取ticket
 		ticket = TicketAPI.ticketGetticket(wechatUser.getSnsToken());
 		if (!ticket.isSuccess()) {
+			log.info("ticket获取失败:"+ticket.getErrcode()+","+ticket.getErrmsg());
 			ticket = null;
-			return Response
-					.ok()
-					.location(
-							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-									+ Code.BadRequestParams.getCode())).build();
+			// return Response
+			// .ok()
+			// .location(
+			// new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
+			// + Code.BadRequestParams.getCode())).build();
+			throw new ServerException(Code.BadRequestParams, "ticket获取失败！");
 		}
 		log.info("ticket:获取成功");
 		// 获取成功
