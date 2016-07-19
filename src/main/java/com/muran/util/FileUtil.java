@@ -26,7 +26,7 @@ public class FileUtil {
 					dir.getParentFile().mkdirs();
 				}
 			}
-			file = new File(filePath + "\\" + fileName);
+			file = new File(filePath);
 			fos = new FileOutputStream(file);
 			bos = new BufferedOutputStream(fos);
 			bos.write(bfile);
