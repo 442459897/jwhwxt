@@ -55,11 +55,11 @@ import com.muran.util.dataVerify.CommonVerify;
 public class WeChatApi extends AbstractApi {
 
 	// public static SnsToken snsToken;// 网页授权token
-	// public static Token token;// 全局基础token
-	// public static long snsTokenExpiresTime;// 网页授权token过期时间
+	public static Token token;// 全局基础token
+	public static long tokenExpiresTime;// 微信token过期时间
 	//
-	// public static Ticket ticket;// jsapi_ticket
-	// public static long ticketExpiresTime;// jsapi_ticket过期时间
+	public static Ticket ticket;// jsapi_ticket
+	public static long ticketExpiresTime;// jsapi_ticket过期时间
 
 	private final static Logger log = Logger.getLogger(GlobalConfig.class);
 
@@ -77,7 +77,6 @@ public class WeChatApi extends AbstractApi {
 
 		WeChatUser wechatUser = null;
 		SnsToken snsToken = null;
-		Token token = null;
 
 		// 参数处理
 		if (type == null) {
@@ -109,25 +108,33 @@ public class WeChatApi extends AbstractApi {
 			// // 精确到毫秒
 			log.info("微信回调，获取token：" + snsToken.getAccess_token() + ",openid:"
 					+ snsToken.getOpenid());
-			// 获取用户信息
+
 			// User user = SnsAPI.userinfo(snsToken.getAccess_token(),
 			// snsToken.getOpenid(), "zh_CN"); 这种获取方法必须使用 snsapi_userinfo
 
-			// 获取基础token信息 与snstoken不同
-			token = TokenAPI.token(GlobalConfig.KEY_APPID,
-					GlobalConfig.KEY_APP_SECRET);
+			if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
+				// 获取基础token信息 与snstoken不同
+				token = TokenAPI.token(GlobalConfig.KEY_APPID,
+						GlobalConfig.KEY_APP_SECRET);
 
-			if (token.isSuccess()) {
-				User user = UserAPI.userInfo(token.getAccess_token(),
-						snsToken.getOpenid());
-				if (user.isSuccess()) {
-					// 存储到session 数据库 如果存在会更新 不存在会创建
-					// request.getSession().setAttribute("user", user);
-					wechatUser = wechatUserService.updateOrCreateWeChatUser(
-							user, token, snsToken);
+				if (token.isSuccess()) {
+					// 过期时间
+					tokenExpiresTime = System.currentTimeMillis()
+							+ (token.getExpires_in() - 200) * 1000;// token创建时间
+																	// 提前200秒过期
+																	// 精确到毫秒
 				}
-				log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
 			}
+			// 获取用户信息
+			User user = UserAPI.userInfo(token.getAccess_token(),
+					snsToken.getOpenid());
+			if (user.isSuccess()) {
+				// 存储到session 数据库 如果存在会更新 不存在会创建
+				// request.getSession().setAttribute("user", user);
+				wechatUser = wechatUserService.updateOrCreateWeChatUser(user,
+						snsToken);
+			}
+			log.info("微信回调，获取userinfo  nickname：" + user.getNickname());
 
 		}
 
@@ -143,7 +150,7 @@ public class WeChatApi extends AbstractApi {
 		}
 		// 判断token是否过期，过期的话使用refreshtoken刷新
 		if (System.currentTimeMillis() > wechatUser.getExpireTime().getTime()) {
-			log.info("token过期，开始请求刷新token……");
+			log.info("snstoken过期，开始请求刷新token……");
 			snsToken = SnsAPI.oauth2RefreshToken(GlobalConfig.KEY_APPID,
 					snsToken.getRefresh_token());
 			// snsTokenExpiresTime = System.currentTimeMillis()
@@ -159,22 +166,27 @@ public class WeChatApi extends AbstractApi {
 				return Response.status(Status.FOUND)
 						.location(new URI(oauthUrl)).build();
 			}
+			if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
+				// 重新获取基础token信息 与snstoken不同
+				token = TokenAPI.token(GlobalConfig.KEY_APPID,
+						GlobalConfig.KEY_APP_SECRET);
 
-			// 重新获取基础token信息 与snstoken不同
-			token = TokenAPI.token(GlobalConfig.KEY_APPID,
-					GlobalConfig.KEY_APP_SECRET);
-
-			if (token.isSuccess()) {
-				User user = UserAPI.userInfo(token.getAccess_token(),
-						snsToken.getOpenid());
-				if (user.isSuccess()) {
-					// 存储到session 数据库 如果存在会更新 不存在会创建
-					// request.getSession().setAttribute("user", user);
-					wechatUser = wechatUserService.updateOrCreateWeChatUser(
-							user, token, snsToken);
+				if (token.isSuccess()) {
+					tokenExpiresTime = System.currentTimeMillis()
+							+ (token.getExpires_in() - 200) * 1000;// token创建时间
+																	// 提前200秒过期
+																	// 精确到毫秒
 				}
-				log.info("刷新token结果，获取userinfo  nickname：" + user.getNickname());
 			}
+			User user = UserAPI.userInfo(token.getAccess_token(),
+					snsToken.getOpenid());
+			if (user.isSuccess()) {
+				// 存储到session 数据库 如果存在会更新 不存在会创建
+				// request.getSession().setAttribute("user", user);
+				wechatUser = wechatUserService.updateOrCreateWeChatUser(user,
+						snsToken);
+			}
+			log.info("刷新token结果，获取userinfo  nickname：" + user.getNickname());
 
 		}
 		// 获取用户session信息
@@ -304,48 +316,33 @@ public class WeChatApi extends AbstractApi {
 		// }
 
 		// 检测ticket是否存在或过期
-		// if (ticket == null || System.currentTimeMillis() > ticketExpiresTime)
-		// {
-		// // 请求ticket
-		// // 检测token
-		//
-		// if (System.currentTimeMillis() > snsTokenExpiresTime) {
-		// log.info("snstoken:过期");
-		// return Response
-		// .ok()
-		// .location(
-		// new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-		// + Code.BadRequestParams.getCode()))
-		// .build();
-		// }
-		// }
-		// 获取用户session信息
-		Ticket ticket = null;
-		WeChatUser wechatUser = null;
-		// Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
-		String sessionId = request.getHeader("SessionId");
-		log.info("sessionid：" + sessionId);
-		if (sessionId != null && sessionId != "") {
-			// 如果session存在 获取用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
-			log.info("wechatUser：" + wechatUser == null);
-		}
-		if (wechatUser == null) {
-			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
+		if (ticket == null || System.currentTimeMillis() > ticketExpiresTime) {
+			if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
+				token = TokenAPI.token(GlobalConfig.KEY_APPID,
+						GlobalConfig.KEY_APP_SECRET);
+
+				if (token.isSuccess()) {
+					tokenExpiresTime = System.currentTimeMillis()
+							+ (token.getExpires_in() - 200) * 1000;// token创建时间
+																	// 提前200秒过期
+																	// 精确到毫秒
+				} else {
+					throw new ServerException(Code.BadRequestParams,
+							"token获取失败！");
+				}
+			}
+
+			ticket = TicketAPI.ticketGetticket(token.getAccess_token());
+			if (!ticket.isSuccess()) {
+				log.info("ticket获取失败:" + ticket.getErrcode() + ","
+						+ ticket.getErrmsg());
+				ticket = null;
+				throw new ServerException(Code.BadRequestParams, "ticket获取失败！");
+			}
 		}
 
 		// 获取ticket
-		ticket = TicketAPI.ticketGetticket(wechatUser.getSnsToken());
-		if (!ticket.isSuccess()) {
-			log.info("ticket获取失败:"+ticket.getErrcode()+","+ticket.getErrmsg());
-			ticket = null;
-			// return Response
-			// .ok()
-			// .location(
-			// new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-			// + Code.BadRequestParams.getCode())).build();
-			throw new ServerException(Code.BadRequestParams, "ticket获取失败！");
-		}
+
 		log.info("ticket:获取成功");
 		// 获取成功
 		// ticketExpiresTime = System.currentTimeMillis()
@@ -402,23 +399,24 @@ public class WeChatApi extends AbstractApi {
 			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
 		}
 		// 检测token
-		// if (token == null || System.currentTimeMillis() >
-		// snsTokenExpiresTime) {
-		// return Response
-		// .ok()
-		// .location(
-		// new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-		// + Code.BadRequestParams.getCode())).build();
-		// }
+		if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
+			token = TokenAPI.token(GlobalConfig.KEY_APPID,
+					GlobalConfig.KEY_APP_SECRET);
+
+			if (token.isSuccess()) {
+				tokenExpiresTime = System.currentTimeMillis()
+						+ (token.getExpires_in() - 200) * 1000;// token创建时间
+																// 提前200秒过期
+																// 精确到毫秒
+			} else {
+				throw new ServerException(Code.BadRequestParams, "token获取失败！");
+			}
+		}
 		// 获取临时素材
-		MediaGetResult result = MediaAPI.mediaGet(wechatUser.getToken(),
+		MediaGetResult result = MediaAPI.mediaGet(token.getAccess_token(),
 				mediaId, true);
 		if (!result.isSuccess()) {
-			return Response
-					.ok()
-					.location(
-							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-									+ Code.BadRequestParams.getCode())).build();
+			throw new ServerException(Code.BadRequestParams, "临时素材获取失败！");
 		}
 		// 将文件下载到本地
 		String basePath = request.getSession().getServletContext()
@@ -437,24 +435,38 @@ public class WeChatApi extends AbstractApi {
 
 		// 获取用户信息
 		// User user = (User) request.getSession().getAttribute("user");
-		WeChatUser wechatUser = null;
+//		WeChatUser wechatUser = null;
+//
+//		String sessionId = request.getHeader("SessionId");
+//		log.info("sessionid：" + sessionId);
+//		if (sessionId != null && sessionId != "") {
+//			// 如果session存在 获取用户信息
+//			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
+//			log.info("wechatUser：" + wechatUser == null);
+//		}
+//		if (wechatUser == null) {
+//			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
+//		}
+		if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
+			token = TokenAPI.token(GlobalConfig.KEY_APPID,
+					GlobalConfig.KEY_APP_SECRET);
+
+			if (token.isSuccess()) {
+				tokenExpiresTime = System.currentTimeMillis()
+						+ (token.getExpires_in() - 200) * 1000;// token创建时间
+																// 提前200秒过期
+																// 精确到毫秒
+			} else {
+				throw new ServerException(Code.BadRequestParams, "token获取失败！");
+			}
+		}
 		
-		String sessionId = request.getHeader("SessionId");
-		log.info("sessionid：" + sessionId);
-		if (sessionId != null && sessionId != "") {
-			// 如果session存在 获取用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
-			log.info("wechatUser：" + wechatUser == null);
-		}
-		if (wechatUser == null) {
-			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
-		}
 
 		WxMenu menu = service.getWxMenu();
 		String menuJson = JsonUtil.toJSONString(menu);
 		log.info("创建菜单的json串：" + menuJson);
 		// 调用微信接口
-		BaseResult result = MenuAPI.menuCreate(wechatUser.getToken(), menuJson);
+		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(), menuJson);
 		log.info("isSuccess：" + result.isSuccess());
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息

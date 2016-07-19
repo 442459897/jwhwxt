@@ -44,7 +44,7 @@ public class WeChatUserService extends AbstractService implements
 
 	@Override
 	@Transactional
-	public WeChatUser updateOrCreateWeChatUser(User user,Token token,SnsToken snsToken) {
+	public WeChatUser updateOrCreateWeChatUser(User user,SnsToken snsToken) {
 		// TODO Auto-generated method stub
 
 		WeChatUser weUser = new WeChatUser();
@@ -59,7 +59,7 @@ public class WeChatUserService extends AbstractService implements
 			weUser.setSessionId(UUID.randomUUID().toString());// 生成随即的sesionid
 			weUser.setWatched(user.getSubscribe() == 0 ? false : true);
 			weUser.setSnsToken(snsToken.getAccess_token());
-			weUser.setToken(token.getAccess_token());
+			//weUser.setToken(token.getAccess_token());
 			weUser = dao.merge(weUser);
 			return weUser;
 		}
@@ -72,7 +72,7 @@ public class WeChatUserService extends AbstractService implements
 		weUser.setSessionId(UUID.randomUUID().toString());// 生成随即的sesionid
 		weUser.setWatched(user.getSubscribe() == 0 ? false : true);
 		weUser.setSnsToken(snsToken.getAccess_token());
-		weUser.setToken(token.getAccess_token());
+		//weUser.setToken(token.getAccess_token());
 		weUser = dao.update(weUser);
 		return weUser;
 

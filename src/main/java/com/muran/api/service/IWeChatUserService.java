@@ -10,7 +10,7 @@ public interface IWeChatUserService {
 
 	public boolean IsUserExistOrExpire(String sessionId);
 	
-	public WeChatUser updateOrCreateWeChatUser(User user,Token token,SnsToken snsToken);
+	public WeChatUser updateOrCreateWeChatUser(User user,SnsToken snsToken);
 	
 	public WeChatUser createWeChatUser(User user);
 	
