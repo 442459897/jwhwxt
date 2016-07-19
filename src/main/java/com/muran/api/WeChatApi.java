@@ -380,7 +380,8 @@ public class WeChatApi extends AbstractApi {
 		config.setNoncestr(noncestr);
 		config.setSignature(signature);
 		config.setJsApiList(WxConfigUtil.jsApiList);
-
+		config.setTimestamp(Integer.parseInt(String.valueOf(System
+				.currentTimeMillis() / 1000)));
 		log.info("config:" + JsonUtil.toJSONString(config));
 		// 返回
 		return Response.ok().entity(config).build();
