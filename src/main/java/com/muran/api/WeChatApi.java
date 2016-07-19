@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.servlet.http.Cookie;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -391,6 +392,7 @@ public class WeChatApi extends AbstractApi {
 
 	@Path("/wxmedia")
 	@POST
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ "application/json" })
 	public Response WeChatDownloadMedia(@FormParam("mediaId") String mediaId)
 			throws URISyntaxException {
