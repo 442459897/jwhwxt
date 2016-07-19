@@ -322,17 +322,16 @@ public class WeChatApi extends AbstractApi {
 		// 获取用户session信息
 		Ticket ticket = null;
 		WeChatUser wechatUser = null;
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
-		log.info("sessionid：" + cookie.getValue());
-		if (wechatUser == null && cookie != null && cookie.getValue() != null
-				&& cookie.getValue() != "") {
+		// Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		String sessionId = request.getHeader("SessionId");
+		log.info("sessionid：" + sessionId);
+		if (sessionId != null && sessionId != "") {
 			// 如果session存在 获取用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
-					.getValue());
-			log.info("wechatUser：" + wechatUser==null);
+			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
+			log.info("wechatUser：" + wechatUser == null);
 		}
 		if (wechatUser == null) {
-			throw new ServerException(Code.UserNoExisted, "用户信息不存在！");
+			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
 		}
 
 		// 获取ticket
@@ -390,17 +389,15 @@ public class WeChatApi extends AbstractApi {
 		// User user = (User) request.getSession().getAttribute("user");
 		WeChatUser wechatUser = null;
 
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionid");
-		if (cookie != null && cookie.getValue() != null
-				&& cookie.getValue() != "") {
-			// 如果sessionId存在 获取未过期的用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
-					.getValue());
+		String sessionId = request.getHeader("SessionId");
+		log.info("sessionid：" + sessionId);
+		if (sessionId != null && sessionId != "") {
+			// 如果session存在 获取用户信息
+			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
+			log.info("wechatUser：" + wechatUser == null);
 		}
-
 		if (wechatUser == null) {
-			throw new ServerException(Code.UserNoExisted, "用户信息不存在！");
-
+			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
 		}
 		// 检测token
 		// if (token == null || System.currentTimeMillis() >
@@ -439,24 +436,23 @@ public class WeChatApi extends AbstractApi {
 		// 获取用户信息
 		// User user = (User) request.getSession().getAttribute("user");
 		WeChatUser wechatUser = null;
-		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionid");
-		if (cookie != null && cookie.getValue() != null
-				&& cookie.getValue() != "") {
-			// 如果sessionId存在 获取未过期的用户信息
-			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
-					.getValue());
+		
+		String sessionId = request.getHeader("SessionId");
+		log.info("sessionid：" + sessionId);
+		if (sessionId != null && sessionId != "") {
+			// 如果session存在 获取用户信息
+			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
+			log.info("wechatUser：" + wechatUser == null);
 		}
 		if (wechatUser == null) {
-			throw new ServerException(Code.UserNoExisted, "用户信息不存在！");
-
+			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
 		}
 
 		WxMenu menu = service.getWxMenu();
 		String menuJson = JsonUtil.toJSONString(menu);
 		log.info("创建菜单的json串：" + menuJson);
 		// 调用微信接口
-		BaseResult result = MenuAPI.menuCreate(wechatUser.getToken(),
-				menuJson);
+		BaseResult result = MenuAPI.menuCreate(wechatUser.getToken(), menuJson);
 		log.info("isSuccess：" + result.isSuccess());
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息
