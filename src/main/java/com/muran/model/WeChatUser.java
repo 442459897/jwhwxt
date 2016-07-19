@@ -44,6 +44,8 @@ public class WeChatUser implements java.io.Serializable {
 	private String headImg;
 	private boolean watched;
 	private String sessionId;
+	private String snsToken;
+	private String token;
 	private Date expireTime;
 
 	/**
@@ -175,6 +177,34 @@ public class WeChatUser implements java.io.Serializable {
 	 */
 	public void setExpireTime(Date expireTime) {
 		this.expireTime = expireTime;
+	}
+
+	/**
+	 * @return the snsToken
+	 */
+	public String getSnsToken() {
+		return snsToken;
+	}
+
+	/**
+	 * @param snsToken the snsToken to set
+	 */
+	public void setSnsToken(String snsToken) {
+		this.snsToken = snsToken;
+	}
+
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

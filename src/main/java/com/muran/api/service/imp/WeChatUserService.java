@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import weixin.popular.bean.sns.SnsToken;
+import weixin.popular.bean.token.Token;
 import weixin.popular.bean.user.User;
 
 import com.muran.api.service.AbstractService;
@@ -42,7 +44,7 @@ public class WeChatUserService extends AbstractService implements
 
 	@Override
 	@Transactional
-	public WeChatUser updateOrCreateWeChatUser(User user) {
+	public WeChatUser updateOrCreateWeChatUser(User user,Token token,SnsToken snsToken) {
 		// TODO Auto-generated method stub
 
 		WeChatUser weUser = new WeChatUser();
@@ -56,6 +58,8 @@ public class WeChatUserService extends AbstractService implements
 			weUser.setOpenId(user.getOpenid());
 			weUser.setSessionId(UUID.randomUUID().toString());// 生成随即的sesionid
 			weUser.setWatched(user.getSubscribe() == 0 ? false : true);
+			weUser.setSnsToken(snsToken.getAccess_token());
+			weUser.setToken(token.getAccess_token());
 			weUser = dao.merge(weUser);
 			return weUser;
 		}
@@ -67,6 +71,8 @@ public class WeChatUserService extends AbstractService implements
 		weUser.setOpenId(user.getOpenid());
 		weUser.setSessionId(UUID.randomUUID().toString());// 生成随即的sesionid
 		weUser.setWatched(user.getSubscribe() == 0 ? false : true);
+		weUser.setSnsToken(snsToken.getAccess_token());
+		weUser.setToken(token.getAccess_token());
 		weUser = dao.update(weUser);
 		return weUser;
 
