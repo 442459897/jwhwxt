@@ -3,6 +3,7 @@ package com.muran.api;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Calendar;
 
 import javax.servlet.http.Cookie;
 import javax.ws.rs.Consumes;
@@ -435,10 +436,10 @@ public class WeChatApi extends AbstractApi {
 		// 将文件下载到本地
 		String basePath = request.getSession().getServletContext()
 				.getRealPath("/");
-		String path = basePath + "upload/wx/" + wechatUser.getOpenId();
+		String path = basePath + "upload/wx/" + wechatUser.getAutoId();
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
-				+ wechatUser.getOpenId() + "/" + result.getFilename();
+				+  wechatUser.getAutoId() + "/" + result.getFilename();
 		FeedBack feedBack=new FeedBack();
 		feedBack.setImage(url);
 		return Response.ok().entity(feedBack).build();
