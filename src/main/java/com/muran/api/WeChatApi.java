@@ -323,11 +323,13 @@ public class WeChatApi extends AbstractApi {
 		Ticket ticket = null;
 		WeChatUser wechatUser = null;
 		Cookie cookie = UserTokenUtil.getCookieByName(request, "sessionId");
+		log.info("sessionid：" + cookie.getValue());
 		if (wechatUser == null && cookie != null && cookie.getValue() != null
 				&& cookie.getValue() != "") {
 			// 如果session存在 获取用户信息
 			wechatUser = wechatUserService.getUserExistAndNoExpire(cookie
 					.getValue());
+			log.info("wechatUser：" + wechatUser==null);
 		}
 		if (wechatUser == null) {
 			throw new ServerException(Code.UserNoExisted, "用户信息不存在！");
