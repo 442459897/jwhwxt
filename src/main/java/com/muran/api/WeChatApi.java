@@ -43,6 +43,7 @@ import com.muran.api.service.IWeChatUserService;
 import com.muran.application.GlobalConfig;
 import com.muran.dto.WxConfig;
 import com.muran.dto.WxMenu;
+import com.muran.model.FeedBack;
 import com.muran.model.WeChatUser;
 import com.muran.util.FileUtil;
 import com.muran.util.GenratorUtil;
@@ -438,7 +439,9 @@ public class WeChatApi extends AbstractApi {
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
 				+ wechatUser.getOpenId() + "/" + result.getFilename();
-		return Response.ok().entity(url).build();
+		FeedBack feedBack=new FeedBack();
+		feedBack.setImage(url);
+		return Response.ok().entity(feedBack).build();
 	}
 
 	@Path("/menus")
