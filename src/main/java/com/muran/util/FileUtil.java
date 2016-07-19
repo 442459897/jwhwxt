@@ -21,8 +21,10 @@ public class FileUtil {
 		File file = null;
 		try {
 			File dir = new File(filePath);
-			if (!dir.exists() && dir.isDirectory()) {// 判断文件目录是否存在
-				dir.mkdirs();
+			if (!dir.exists()) {// 判断文件目录是否存在
+				if (!dir.getParentFile().exists()) {
+					dir.getParentFile().mkdirs();
+				}
 			}
 			file = new File(filePath + "\\" + fileName);
 			fos = new FileOutputStream(file);
