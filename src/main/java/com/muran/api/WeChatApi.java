@@ -434,9 +434,9 @@ public class WeChatApi extends AbstractApi {
 			throw new ServerException(Code.BadRequestParams, "临时素材获取失败！");
 		}
 		// 将文件下载到本地
-		String basePath = request.getSession().getServletContext()
-				.getRealPath("/");
+		String basePath = GlobalConfig.KEY_WEB_BASE;
 		String path = basePath + "upload/wx/" + wechatUser.getAutoId();
+		
 		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
 		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
 				+  wechatUser.getAutoId() + "/" + result.getFilename();
