@@ -369,19 +369,19 @@ public class WeChatApi extends AbstractApi {
 		}
 		sb.append("url=" + result);
 		log.info("url:"+result);
+		log.info("sb:"+sb);
 		// 进行sha1签名
 		String signature = SecuritySHA.SHA1(sb.toString());
 
 		log.info("signature:" + signature);
 		// 组建返回实体
 		WxConfig config = new WxConfig();
-		config.setDebug(false);
+		config.setDebug(true);
 		config.setAppId(GlobalConfig.KEY_APPID);
 		config.setNoncestr(noncestr);
 		config.setSignature(signature);
 		config.setJsApiList(WxConfigUtil.jsApiList);
-		config.setTimestamp(Integer.parseInt(String.valueOf(System
-				.currentTimeMillis() / 1000)));
+		config.setTimestamp(timestamp);
 		log.info("config:" + JsonUtil.toJSONString(config));
 		// 返回
 		return Response.ok().entity(config).build();
