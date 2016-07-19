@@ -360,7 +360,15 @@ public class WeChatApi extends AbstractApi {
 		sb.append("noncestr=" + noncestr + "&");
 		sb.append("jsapi_ticket=" + ticket.getTicket() + "&");
 		sb.append("timestamp=" + String.valueOf(timestamp) + "&");
-		sb.append("url=" + url);
+		String result="";
+		try {
+			result=java.net.URLDecoder.decode(url,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sb.append("url=" + result);
+		log.info("url:"+result);
 		// 进行sha1签名
 		String signature = SecuritySHA.SHA1(sb.toString());
 
