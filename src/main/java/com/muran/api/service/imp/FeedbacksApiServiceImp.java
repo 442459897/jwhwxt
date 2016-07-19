@@ -125,4 +125,28 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
 		return Response.ok().entity(model).build();
 	}
 
+	@Override
+	@Transactional
+	public Response getOneById(Long id, Context context) {
+		FeedBack feedBack = feedBackdao.findOne(id);
+		FeedBackInfo feedBackInfo = new FeedBackInfo();
+		if (feedBack != null) {
+			feedBackInfo.setAutoId(feedBack.getAutoId());
+			feedBackInfo.setContent(feedBack.getContent());
+			feedBackInfo.setImage(feedBack.getImage());
+			feedBackInfo.setMobile(feedBack.getMobile());
+			feedBackInfo.setSayTime(feedBack.getSayTime());
+
+			WeChatUser user = new WeChatUser();
+			user = weuserDao.getByOpenId(context.getOpenId());
+			feedBackInfo.setHeadImg(user.getHeadImg());
+			feedBackInfo.setNickName(user.getNickName());
+
+			// 回复list
+			feedBackInfo.setReplies(getWxList(1L, feedBack.getAutoId(), 1L));
+		}
+
+		return Response.ok().entity(feedBackInfo).build();
+	}
+
 }

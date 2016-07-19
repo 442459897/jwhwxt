@@ -2,6 +2,7 @@ package com.muran.api;
 
 import com.muran.dto.*;
 import com.muran.api.service.FeedbacksApiService;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.muran.api.AbstractApi;
 import io.swagger.annotations.ApiParam;
 
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
@@ -60,4 +62,13 @@ public class FeedbacksApi extends AbstractApi {
     public Response submitFeedback(@ApiParam(value = "\u6211\u6709\u8BDD\u8BF4body" ,required=true) AddFeedback feedback,@Context  SecurityContext securityContext){
         return service.submitFeedback(feedback,context());
     }
+    
+    @GET
+	@Path("/{autoId}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces({ "application/json" })
+	public Response modifyPwd(@PathParam("autoId") Long autoId,@Context  SecurityContext securityContext) {
+		
+		return service.getOneById(autoId,context());
+	}
 }

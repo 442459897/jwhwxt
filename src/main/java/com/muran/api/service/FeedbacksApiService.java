@@ -11,6 +11,8 @@ import com.muran.dto.AddFeedback;
 import java.util.List;
 
 import java.io.InputStream;
+
+import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 import com.muran.api.Context;
 
@@ -19,4 +21,5 @@ public interface FeedbacksApiService {
     Response getFeedbackInfo(Long num,String upOrDown,Long time,Context context);
     Response getFeedbackInfoPageList(Integer pageSize,Integer pageIdex,Long startTime,Long endTime,Context context);
     Response submitFeedback(AddFeedback feedback,Context context);
+    Response getOneById(Long id,Context context);
 }
