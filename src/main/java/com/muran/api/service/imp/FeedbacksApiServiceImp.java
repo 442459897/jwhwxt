@@ -138,7 +138,7 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
 			feedBackInfo.setSayTime(feedBack.getSayTime());
 
 			WeChatUser user = new WeChatUser();
-			user = weuserDao.getByOpenId(context.getOpenId());
+			user = weuserDao.getByOpenId(feedBack.getOpenId());
 			feedBackInfo.setHeadImg(user.getHeadImg());
 			feedBackInfo.setNickName(user.getNickName());
 
