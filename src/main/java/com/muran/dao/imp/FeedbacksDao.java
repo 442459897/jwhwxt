@@ -17,7 +17,8 @@ import com.muran.util.DateUtil;
  */
 @SuppressWarnings("unchecked")
 @Repository("FeedbacksDao")
-public class FeedbacksDao extends AbstractHibernateDao<FeedBack>implements IFeedbacksDao {
+public class FeedbacksDao extends AbstractHibernateDao<FeedBack> implements
+		IFeedbacksDao {
 
 	public FeedbacksDao() {
 		super();
@@ -31,30 +32,35 @@ public class FeedbacksDao extends AbstractHibernateDao<FeedBack>implements IFeed
 		if (time != null) {
 
 			if (upOrDown.equalsIgnoreCase("up")) {
-				hql += " and sayTime<'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and sayTime<'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			} else if (upOrDown.equalsIgnoreCase("down")) {
-				hql += " and sayTime>'" + DateUtil.timestampToDateStr(time.toString()) + "'";
+				hql += " and sayTime>'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			}
 		}
-		hql+=" order by sayTime DESC";
+		hql += " order by sayTime DESC";
 		Query query = getCurrentSession().createQuery(hql);
-		query.setFirstResult(0); 
-		query.setMaxResults(Integer.parseInt(num.toString())); 
+		query.setFirstResult(0);
+		query.setMaxResults(Integer.parseInt(num.toString()));
 		List<FeedBack> list = query.list();
 		return list;
 	}
 
 	@Override
-	public Data<FeedBack> getFeedbackInfoPageList(Integer pageSize, Integer pageIdex, Long startTime, Long endTime) {
+	public Data<FeedBack> getFeedbackInfoPageList(Integer pageSize,
+			Integer pageIdex, Long startTime, Long endTime) {
 		String hql = " from FeedBack where 1=1 ";
 
 		if (startTime != null) {
-			hql += " and sayTime>'" + DateUtil.timestampToDateStr(startTime.toString()) + "'";
+			hql += " and sayTime>'"
+					+ DateUtil.timestampToDateStr(startTime.toString()) + "'";
 		}
 		if (endTime != null) {
-			hql += " and sayTime<'" + DateUtil.timestampToDateStr(endTime.toString()) + "'";
+			hql += " and sayTime<'"
+					+ DateUtil.timestampToDateStr(endTime.toString()) + "'";
 		}
-		hql+=" order by sayTime DESC";
+		hql += " order by sayTime DESC";
 		Query query = getCurrentSession().createQuery(hql);
 
 		List<FeedBack> list = query.list();
@@ -73,5 +79,29 @@ public class FeedbacksDao extends AbstractHibernateDao<FeedBack>implements IFeed
 		data.setData(list);
 
 		return data;
+	}
+
+	@Override
+	public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time,
+			String openId) {
+		// TODO Auto-generated method stub
+		String hql = " from FeedBack where 1=1 and openId='" + openId + "' ";
+
+		if (time != null) {
+
+			if (upOrDown.equalsIgnoreCase("up")) {
+				hql += " and sayTime<'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
+			} else if (upOrDown.equalsIgnoreCase("down")) {
+				hql += " and sayTime>'"
+						+ DateUtil.timestampToDateStr(time.toString()) + "'";
+			}
+		}
+		hql += " order by sayTime DESC";
+		Query query = getCurrentSession().createQuery(hql);
+		query.setFirstResult(0);
+		query.setMaxResults(Integer.parseInt(num.toString()));
+		List<FeedBack> list = query.list();
+		return list;
 	}
 }

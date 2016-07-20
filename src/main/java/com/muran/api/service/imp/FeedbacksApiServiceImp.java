@@ -48,7 +48,7 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
 		if (num == null) {
 			num = (long) 10;
 		}
-		List<FeedBack> list = feedBackdao.getFeedbackInfo(num, upOrDown, time);
+		List<FeedBack> list = feedBackdao.getFeedbackInfo(num, upOrDown, time,context.getOpenId());
 		List<FeedBackInfo> result = new ArrayList<FeedBackInfo>();
 		if (list != null && list.size() > 0) {
 			for (FeedBack feedBack : list) {
@@ -60,7 +60,7 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
 				feedBackInfo.setSayTime(feedBack.getSayTime());
 
 				WeChatUser user = new WeChatUser();
-				user = weuserDao.getByOpenId(context.getOpenId());
+				user = weuserDao.getByOpenId(feedBack.getOpenId());
 				feedBackInfo.setHeadImg(user.getHeadImg());
 				feedBackInfo.setNickName(user.getNickName());
 

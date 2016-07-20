@@ -12,6 +12,8 @@ import com.muran.util.Data;
  */
 public interface IFeedbacksDao extends IOperations<FeedBack> {
 	public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time);
+	
+	public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time,String openId);
 
 	public Data<FeedBack> getFeedbackInfoPageList(Integer pageSize, Integer pageIdex, Long startTime, Long endTime);
 
