@@ -60,7 +60,7 @@ public class GroupMenuService extends AbstractService implements
 		// TODO Auto-generated method stub
 		List<GroupMenu> list = dao.getGroupMenusByGroupId(groupId);
 		String result = "";
-		if (list != null) {
+		if (list != null && list.size() > 0) {
 			for (GroupMenu gm : list) {
 				result += gm.getMenuId();
 				if (gm.getRoleKey() != null && !gm.getRoleKey().equals("")) {
