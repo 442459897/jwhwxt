@@ -17,13 +17,12 @@ import com.muran.model.UserMenuGroup;
 import com.muran.api.service.AbstractService;
 import com.muran.api.service.IUserMenuGroupService;
 
-
 /**
  * @author wxz
  * 
  */
-public class UserMenuGroupService extends AbstractService
-		implements IUserMenuGroupService {
+public class UserMenuGroupService extends AbstractService implements
+		IUserMenuGroupService {
 
 	@Resource(name = "UserMenuGroupDao")
 	private IUserMenuGroupDao dao;
@@ -59,5 +58,25 @@ public class UserMenuGroupService extends AbstractService
 	public List<MenuGroup> getMenuGroupListByUsername(String username) {
 		// TODO Auto-generated method stub
 		return menuGroupDao.getMenuGroupsByUsername(username);
+	}
+
+	@Override
+	@BussAnnotation(bussName = "建立用户菜单组关系", login = true, role = "menugroup_adduser")
+	@Transactional(readOnly = false)
+	public void buildUserMenuGroupByUser(String usernames, Long groupId) {
+		// TODO Auto-generated method stub
+		if (usernames != null && !usernames.equals("")) {
+			String[] array = usernames.split(",");
+			for (int i = 0; i < array.length; i++) {
+				UserMenuGroup userMenuGroup = dao
+						.getUserMenuGroupByUsernameAndGroupId(array[i], groupId);
+				if (userMenuGroup == null) {
+					userMenuGroup = new UserMenuGroup();
+					userMenuGroup.setUsername(array[i]);
+					userMenuGroup.setGroupId(groupId);
+					dao.save(userMenuGroup);
+				}
+			}
+		}
 	}
 }

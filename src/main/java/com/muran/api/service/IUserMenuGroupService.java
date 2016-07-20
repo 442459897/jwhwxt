@@ -8,5 +8,7 @@ public interface IUserMenuGroupService  {
 
 	public void buildUserMenuGroup(String username, String groups);
 	
+	public void buildUserMenuGroupByUser(String usernames, Long groupId);
+	
 	public List<MenuGroup> getMenuGroupListByUsername(String username);
 }

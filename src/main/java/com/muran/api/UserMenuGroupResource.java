@@ -43,6 +43,19 @@ public class UserMenuGroupResource extends AbstractApi {
 		return Response.ok().build();
 	}
 	
+	@POST
+	@Path("/adduser")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buildUserMenuGroupByUser(
+			@FormParam("usernames") String usernames,
+			@FormParam("groupId") Long groupId) {
+		// TODO Auto-generated method stub
+		AssertNull.assertNull(usernames,groupId);
+		service.buildUserMenuGroupByUser(usernames, groupId);
+		return Response.ok().build();
+	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getMenuGroupListByUsername(

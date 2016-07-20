@@ -20,4 +20,6 @@ public interface IUserMenuGroupDao extends IOperations<UserMenuGroup> {
 	
 	public List<UserMenuGroup> getUserMenuGroupsByUsername(String username);
 	
+	public UserMenuGroup getUserMenuGroupByUsernameAndGroupId(String username,Long groupId);
+	
 }

@@ -47,4 +47,17 @@ public class UserMenuGroupDao extends AbstractHibernateDao<UserMenuGroup>
 		return query.list();
 	}
 
+	@Override
+	public UserMenuGroup getUserMenuGroupByUsernameAndGroupId(String username,
+			Long groupId) {
+		// TODO Auto-generated method stub
+		String hql = " from UserMenuGroup where username='" + username
+				+ "' and groupId=" + groupId;
+		Query query = getCurrentSession().createQuery(hql);
+		List<UserMenuGroup> list = query.list();
+		if (list != null && list.size() > 0)
+			return list.get(0);
+		return null;
+	}
+
 }
