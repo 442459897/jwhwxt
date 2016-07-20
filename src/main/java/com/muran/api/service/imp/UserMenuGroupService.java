@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.muran.aop.annotation.BussAnnotation;
 import com.muran.dao.IMenuGroupDao;
 import com.muran.dao.IUserMenuGroupDao;
+import com.muran.model.Admin;
 import com.muran.model.MenuGroup;
 import com.muran.model.UserMenuGroup;
 import com.muran.api.service.AbstractService;
@@ -78,5 +79,12 @@ public class UserMenuGroupService extends AbstractService implements
 				}
 			}
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public List<Admin> getAdminListByGroup(Long groupId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

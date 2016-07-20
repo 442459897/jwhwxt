@@ -9,6 +9,8 @@ import org.hibernate.Query;
 
 import com.muran.dao.imp.AbstractHibernateDao;
 import com.muran.dao.IUserMenuGroupDao;
+import com.muran.model.Admin;
+import com.muran.model.MenuGroup;
 import com.muran.model.UserMenuGroup;
 
 /**
@@ -58,6 +60,15 @@ public class UserMenuGroupDao extends AbstractHibernateDao<UserMenuGroup>
 		if (list != null && list.size() > 0)
 			return list.get(0);
 		return null;
+	}
+
+	@Override
+	public List<Admin> getAdminByGroup(Long groupId) {
+		// TODO Auto-generated method stub
+		String hql = " FROM Admin where username in(SELECT username FROM UserMenuGroup where groupId="
+				+ groupId + ") ";
+		Query query = getCurrentSession().createQuery(hql);
+		return query.list();
 	}
 
 }

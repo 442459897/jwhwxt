@@ -64,5 +64,15 @@ public class UserMenuGroupResource extends AbstractApi {
 		AssertNull.assertNull(username);
 		return Response.ok().entity(service.getMenuGroupListByUsername(username)).build();
 	}
+	
+	@GET
+	@Path("/admins")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMenuGroupListByGroup(
+			@QueryParam("groupId") Long groupId) {
+		// TODO Auto-generated method stub
+		AssertNull.assertNull(groupId);
+		return Response.ok().entity(service.getAdminListByGroup(groupId)).build();
+	}
 
 }
