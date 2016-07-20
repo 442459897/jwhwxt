@@ -16,13 +16,14 @@ import org.springframework.stereotype.Component;
 
 import com.muran.api.exception.AssertNull;
 import com.muran.api.service.IGroupMenuService;
+import com.muran.dto.GeneralString;
 
 @Component
 @Path("v1/groupmenus")
 public class GroupMenuResource extends AbstractApi {
 
 	@Autowired
-    IGroupMenuService service;
+	IGroupMenuService service;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -40,7 +41,9 @@ public class GroupMenuResource extends AbstractApi {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getMenuByGroup(@PathParam("groupId") Long groupId) {
 		// TODO Auto-generated method stub
-		return Response.ok().entity(service.getMenuByGroup(groupId)).build();
+		GeneralString str = new GeneralString();
+		str.setValue(service.getMenuByGroup(groupId));
+		return Response.ok().entity(str).build();
 	}
 
 }
