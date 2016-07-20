@@ -85,6 +85,6 @@ public class UserMenuGroupService extends AbstractService implements
 	@Transactional(readOnly = false)
 	public List<Admin> getAdminListByGroup(Long groupId) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getAdminByGroup(groupId);
 	}
 }
