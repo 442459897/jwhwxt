@@ -57,6 +57,7 @@ public class ColumnsApiServiceImp extends AbstractService implements
 		info.setIsShowPoster(item.isShowPoster());
 		info.setName(item.getName());
 		info.setPosterUrl(item.getPosterUrl());
+		info.setPosterImageUrl(item.getPosterImageUrl());
 		return Response.ok().entity(info).build();
 	}
 
@@ -74,6 +75,7 @@ public class ColumnsApiServiceImp extends AbstractService implements
 				info.setIsShowPoster(columnItem.isShowPoster());
 				info.setName(columnItem.getName());
 				info.setPosterUrl(columnItem.getPosterUrl());
+				info.setPosterImageUrl(columnItem.getPosterImageUrl());
 				listReturn.add(info);
 			}
 		}
@@ -98,7 +100,7 @@ public class ColumnsApiServiceImp extends AbstractService implements
 	@Override
 	@Transactional
 	public Response setColumnPosterInfo(String columnKey, Boolean isShowPoster,
-			String posterUrl, Context context) {
+			String posterUrl,String posterImageUrl, Context context) {
 		// TODO Auto-generated method stub
 		ColumnItem item = new ColumnItem();
 		item = dao.getColumnItemByKey(columnKey);
@@ -108,6 +110,7 @@ public class ColumnsApiServiceImp extends AbstractService implements
 		item.setColumnKey(columnKey);
 		item.setShowPoster(isShowPoster);
 		item.setPosterUrl(posterUrl);
+		item.setPosterImageUrl(posterImageUrl);
 		item = dao.update(item);
 		
 		ColumnPosterInfo info = new ColumnPosterInfo();
@@ -115,7 +118,7 @@ public class ColumnsApiServiceImp extends AbstractService implements
 		info.setIsShowPoster(isShowPoster);
 		info.setName(item.getName());
 		info.setPosterUrl(posterUrl);
-		
+		info.setPosterImageUrl(posterImageUrl);
 		return Response.ok().entity(info).build();
 	}
 

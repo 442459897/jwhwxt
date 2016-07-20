@@ -35,6 +35,7 @@ public class ColumnItem implements java.io.Serializable{
 	private boolean isPoster;
 	private boolean isShowPoster;
 	private String posterUrl;
+	private String posterImageUrl;
 	private long parentId;
 	private String url;
 	private String outUrl;
@@ -228,6 +229,18 @@ public class ColumnItem implements java.io.Serializable{
 		this.outUrl = outUrl;
 		this.modifyTime = modifyTime;
 		this.modifyMan = modifyMan;
+	}
+	/**
+	 * @return the posterImageUrl
+	 */
+	public String getPosterImageUrl() {
+		return posterImageUrl;
+	}
+	/**
+	 * @param posterImageUrl the posterImageUrl to set
+	 */
+	public void setPosterImageUrl(String posterImageUrl) {
+		this.posterImageUrl = posterImageUrl;
 	}
 	
 	

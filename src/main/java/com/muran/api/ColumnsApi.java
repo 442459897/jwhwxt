@@ -76,8 +76,8 @@ public class ColumnsApi extends AbstractApi {
         @io.swagger.annotations.ApiResponse(code = 200, message = "\u680F\u76EE\u6D77\u62A5\u8BBE\u7F6E\u6210\u529F\u3002", response = GeneralString.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "\u680F\u76EE\u6D77\u62A5\u8BBE\u7F6E\u5931\u8D25\u3002", response = GeneralString.class) })
-    public Response setColumnPosterInfo(@ApiParam(value = "\u680F\u76EE\u552F\u4E00key",required=true) @PathParam("columnKey") String columnKey,@ApiParam(value = "\u662F\u5426\u663E\u793A\u6D77\u62A5", required=true)@FormParam("isShowPoster")  Boolean isShowPoster,@ApiParam(value = "\u6D77\u62A5url")@FormParam("posterUrl")  String posterUrl,@Context  SecurityContext securityContext){
-        return service.setColumnPosterInfo(columnKey,isShowPoster,posterUrl,context());
+    public Response setColumnPosterInfo(@ApiParam(value = "\u680F\u76EE\u552F\u4E00key",required=true) @PathParam("columnKey") String columnKey,@ApiParam(value = "\u662F\u5426\u663E\u793A\u6D77\u62A5", required=true)@FormParam("isShowPoster")  Boolean isShowPoster,@ApiParam(value = "\u6D77\u62A5url")@FormParam("posterUrl")  String posterUrl,@FormParam("posterImageUrl")  String posterImageUrl,@Context  SecurityContext securityContext){
+        return service.setColumnPosterInfo(columnKey,isShowPoster,posterUrl,posterImageUrl,context());
     }
     @PUT
     @Path("/communities")

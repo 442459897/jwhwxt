@@ -20,6 +20,6 @@ public interface ColumnsApiService {
     Response getColumnPosterInfo(String columnKey,Context context);
     Response getColumnPosterInfoList(Context context);
     Response getCommunityUrl(Context context);
-    Response setColumnPosterInfo(String columnKey,Boolean isShowPoster,String posterUrl,Context context);
+    Response setColumnPosterInfo(String columnKey,Boolean isShowPoster,String posterUrl,String posterImageUrl,Context context);
     Response setCommunityUrl(String outUrl,Context context);
 }
