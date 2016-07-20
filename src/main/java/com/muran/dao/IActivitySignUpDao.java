@@ -1,5 +1,7 @@
 package com.muran.dao;
 
+import java.util.List;
+
 import com.muran.dao.operation.IOperations;
 import com.muran.model.ActivitySignup;
 import com.muran.util.Data;
@@ -12,6 +14,7 @@ public interface IActivitySignUpDao extends IOperations<ActivitySignup> {
 	public int getSignUpNum(Long autoId);
 
 	public ActivitySignup getOneByOpenId(Long activity, String openid);
+	public List<ActivitySignup> getListByOpenId(String openid);
 	
 	public Data<ActivitySignup> getActivitySignupPageList(Long autoId, Integer pageSize, Integer pageIdex);
 }

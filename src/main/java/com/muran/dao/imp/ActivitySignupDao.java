@@ -84,4 +84,15 @@ public class ActivitySignupDao extends AbstractHibernateDao<ActivitySignup>
 
 		return data;
 	}
+
+	@Override
+	public List<ActivitySignup> getListByOpenId(String openid) {
+		String hql = " from ActivitySignup where 1=1 ";
+		if (openid != null && openid != "") {
+			hql += " and openId ='" + openid + "'";
+		}
+		Query query = getCurrentSession().createQuery(hql);
+		List<ActivitySignup> list = query.list();
+		return list;
+	}
 }

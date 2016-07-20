@@ -103,7 +103,15 @@ public class ActivitiesApi extends AbstractApi {
 		
 		return service.getSignupNum(autoId);
 	}
-    
+	@GET
+	@Path("/wx/signupinfo")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces({ "application/json" })
+	public Response getSignupNum(@Context  SecurityContext securityContext) {
+		
+		return service.getMySignup(context());
+	}
+	
     @GET
     @Path("/{autoId}/wx/signupinfo")
     @Consumes({ "application/json" })
