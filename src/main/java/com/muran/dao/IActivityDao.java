@@ -28,6 +28,7 @@ public interface IActivityDao extends IOperations<Activity> {
 	public List<Activity> getRandomList(int num);
 	
 	
-	public List<ActivityInfo> getActivityWxListByOpenId(String openid);
+	public List<ActivityInfo> getActivityWxListByOpenId(Integer num, String upOrDown,
+			Long time,String openid);
 
 }

@@ -275,11 +275,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 	@Override
 	@Transactional
-	public Response getMySignup(Context context) {
+	public Response getMySignup(Integer num,String upOrDown,Long time,Context context) {
 		AssertNull.assertNull(context.getOpenId());
 		
 		List<ActivityInfo> result=new ArrayList<ActivityInfo>();
-		result=activityDao.getActivityWxListByOpenId(context.getOpenId());
+		result=activityDao.getActivityWxListByOpenId(num, upOrDown, time, context.getOpenId());
 		return Response.ok().entity(result).build();
 	}
 
