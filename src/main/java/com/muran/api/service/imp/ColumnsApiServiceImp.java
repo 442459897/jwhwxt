@@ -129,35 +129,37 @@ public class ColumnsApiServiceImp extends AbstractService implements
 			throw new ServerException(Code.BadRequestParams, "小区栏目信息不存在！");
 		}
 		item.setOutUrl(outUrl);
-		item.setUrl(outUrl);
+		//item.setUrl(outUrl);
 		item = dao.update(item);
 		
 		//处理菜单
 		
-		if (WeChatApi.token == null || System.currentTimeMillis() > WeChatApi.tokenExpiresTime) {
-			WeChatApi.token = TokenAPI.token(GlobalConfig.KEY_APPID,
-					GlobalConfig.KEY_APP_SECRET);
-
-			if (WeChatApi.token.isSuccess()) {
-				WeChatApi.tokenExpiresTime = System.currentTimeMillis()
-						+ (WeChatApi.token.getExpires_in() - 200) * 1000;// token创建时间
-																// 提前200秒过期
-																// 精确到毫秒
-			} else {
-				throw new ServerException(Code.BadRequestParams, "token获取失败！");
-			}
-		}
-		
-		WxMenu menu = getWxMenu();
-		String menuJson = JsonUtil.toJSONString(menu);
-		log.info("创建菜单的json串：" + menuJson);
-		// 调用微信接口
-		BaseResult result = MenuAPI.menuCreate(WeChatApi.token.getAccess_token(), menuJson);
-		log.info("isSuccess：" + result.isSuccess());
-		if (!result.isSuccess()) {
-			// 失败 返回失败信息
-			throw new ServerException(Code.BadRequestParams, "创建菜单失败！");
-		}
+		// if (WeChatApi.token == null || System.currentTimeMillis() >
+		// WeChatApi.tokenExpiresTime) {
+		// WeChatApi.token = TokenAPI.token(GlobalConfig.KEY_APPID,
+		// GlobalConfig.KEY_APP_SECRET);
+		//
+		// if (WeChatApi.token.isSuccess()) {
+		// WeChatApi.tokenExpiresTime = System.currentTimeMillis()
+		// + (WeChatApi.token.getExpires_in() - 200) * 1000;// token创建时间
+		// // 提前200秒过期
+		// // 精确到毫秒
+		// } else {
+		// throw new ServerException(Code.BadRequestParams, "token获取失败！");
+		// }
+		// }
+		//
+		// WxMenu menu = getWxMenu();
+		// String menuJson = JsonUtil.toJSONString(menu);
+		// log.info("创建菜单的json串：" + menuJson);
+		// // 调用微信接口
+		// BaseResult result =
+		// MenuAPI.menuCreate(WeChatApi.token.getAccess_token(), menuJson);
+		// log.info("isSuccess：" + result.isSuccess());
+		// if (!result.isSuccess()) {
+		// // 失败 返回失败信息
+		// throw new ServerException(Code.BadRequestParams, "创建菜单失败！");
+		// }
 		
 		
 		GeneralString str=new GeneralString();
