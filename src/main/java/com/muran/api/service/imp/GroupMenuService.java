@@ -69,6 +69,7 @@ public class GroupMenuService extends AbstractService implements
 					result += ",";
 				}
 			}
+			log.info(result);
 			result = result.substring(0, result.length() - 1);
 		}
 		return result;
