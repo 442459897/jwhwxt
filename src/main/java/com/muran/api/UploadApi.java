@@ -51,7 +51,7 @@ public class UploadApi extends AbstractApi {
 				+ "upload/web/";
 		//
 		String fileName = Calendar.getInstance().getTimeInMillis()
-				+ disposition.getFileName();
+				+"."+disposition.getFileName().substring(disposition.getFileName().lastIndexOf(".")+1) ;
 
 		String filePath = basePath + fileName;
 
