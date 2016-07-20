@@ -277,15 +277,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	@Transactional
 	public Response getMySignup(Context context) {
 		AssertNull.assertNull(context.getOpenId());
-		List<ActivitySignup> list=signupDao.getListByOpenId(context.getOpenId());
-		List<Activity> result=new ArrayList<Activity>();
-		if (list!=null&&list.size()>0) {
-			for (ActivitySignup activitySignup : list) {
-				
-				Activity activity= activityDao.findOne(activitySignup.getActivity());
-				result.add(activity);
-			}
-		}
+		
+		List<ActivityInfo> result=new ArrayList<ActivityInfo>();
+		result=activityDao.getActivityWxListByOpenId(context.getOpenId());
 		return Response.ok().entity(result).build();
 	}
 

@@ -150,4 +150,24 @@ public class ActivityDao extends AbstractHibernateDao<Activity> implements
 		return query.list();
 	}
 
+	@Override
+	public  List<ActivityInfo> getActivityWxListByOpenId(String openid) {
+		String hql = "SELECT a.autoId,a.title,a.overurl as overUrl,a.hoster,a.startTime,a.endTime,a.location,a.publishTime,a.content,a.signupTop,a.status,a.signupEndTime,case when b.signNum is null then 0 else b.signNum end signNum,case when c.commentNum is null then 0 else c.commentNum end commentNum FROM jwhwxt.tb_activity a "
+				+ " left join (select count(activity)as signNum,activity from tb_activity_signup) b on b.activity=a.autoID "
+				+ " left join (select count(itemId)as commentNum,itemId from tb_article_comment where columnKey='column_activities')c on c.itemId=a.autoId"
+				+ " left join tb_activity_signup s on s.activity=a.autoId	"
+				+ " where 1=1 ";
+		if (openid != null && !openid.equals("")) {
+			hql += " and s.openid='"+openid+"'";
+		}
+
+		hql += " order by a.publishtime desc ";
+		Query query = getCurrentSession().createSQLQuery(hql)
+				.setResultTransformer(
+						Transformers.aliasToBean(ActivityInfo.class));
+		List<ActivityInfo> list = query.list();
+
+		return list;
+	}
+
 }
