@@ -71,4 +71,11 @@ public class UserMenuGroupDao extends AbstractHibernateDao<UserMenuGroup>
 		return query.list();
 	}
 
+	@Override
+	public void deleteUserMenuGroupByGroup(Long group) {
+		// TODO Auto-generated method stub
+		String hql = " delete UserMenuGroup where groupId=" + group;
+		getCurrentSession().createQuery(hql).executeUpdate();
+	}
+
 }

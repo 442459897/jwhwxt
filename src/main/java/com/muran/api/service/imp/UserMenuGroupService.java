@@ -66,17 +66,16 @@ public class UserMenuGroupService extends AbstractService implements
 	@Transactional(readOnly = false)
 	public void buildUserMenuGroupByUser(String usernames, Long groupId) {
 		// TODO Auto-generated method stub
+		// 删除
+		dao.deleteUserMenuGroupByGroup(groupId);
+
 		if (usernames != null && !usernames.equals("")) {
 			String[] array = usernames.split(",");
 			for (int i = 0; i < array.length; i++) {
-				UserMenuGroup userMenuGroup = dao
-						.getUserMenuGroupByUsernameAndGroupId(array[i], groupId);
-				if (userMenuGroup == null) {
-					userMenuGroup = new UserMenuGroup();
-					userMenuGroup.setUsername(array[i]);
-					userMenuGroup.setGroupId(groupId);
-					dao.save(userMenuGroup);
-				}
+				UserMenuGroup userMenuGroup = new UserMenuGroup();
+				userMenuGroup.setUsername(array[i]);
+				userMenuGroup.setGroupId(groupId);
+				dao.save(userMenuGroup);
 			}
 		}
 	}

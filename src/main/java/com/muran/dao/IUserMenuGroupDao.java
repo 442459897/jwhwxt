@@ -25,4 +25,6 @@ public interface IUserMenuGroupDao extends IOperations<UserMenuGroup> {
 	
 	public List<Admin> getAdminByGroup(Long groupId);
 	
+	public void deleteUserMenuGroupByGroup(Long group);
+	
 }
