@@ -279,6 +279,10 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		AssertNull.assertNull(context.getOpenId());
 		
 		List<ActivityInfo> result=new ArrayList<ActivityInfo>();
+		if (num==null) {
+			num=10;
+		}
+		
 		result=activityDao.getActivityWxListByOpenId(num, upOrDown, time, context.getOpenId());
 		return Response.ok().entity(result).build();
 	}
