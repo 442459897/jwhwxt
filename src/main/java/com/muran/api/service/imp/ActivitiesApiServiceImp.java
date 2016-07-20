@@ -1,5 +1,6 @@
 package com.muran.api.service.imp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -265,10 +266,25 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getSignupNum(Long autoId) {
 		// TODO Auto-generated method stub
 		int num=signupDao.getSignUpNum(autoId);
 		return Response.ok().entity(num).build();
+	}
+
+	@Override
+	@Transactional
+	public Response getMySignup(Integer num,String upOrDown,Long time,Context context) {
+		AssertNull.assertNull(context.getOpenId());
+		
+		List<ActivityInfo> result=new ArrayList<ActivityInfo>();
+		if (num==null) {
+			num=10;
+		}
+		
+		result=activityDao.getActivityWxListByOpenId(num, upOrDown, time, context.getOpenId());
+		return Response.ok().entity(result).build();
 	}
 
 }

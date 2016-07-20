@@ -103,7 +103,24 @@ public class ActivitiesApi extends AbstractApi {
 		
 		return service.getSignupNum(autoId);
 	}
-    
+//	@GET
+//	@Path("/wx/signupinfo")
+//	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+//	@Produces({ "application/json" })
+//	public Response getSignupNum(@Context  SecurityContext securityContext) {
+//		
+//		return service.getMySignup(context());
+//	}
+	@GET
+	@Path("/wx/signupinfo")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "\u5FAE\u4FE1\u6D3B\u52A8\u4FE1\u606F\u5217\u8868", notes = "", response = SampleActivity.class, responseContainer = "List", tags={ "activities(活动相关)", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "\u6D3B\u52A8\u4FE1\u606F", response = SampleActivity.class, responseContainer = "List") })
+    public Response getMySignup(@ApiParam(value = "\u83B7\u53D6\u7684\u6570\u91CF.\u9ED8\u8BA45\u6761") @QueryParam("num") Integer num,@ApiParam(value = "up:\u4E0A\u62C9(\u83B7\u53D6time\u4E4B\u524D) down:\u4E0B\u62C9(\u4ECE\u6700\u65B0num*20\u6761\u4E2D\u968F\u673A\u62BD\u53D6num\u6761).\u9ED8\u8BA4up") @QueryParam("upOrDown") String upOrDown,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("time") Long time,@Context  SecurityContext securityContext){
+        return service.getMySignup(num,upOrDown,time,context());
+    }
     @GET
     @Path("/{autoId}/wx/signupinfo")
     @Consumes({ "application/json" })
