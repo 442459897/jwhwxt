@@ -113,4 +113,11 @@ public class AdminsApi extends AbstractApi {
 	public Response login(@PathParam("username") String username, @Context SecurityContext securityContext) {
 		return service.getAdminByUsername(username, context());
 	}
+	
+	@GET
+	@Path("/all")
+	@Produces({ "application/json" })
+	public Response getAdminAllList(@Context SecurityContext securityContext){
+		return service.getAdminAllList(context());
+	}
 }

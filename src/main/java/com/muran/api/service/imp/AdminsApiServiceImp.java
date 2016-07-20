@@ -143,4 +143,11 @@ public class AdminsApiServiceImp implements AdminsApiService {
 		return Response.ok().entity(admin).build();
 	}
 
+	@Override
+	@Transactional
+	public Response getAdminAllList(Context context) {
+		// TODO Auto-generated method stub
+		return Response.ok().entity(adminDao.findAll()).build();
+	}
+
 }
