@@ -3,7 +3,9 @@ package com.muran.api;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.ws.rs.Consumes;
@@ -361,20 +363,20 @@ public class WeChatApi extends AbstractApi {
 				.currentTimeMillis() / 1000));
 		// 组建签名体
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("jsapi_ticket=" + ticket.getTicket() + "&");
 		sb.append("noncestr=" + noncestr + "&");
 		sb.append("timestamp=" + String.valueOf(timestamp) + "&");
-		String result="";
+		String result = "";
 		try {
-			result=java.net.URLDecoder.decode(url,"utf-8");
+			result = java.net.URLDecoder.decode(url, "utf-8");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		sb.append("url=" + result);
-		log.info("url:"+result);
-		log.info("sb:"+sb);
+		log.info("url:" + result);
+		log.info("sb:" + sb);
 		// 进行sha1签名
 		String signature = SecuritySHA.SHA1(sb.toString());
 
@@ -393,16 +395,17 @@ public class WeChatApi extends AbstractApi {
 
 	}
 
-	@Path("/wxmedia/{mediaId}")
-	@GET
+	@Path("/wxmedia")
+	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({ "application/json" })
-	public Response WeChatDownloadMedia(@PathParam("mediaId") String mediaId)
+	public Response WeChatDownloadMedia(@FormParam("mediaIds") String mediaIds)
 			throws URISyntaxException {
+		List<String> list = new ArrayList<String>();
+
 		// 获取用户信息
 		// User user = (User) request.getSession().getAttribute("user");
 		WeChatUser wechatUser = null;
-
 		String sessionId = request.getHeader("SessionId");
 		log.info("sessionid：" + sessionId);
 		if (sessionId != null && sessionId != "") {
@@ -427,22 +430,29 @@ public class WeChatApi extends AbstractApi {
 				throw new ServerException(Code.BadRequestParams, "token获取失败！");
 			}
 		}
-		// 获取临时素材
-		MediaGetResult result = MediaAPI.mediaGet(token.getAccess_token(),
-				mediaId, true);
-		if (!result.isSuccess()) {
-			throw new ServerException(Code.BadRequestParams, "临时素材获取失败！");
+		String[] arrayMediaId = mediaIds.split(",");
+		String basePath = request.getSession().getServletContext()
+				.getRealPath("/");
+		for (String mediaId : arrayMediaId) {
+			// 获取临时素材
+			MediaGetResult result = MediaAPI.mediaGet(token.getAccess_token(),
+					mediaId, true);
+			if (!result.isSuccess()) {
+				throw new ServerException(Code.BadRequestParams, "临时素材获取失败！");
+			}
+			// 将文件下载到本地
+			String path = basePath + "upload/wx/" + wechatUser.getAutoId()
+					+ "/" + result.getFilename();
+			log.info(path);
+			FileUtil.saveFile(result.getBytes(), path, result.getFilename());
+			String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
+					+ wechatUser.getAutoId() + "/" + result.getFilename();
+
+			list.add(url);
 		}
-		// 将文件下载到本地
-		String basePath =request.getSession().getServletContext().getRealPath("/");
-		String path = basePath + "upload/wx/" + wechatUser.getAutoId()+ "/" +result.getFilename();
-		log.info(path);
-		FileUtil.saveFile(result.getBytes(), path, result.getFilename());
-		String url = GlobalConfig.KEY_WEB_BASE + "upload/wx/"
-				+  wechatUser.getAutoId() + "/" + result.getFilename();
-		FeedBack feedBack=new FeedBack();
-		feedBack.setImage(url);
-		return Response.ok().entity(feedBack).build();
+		// FeedBack feedBack=new FeedBack();
+		// feedBack.setImage(url);
+		return Response.ok().entity(list).build();
 	}
 
 	@Path("/menus")
@@ -452,18 +462,18 @@ public class WeChatApi extends AbstractApi {
 
 		// 获取用户信息
 		// User user = (User) request.getSession().getAttribute("user");
-//		WeChatUser wechatUser = null;
-//
-//		String sessionId = request.getHeader("SessionId");
-//		log.info("sessionid：" + sessionId);
-//		if (sessionId != null && sessionId != "") {
-//			// 如果session存在 获取用户信息
-//			wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
-//			log.info("wechatUser：" + wechatUser == null);
-//		}
-//		if (wechatUser == null) {
-//			throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
-//		}
+		// WeChatUser wechatUser = null;
+		//
+		// String sessionId = request.getHeader("SessionId");
+		// log.info("sessionid：" + sessionId);
+		// if (sessionId != null && sessionId != "") {
+		// // 如果session存在 获取用户信息
+		// wechatUser = wechatUserService.getUserExistAndNoExpire(sessionId);
+		// log.info("wechatUser：" + wechatUser == null);
+		// }
+		// if (wechatUser == null) {
+		// throw new ServerException(Code.UserNoExisted, "用户信息已过期或不存在！");
+		// }
 		if (token == null || System.currentTimeMillis() > tokenExpiresTime) {
 			token = TokenAPI.token(GlobalConfig.KEY_APPID,
 					GlobalConfig.KEY_APP_SECRET);
@@ -477,13 +487,13 @@ public class WeChatApi extends AbstractApi {
 				throw new ServerException(Code.BadRequestParams, "token获取失败！");
 			}
 		}
-		
 
 		WxMenu menu = service.getWxMenu();
 		String menuJson = JsonUtil.toJSONString(menu);
 		log.info("创建菜单的json串：" + menuJson);
 		// 调用微信接口
-		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(), menuJson);
+		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(),
+				menuJson);
 		log.info("isSuccess：" + result.isSuccess());
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息

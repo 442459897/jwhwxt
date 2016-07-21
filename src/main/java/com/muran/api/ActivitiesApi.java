@@ -171,4 +171,11 @@ public class ActivitiesApi extends AbstractApi {
     public Response updateActivity(@ApiParam(value = "\u6D3B\u52A8id",required=true) @PathParam("autoId") Long autoId,@ApiParam(value = "\u6D3B\u52A8\u4FE1\u606F" ,required=true) AddActivity activity,@Context  SecurityContext securityContext){
         return service.updateActivity(autoId,activity,context());
     }
+    
+    @GET
+    @Path("/{autoId}/issignup")
+    @Produces({ "application/json" })
+    public Response getUserIsSignup(@PathParam("autoId") Long autoId,@Context  SecurityContext securityContext){
+        return service.getUserIsSignup(autoId, context());
+    }
 }

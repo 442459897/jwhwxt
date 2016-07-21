@@ -20,6 +20,7 @@ import com.muran.dao.IActivityDao;
 import com.muran.dao.IActivitySignUpDao;
 import com.muran.dto.ActivityInfo;
 import com.muran.dto.AddActivity;
+import com.muran.dto.GeneralBoolean;
 import com.muran.dto.SignupActivity;
 import com.muran.dto.SignupWxInfo;
 import com.muran.model.Activity;
@@ -29,7 +30,8 @@ import com.muran.util.Data;
 @Service
 public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
-	private final static Logger log = Logger.getLogger(ActivitiesApiServiceImp.class);
+	private final static Logger log = Logger
+			.getLogger(ActivitiesApiServiceImp.class);
 	@Resource(name = "ActivityDao")
 	private IActivityDao activityDao;
 
@@ -45,9 +47,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	public Response addActivity(AddActivity activity, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
-		AssertNull.assertNull(activity.getTitle(), activity.getKeywords(), activity.getStartTime(),
-				activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
-				activity.getSignupTop(), activity.getHoster(),activity.getContent());
+		AssertNull.assertNull(activity.getTitle(), activity.getKeywords(),
+				activity.getStartTime(), activity.getEndTime(),
+				activity.getSignupEndTime(), activity.getCoverUrl(),
+				activity.getSignupTop(), activity.getHoster(),
+				activity.getContent());
 		model.setTitle(activity.getTitle());
 		model.setContent(activity.getContent());
 		model.setStartTime(activity.getStartTime());
@@ -104,12 +108,13 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 */
 	@Override
 	@Transactional
-	public Response getActivityPageList(Integer pageSize, Integer pageIndex, Long startTime, Long endTime, String title,
-			String keyword, String status, Context context) {
+	public Response getActivityPageList(Integer pageSize, Integer pageIndex,
+			Long startTime, Long endTime, String title, String keyword,
+			String status, Context context) {
 		// TODO Auto-generated method stub
 		AssertNull.assertNull(pageIndex, pageSize);
-		Data<Activity> data = activityDao.getActivityPageList(pageSize, pageIndex, startTime, endTime, title, keyword,
-				status);
+		Data<Activity> data = activityDao.getActivityPageList(pageSize,
+				pageIndex, startTime, endTime, title, keyword, status);
 		return Response.ok().entity(data).build();
 	}
 
@@ -118,13 +123,14 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 */
 	@Override
 	@Transactional
-	public Response getActivityWxList(Integer num, String upOrDown, Long time, String title, String keyword,
-			Context context) {
+	public Response getActivityWxList(Integer num, String upOrDown, Long time,
+			String title, String keyword, Context context) {
 		// TODO Auto-generated method stub
-		if (num==null) {
-			num= 10;
+		if (num == null) {
+			num = 10;
 		}
-		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown, time, title, keyword);
+		List<ActivityInfo> list = activityDao.getActivityWxList(num, upOrDown,
+				time, title, keyword);
 		return Response.ok().entity(list).build();
 	}
 
@@ -133,11 +139,13 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 */
 	@Override
 	@Transactional
-	public Response getSignupInfo(Long autoId, Integer num, String upOrDown, Long time, Context context) {
-		if (num==null) {
-			num=10;
+	public Response getSignupInfo(Long autoId, Integer num, String upOrDown,
+			Long time, Context context) {
+		if (num == null) {
+			num = 10;
 		}
-		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num, upOrDown, time);
+		List<SignupWxInfo> list = activityDao.getSignupInfo(autoId, num,
+				upOrDown, time);
 		return Response.ok().entity(list).build();
 	}
 
@@ -146,9 +154,11 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 **/
 	@Override
 	@Transactional
-	public Response getSignupInfoPageList(Long autoId, Integer pageSize, Integer pageIndex, Context context) {
+	public Response getSignupInfoPageList(Long autoId, Integer pageSize,
+			Integer pageIndex, Context context) {
 		AssertNull.assertNull(pageIndex, pageSize);
-		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId, pageSize, pageIndex);
+		Data<ActivitySignup> data = signupDao.getActivitySignupPageList(autoId,
+				pageSize, pageIndex);
 		return Response.ok().entity(data).build();
 	}
 
@@ -157,9 +167,10 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 */
 	@Override
 	@Transactional
-	public Response signupActivity(Long autoId, SignupActivity signupinfo, Context context) {
-		AssertNull.assertNull(signupinfo.getActivity(), signupinfo.getMobile(), context.getOpenId(),
-				signupinfo.getName());
+	public Response signupActivity(Long autoId, SignupActivity signupinfo,
+			Context context) {
+		AssertNull.assertNull(signupinfo.getActivity(), signupinfo.getMobile(),
+				context.getOpenId(), signupinfo.getName());
 		Activity model = new Activity();
 		model = activityDao.findOne(autoId);
 		if (model == null) {
@@ -235,9 +246,12 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	 */
 	@Override
 	@Transactional
-	public Response updateActivity(Long autoId, AddActivity activity, Context context) {
-		AssertNull.assertNull(activity.getTitle(), activity.getClass(), activity.getKeywords(), activity.getStartTime(),
-				activity.getEndTime(), activity.getEndTime(), activity.getSignupEndTime(), activity.getCoverUrl(),
+	public Response updateActivity(Long autoId, AddActivity activity,
+			Context context) {
+		AssertNull.assertNull(activity.getTitle(), activity.getClass(),
+				activity.getKeywords(), activity.getStartTime(),
+				activity.getEndTime(), activity.getEndTime(),
+				activity.getSignupEndTime(), activity.getCoverUrl(),
 				activity.getSignupTop(), activity.getHoster());
 
 		Activity model = new Activity();
@@ -269,21 +283,36 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	@Transactional
 	public Response getSignupNum(Long autoId) {
 		// TODO Auto-generated method stub
-		int num=signupDao.getSignUpNum(autoId);
+		int num = signupDao.getSignUpNum(autoId);
 		return Response.ok().entity(num).build();
 	}
 
 	@Override
 	@Transactional
-	public Response getMySignup(Integer num,String upOrDown,Long time,Context context) {
+	public Response getMySignup(Integer num, String upOrDown, Long time,
+			Context context) {
 		AssertNull.assertNull(context.getOpenId());
-		
-		List<ActivityInfo> result=new ArrayList<ActivityInfo>();
-		if (num==null) {
-			num=10;
+
+		List<ActivityInfo> result = new ArrayList<ActivityInfo>();
+		if (num == null) {
+			num = 10;
 		}
-		
-		result=activityDao.getActivityWxListByOpenId(num, upOrDown, time, context.getOpenId());
+
+		result = activityDao.getActivityWxListByOpenId(num, upOrDown, time,
+				context.getOpenId());
+		return Response.ok().entity(result).build();
+	}
+
+	@Override
+	@Transactional
+	public Response getUserIsSignup(Long autoId, Context context) {
+		// TODO Auto-generated method stub
+		GeneralBoolean result = new GeneralBoolean(true);
+		ActivitySignup info = signupDao.getOneByOpenId(autoId,
+				context.getOpenId());
+		if (info == null) {
+			result = new GeneralBoolean(false);
+		}
 		return Response.ok().entity(result).build();
 	}
 

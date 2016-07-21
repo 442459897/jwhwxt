@@ -21,4 +21,5 @@ public interface ActivitiesApiService {
     Response updateActivity(Long autoId,AddActivity activity,Context context);
     Response getSignupNum(Long autoId);
     Response getMySignup(Integer num,String upOrDown,Long time,Context context);
+    Response getUserIsSignup(Long autoId,Context context);
 }
