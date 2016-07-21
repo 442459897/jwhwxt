@@ -397,7 +397,7 @@ public class WeChatApi extends AbstractApi {
 
 	@Path("/wxmedia")
 	@POST
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces({ "application/json" })
 	public Response WeChatDownloadMedia(@FormParam("mediaIds") String mediaIds)
 			throws URISyntaxException {
