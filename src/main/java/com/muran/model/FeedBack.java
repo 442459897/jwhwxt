@@ -116,7 +116,7 @@ public class FeedBack implements java.io.Serializable {
 	/**
 	 * @return the image
 	 */
-	@Column(name = "image", length = 300)
+	@Column(name = "image", columnDefinition = "text")
 	public String getImage() {
 		return image;
 	}
@@ -165,9 +165,9 @@ public class FeedBack implements java.io.Serializable {
 		this.image = image;
 		this.mobile = mobile;
 	}
-	
-	public FeedBack(){
-		
+
+	public FeedBack() {
+
 	}
 
 }
