@@ -129,12 +129,21 @@ public class CommentsApiServiceImp implements CommentsApiService {
 				if (comment.getColumnKey().equals("column_activities")) {
 					Activity activity = new Activity();
 					activity = activityDao.findOne(comment.getItemId());
-					info.setItemTitle(activity.getTitle());
+					if (activity == null) {
+						info.setItemTitle("该活动已删除");
+					} else {
+						info.setItemTitle(activity.getTitle());
+					}
 
 				} else {
 					Article article = new Article();
 					article = articleDao.findOne(comment.getItemId());
-					info.setItemTitle(article.getTitle());
+					if (article == null) {
+						info.setItemTitle("该文章已删除");
+					} else {
+						info.setItemTitle(article.getTitle());
+					}
+
 				}
 				ColumnItem item = new ColumnItem();
 				item = columnDao.getColumnItemByKey(comment.getColumnKey());
