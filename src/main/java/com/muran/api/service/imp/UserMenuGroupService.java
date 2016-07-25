@@ -68,7 +68,7 @@ public class UserMenuGroupService extends AbstractService implements
 		// TODO Auto-generated method stub
 		// 删除
 		dao.deleteUserMenuGroupByGroup(groupId);
-
+		
 		if (usernames != null && !usernames.equals("")) {
 			String[] array = usernames.split(",");
 			for (int i = 0; i < array.length; i++) {
