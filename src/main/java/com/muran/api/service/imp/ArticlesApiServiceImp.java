@@ -193,15 +193,15 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		Data<Article> data = dao.getArticlesPageList(pageSize, pageIdex,
 				startTime, endTime, columnKey, title, keyword, source, status);
 		//去掉内容
-		if(data.getData()!=null&&data.getData().size()>0)
-		{
-			List<Article> list=new ArrayList<Article>();
-			for (Article article : data.getData()) {
-				article.setContent("");
-				list.add(article);
-			}
-			data.setData(list);
-		}
+//		if(data.getData()!=null&&data.getData().size()>0)
+//		{
+//			List<Article> list=new ArrayList<Article>();
+//			for (Article article : data.getData()) {
+//				article.setContent("");
+//				list.add(article);
+//			}
+//			data.setData(list);
+//		}
 		return Response.ok().entity(data).build();
 	}
 
