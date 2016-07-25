@@ -15,7 +15,7 @@ import com.muran.util.DateUtil;
 @Repository("CommentDao")
 public class CommentDao extends AbstractHibernateDao<Comment> implements
 		ICommentDao {
-	
+
 	public CommentDao() {
 		// TODO Auto-generated constructor stub
 		super();
@@ -35,7 +35,7 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 		if (status != null) {
 			hql += " and status=" + status;
 		}
-		hql+=" order by commentTime desc ";
+		hql += " order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		return query.list();
 	}
@@ -72,7 +72,7 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 						+ DateUtil.timestampToDateStr(time.toString()) + "'";
 			}
 		}
-		hql+=" order by commentTime desc ";
+		hql += " order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
 		query.setFirstResult(0);
 		query.setMaxResults(Integer.valueOf(num.toString()));
@@ -103,9 +103,9 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 		if (status != null) {
 			hql += " and status=" + status;
 		}
-		hql+=" order by commentTime desc ";
+		hql += " order by commentTime desc ";
 		Query query = getCurrentSession().createQuery(hql);
-		
+
 		List<Comment> list = query.list();
 
 		Data<Comment> data = new Data<Comment>();
@@ -120,8 +120,16 @@ public class CommentDao extends AbstractHibernateDao<Comment> implements
 		data.setTotalRecord(totalRecord);
 
 		data.setData(list);
-		
+
 		return data;
+	}
+
+	@Override
+	public void deleteComment(String columnKey, Long itemId) {
+		// TODO Auto-generated method stub
+		String hql = " delete Comment where columnKey='" + columnKey
+				+ "' and itemId=" + itemId;
+		getCurrentSession().createQuery(hql).executeUpdate();
 	}
 
 }

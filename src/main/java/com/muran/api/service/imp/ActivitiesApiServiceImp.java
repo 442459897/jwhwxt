@@ -18,6 +18,7 @@ import com.muran.api.exception.ServerException;
 import com.muran.api.service.ActivitiesApiService;
 import com.muran.dao.IActivityDao;
 import com.muran.dao.IActivitySignUpDao;
+import com.muran.dao.ICommentDao;
 import com.muran.dto.ActivityInfo;
 import com.muran.dto.AddActivity;
 import com.muran.dto.GeneralBoolean;
@@ -37,6 +38,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 
 	@Resource(name = "ActivitySignupDao")
 	private IActivitySignUpDao signupDao;
+
+	@Resource(name = "CommentDao")
+	private ICommentDao commentDao;
 
 	/**
 	 * 
@@ -85,6 +89,9 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 			throw new ServerException(Code.ActivityNoExisted, "活动不存在！");
 		}
 		activityDao.deleteById(autoId);
+		// 删除评论信息
+		commentDao.deleteComment("column_activities", model.getAutoId());
+
 		return Response.ok().build();
 	}
 

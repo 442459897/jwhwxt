@@ -16,4 +16,6 @@ public interface ICommentDao extends IOperations<Comment> {
 	public Data<Comment> getCommentInfoPageList(String columnKey, Long itemId,
 			Integer pageSize, Integer pageIdex, String itemTitle,
 			Long startTime, Long endTime, String status);
+	
+	public void deleteComment(String columnKey,Long itemId);
 }
