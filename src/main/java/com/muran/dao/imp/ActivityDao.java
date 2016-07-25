@@ -63,7 +63,7 @@ public class ActivityDao extends AbstractHibernateDao<Activity> implements
 		query.setFirstResult((pageIndex - 1) * pageSize);
 		query.setMaxResults(pageSize);
 		list = query.list();
-
+		
 		data.setPageIndex(pageIndex);
 		data.setPageSize(pageSize);
 		data.setTotalRecord(totalRecord);
