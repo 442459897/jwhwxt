@@ -327,6 +327,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response cancelSignup(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		Activity model = new Activity();
@@ -339,6 +340,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 	}
 
 	@Override
+	@Transactional
 	public Response getSignupStatus(Long autoId, Context context) {
 		// TODO Auto-generated method stub
 		
