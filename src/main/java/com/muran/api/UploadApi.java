@@ -21,6 +21,8 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.muran.api.exception.Code;
+import com.muran.api.exception.ServerException;
 import com.muran.application.GlobalConfig;
 import com.muran.dto.FileObject;
 import com.muran.util.FileUtil;
@@ -54,6 +56,11 @@ public class UploadApi extends AbstractApi {
 				+"."+disposition.getFileName().substring(disposition.getFileName().lastIndexOf(".")+1) ;
 
 		String filePath = basePath + fileName;
+		
+		long size=disposition.getSize();
+		if (size>2*1024*1024) {
+			throw new ServerException(Code.UploadFail, "上传文件失败！文件大小不能超过2M！");
+		}
 
 		log.info("basePath:" + basePath);
 		log.info("filePath:" + filePath);

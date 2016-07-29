@@ -47,6 +47,7 @@ public enum Code implements ResponseCode {
 			SignUpTopOver(1051,"报名已满"),
 			DataExisted(1052,"数据已存在"),
 	CreateMenuFail(9001, "创建微信菜单失败！"),
+	UploadFail(9002, "上传文件失败！文件大小不能超过2M!"),
 	Please(8001, "请重新授权！");
 	Code() {
 	}

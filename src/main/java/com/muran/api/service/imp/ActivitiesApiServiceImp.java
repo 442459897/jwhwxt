@@ -62,6 +62,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setEndTime(activity.getEndTime());
 		model.setLocation(activity.getLocation());
 		model.setKeywords(activity.getKeywords());
+		model.setSignupStartTime(activity.getSignupStartTime());
 		model.setSignupEndTime(activity.getSignupEndTime());
 		model.setOverUrl(activity.getCoverUrl());
 		model.setSignupTop(activity.getSignupTop().longValue());
@@ -272,6 +273,7 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		model.setEndTime(activity.getEndTime());
 		model.setLocation(activity.getLocation());
 		model.setKeywords(activity.getKeywords());
+		model.setSignupStartTime(activity.getSignupStartTime());
 		model.setSignupEndTime(activity.getSignupEndTime());
 		model.setOverUrl(activity.getCoverUrl());
 		model.setSignupTop(activity.getSignupTop().longValue());
@@ -321,6 +323,18 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 			result = new GeneralBoolean(false);
 		}
 		return Response.ok().entity(result).build();
+	}
+
+	@Override
+	public Response cancelSignup(Long autoId, Context context) {
+		// TODO Auto-generated method stub
+		Activity model = new Activity();
+		model = activityDao.findOne(autoId);
+		if (model == null) {
+			throw new ServerException(Code.ActivityNoExisted, "活动不存在！");
+		}
+		signupDao.cancelSignup(autoId, context.getOpenId());
+		return Response.ok().build();
 	}
 
 }

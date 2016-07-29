@@ -54,6 +54,7 @@ public class Activity implements java.io.Serializable {
 	private String publishMan;
 	private Long signupTop;//最大人数
 
+	private Date signupStartTime = new Date();
 	private Date signupEndTime = new Date();
 
 	private String content;
@@ -359,6 +360,20 @@ public class Activity implements java.io.Serializable {
 	 */
 	public void setBackMan(String backMan) {
 		this.backMan = backMan;
+	}
+
+	/**
+	 * @return the signupStartTime
+	 */
+	public Date getSignupStartTime() {
+		return signupStartTime;
+	}
+
+	/**
+	 * @param signupStartTime the signupStartTime to set
+	 */
+	public void setSignupStartTime(Date signupStartTime) {
+		this.signupStartTime = signupStartTime;
 	}
 
 }

@@ -178,4 +178,11 @@ public class ActivitiesApi extends AbstractApi {
     public Response getUserIsSignup(@PathParam("autoId") Long autoId,@Context  SecurityContext securityContext){
         return service.getUserIsSignup(autoId, context());
     }
+    
+    @DELETE
+    @Path("/{autoId}/wx/signupinfo")
+    @Produces({ "application/json" })
+    public Response cancelSignup(@PathParam("autoId") Long autoId,@Context  SecurityContext securityContext){
+    	return service.cancelSignup(autoId, context());
+    }
 }

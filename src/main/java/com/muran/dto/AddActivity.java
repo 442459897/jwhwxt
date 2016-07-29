@@ -23,6 +23,7 @@ public class AddActivity   {
   private Date endTime = null;
   private String location = null;
   private String keywords = null;
+  private Date signupStartTime= null;
   private Date signupEndTime = null;
   private String content = null;
   private String coverUrl = null;
@@ -237,12 +238,13 @@ public class AddActivity   {
         Objects.equals(coverUrl, addActivity.coverUrl) &&
         Objects.equals(signupTop, addActivity.signupTop) &&
         Objects.equals(hoster, addActivity.hoster) &&
-        Objects.equals(status, addActivity.status);
+        Objects.equals(status, addActivity.status)&&
+        Objects.equals(signupStartTime, addActivity.signupStartTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(title, startTime, endTime, location, keywords, signupEndTime, content, coverUrl, signupTop, hoster, status);
+    return Objects.hash(title, startTime, endTime, location, keywords, signupEndTime, content, coverUrl, signupTop, hoster, status,signupStartTime);
   }
 
   @Override
@@ -261,6 +263,7 @@ public class AddActivity   {
     sb.append("    signupTop: ").append(toIndentedString(signupTop)).append("\n");
     sb.append("    hoster: ").append(toIndentedString(hoster)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    signupStartTime: ").append(toIndentedString(signupStartTime)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -274,6 +277,23 @@ public class AddActivity   {
       return "null";
     }
     return o.toString().replace("\n", "\n    ");
+  }
+  
+  /**
+   * @return the signupStartTime
+   */
+  @ApiModelProperty(value = "")
+  @JsonProperty("signupStartTime")
+  public Date getSignupStartTime() {
+  	return signupStartTime;
+  }
+
+
+  /**
+   * @param signupStartTime the signupStartTime to set
+   */
+  public void setSignupStartTime(Date signupStartTime) {
+  	this.signupStartTime = signupStartTime;
   }
 }
 

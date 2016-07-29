@@ -16,5 +16,7 @@ public interface IActivitySignUpDao extends IOperations<ActivitySignup> {
 	public ActivitySignup getOneByOpenId(Long activity, String openid);
 	public List<ActivitySignup> getListByOpenId(String openid);
 	
+	public void cancelSignup(Long activity,String openId);
+	
 	public Data<ActivitySignup> getActivitySignupPageList(Long autoId, Integer pageSize, Integer pageIdex);
 }

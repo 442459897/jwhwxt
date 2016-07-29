@@ -95,4 +95,11 @@ public class ActivitySignupDao extends AbstractHibernateDao<ActivitySignup>
 		List<ActivitySignup> list = query.list();
 		return list;
 	}
+
+	@Override
+	public void cancelSignup(Long activity, String openId) {
+		// TODO Auto-generated method stub
+		String hql = " delete ActivitySignup where activity="+activity+" and openId='"+openId+"' ";
+		 getCurrentSession().createQuery(hql).executeUpdate();
+	}
 }

@@ -33,6 +33,7 @@ public class ActivityInfo   {
   private BigInteger commentNum = null;
   private BigInteger status = null;
   private Date signupEndTime = null;
+  private Date signupStartTime= null;
 
   /**
    **/
@@ -313,12 +314,13 @@ public class ActivityInfo   {
         Objects.equals(signupTop, activityInfo.signupTop) &&
         Objects.equals(commentNum, activityInfo.commentNum) &&
         Objects.equals(status, activityInfo.status) &&
-        Objects.equals(signupEndTime, activityInfo.signupEndTime);
+        Objects.equals(signupEndTime, activityInfo.signupEndTime)&&
+        Objects.equals(signupStartTime, activityInfo.signupStartTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(autoId, title, overUrl, hoster, startTime, endTime, location, signNum, publishTime, publishMan, content, signupTop, commentNum, status, signupEndTime);
+    return Objects.hash(autoId, title, overUrl, hoster, startTime, endTime, location, signNum, publishTime, publishMan, content, signupTop, commentNum, status, signupEndTime,signupStartTime);
   }
 
   @Override
@@ -341,6 +343,7 @@ public class ActivityInfo   {
     sb.append("    commentNum: ").append(toIndentedString(commentNum)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    signupEndTime: ").append(toIndentedString(signupEndTime)).append("\n");
+    sb.append("    signupStartTime: ").append(toIndentedString(signupStartTime)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -355,5 +358,23 @@ public class ActivityInfo   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
+/**
+ * @return the signupStartTime
+ */
+@ApiModelProperty(value = "")
+@JsonProperty("signupStartTime")
+public Date getSignupStartTime() {
+	return signupStartTime;
+}
+
+
+/**
+ * @param signupStartTime the signupStartTime to set
+ */
+public void setSignupStartTime(Date signupStartTime) {
+	this.signupStartTime = signupStartTime;
+}
 }
 
