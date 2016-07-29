@@ -23,6 +23,7 @@ import com.muran.dto.ActivityInfo;
 import com.muran.dto.AddActivity;
 import com.muran.dto.GeneralBoolean;
 import com.muran.dto.SignupActivity;
+import com.muran.dto.SignupStatus;
 import com.muran.dto.SignupWxInfo;
 import com.muran.model.Activity;
 import com.muran.model.ActivitySignup;
@@ -335,6 +336,56 @@ public class ActivitiesApiServiceImp implements ActivitiesApiService {
 		}
 		signupDao.cancelSignup(autoId, context.getOpenId());
 		return Response.ok().build();
+	}
+
+	@Override
+	public Response getSignupStatus(Long autoId, Context context) {
+		// TODO Auto-generated method stub
+		
+		
+		Activity model = new Activity();
+		model = activityDao.findOne(autoId);
+		if (model == null) {
+			throw new ServerException(Code.ActivityNoExisted, "活动不存在！");
+		}
+		ActivitySignup info = signupDao.getOneByOpenId(autoId,
+				context.getOpenId());
+		boolean issignup=false;
+		if (info!=null) {
+			issignup=true;
+		}
+		
+		
+		SignupStatus result=new SignupStatus();
+		//判断活动是否结束
+		if (model.getEndTime().getTime()<System.currentTimeMillis()) {
+			//活动结束
+			result.setEnable(false);
+			result.setSignup(issignup);
+			result.setShowInfo("活动已结束");
+		}else if(issignup){
+			result.setSignup(issignup);
+			result.setEnable(true);			
+			result.setShowInfo("取消报名");
+		}
+		else if(model.getSignupStartTime()!=null&&model.getSignupStartTime().getTime()>System.currentTimeMillis()){	
+			result.setEnable(false);
+			result.setSignup(issignup);
+			result.setShowInfo("报名未开始");
+		}else if (model.getSignupEndTime()!=null&&model.getSignupEndTime().getTime()<System.currentTimeMillis()) {
+			result.setEnable(false);
+			result.setSignup(issignup);
+			result.setShowInfo("报名已结束");
+		}else if(model.getSignupTop() <= signupDao.getSignUpNum(autoId)){
+			result.setEnable(false);
+			result.setSignup(issignup);
+			result.setShowInfo("报名已满");
+		}else{
+			result.setEnable(true);
+			result.setSignup(issignup);
+			result.setShowInfo("我要报名");
+		}
+		return Response.ok().entity(result).build();
 	}
 
 }
