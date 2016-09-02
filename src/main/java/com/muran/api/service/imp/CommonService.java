@@ -15,6 +15,7 @@ import com.muran.dto.WxButton;
 import com.muran.dto.WxMenu;
 import com.muran.dto.WxSubButton;
 import com.muran.model.ColumnItem;
+
 @Service
 public class CommonService extends AbstractService implements ICommonService {
 
@@ -34,15 +35,23 @@ public class CommonService extends AbstractService implements ICommonService {
 			button.setName(columnItem.getName());
 			List<ColumnItem> listChild = dao.getList(columnItem.getAutoId());
 
-			List<WxSubButton> listSubButtons = new ArrayList<WxSubButton>();
-			for (ColumnItem columnItem2 : listChild) {
-				WxSubButton subButton = new WxSubButton();
-				subButton.setName(columnItem2.getName());
-				subButton.setType(columnItem2.getType());
-				subButton.setUrl(columnItem2.getUrl());
-				listSubButtons.add(subButton);
+			if (listChild != null && listChild.size() > 0) {
+				List<WxSubButton> listSubButtons = new ArrayList<WxSubButton>();
+				for (ColumnItem columnItem2 : listChild) {
+					WxSubButton subButton = new WxSubButton();
+					subButton.setName(columnItem2.getName());
+					subButton.setType(columnItem2.getType());
+					subButton.setUrl(columnItem2.getUrl());
+					listSubButtons.add(subButton);
+				}
+				button.setSub_button(listSubButtons);
+			}else if(columnItem.getType().equals("click")){
+				button.setType("click");
+				button.setKey(columnItem.getUrl());
+			}else if (columnItem.getType().equals("view")){
+				button.setType("view");
+				button.setUrl(columnItem.getUrl());
 			}
-			button.setSub_button(listSubButtons);
 			listButtons.add(button);
 		}
 		WxMenu menu = new WxMenu();

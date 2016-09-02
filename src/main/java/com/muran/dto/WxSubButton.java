@@ -1,5 +1,5 @@
 package com.muran.dto;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 public class WxSubButton implements java.io.Serializable {
 	/**
 	 * 
@@ -9,6 +9,7 @@ public class WxSubButton implements java.io.Serializable {
 	private String type;
 	private String name;
 	private String url;
+	private String key;
 	/**
 	 * @return the type
 	 */
@@ -36,6 +37,7 @@ public class WxSubButton implements java.io.Serializable {
 	/**
 	 * @return the url
 	 */
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	public String getUrl() {
 		return url;
 	}
@@ -44,6 +46,15 @@ public class WxSubButton implements java.io.Serializable {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 }
