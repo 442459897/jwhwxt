@@ -18,90 +18,117 @@ import com.muran.util.DateUtil;
 @SuppressWarnings("unchecked")
 @Repository("FeedbacksDao")
 public class FeedbacksDao extends AbstractHibernateDao<FeedBack> implements
-		IFeedbacksDao {
+        IFeedbacksDao {
 
-	public FeedbacksDao() {
-		super();
-		setClazz(FeedBack.class);
-	}
+    public FeedbacksDao() {
+        super();
+        setClazz(FeedBack.class);
+    }
 
-	@Override
-	public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time) {
-		String hql = " from FeedBack where 1=1 ";
+    @Override
+    public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time) {
+        String hql = " from FeedBack where 1=1 ";
 
-		if (time != null) {
+        if (time != null) {
 
-			if (upOrDown.equalsIgnoreCase("up")) {
-				hql += " and sayTime<'"
-						+ DateUtil.timestampToDateStr(time.toString()) + "'";
-			} else if (upOrDown.equalsIgnoreCase("down")) {
-				hql += " and sayTime>'"
-						+ DateUtil.timestampToDateStr(time.toString()) + "'";
-			}
-		}
-		hql += " order by sayTime DESC";
-		Query query = getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(Integer.parseInt(num.toString()));
-		List<FeedBack> list = query.list();
-		return list;
-	}
+            if (upOrDown.equalsIgnoreCase("up")) {
+                hql += " and sayTime<'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            } else if (upOrDown.equalsIgnoreCase("down")) {
+                hql += " and sayTime>'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            }
+        }
+        hql += " order by sayTime DESC";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setFirstResult(0);
+        query.setMaxResults(Integer.parseInt(num.toString()));
+        List<FeedBack> list = query.list();
+        return list;
+    }
 
-	@Override
-	public Data<FeedBack> getFeedbackInfoPageList(Integer pageSize,
-			Integer pageIdex, Long startTime, Long endTime) {
-		String hql = " from FeedBack where 1=1 ";
+    @Override
+    public Data<FeedBack> getFeedbackInfoPageList(Integer pageSize,
+                                                  Integer pageIdex, Long startTime, Long endTime) {
+        String hql = " from FeedBack where 1=1 ";
 
-		if (startTime != null) {
-			hql += " and sayTime>'"
-					+ DateUtil.timestampToDateStr(startTime.toString()) + "'";
-		}
-		if (endTime != null) {
-			hql += " and sayTime<'"
-					+ DateUtil.timestampToDateStr(endTime.toString()) + "'";
-		}
-		hql += " order by sayTime DESC";
-		Query query = getCurrentSession().createQuery(hql);
+        if (startTime != null) {
+            hql += " and sayTime>'"
+                    + DateUtil.timestampToDateStr(startTime.toString()) + "'";
+        }
+        if (endTime != null) {
+            hql += " and sayTime<'"
+                    + DateUtil.timestampToDateStr(endTime.toString()) + "'";
+        }
+        hql += " order by sayTime DESC";
+        Query query = getCurrentSession().createQuery(hql);
 
-		List<FeedBack> list = query.list();
+        List<FeedBack> list = query.list();
 
-		Data<FeedBack> data = new Data<FeedBack>();
+        Data<FeedBack> data = new Data<FeedBack>();
 
-		int totalRecord = list.size();
-		query.setFirstResult((pageIdex - 1) * pageSize);
-		query.setMaxResults(pageSize);
-		list = query.list();
+        int totalRecord = list.size();
+        query.setFirstResult((pageIdex - 1) * pageSize);
+        query.setMaxResults(pageSize);
+        list = query.list();
 
-		data.setPageIndex(pageIdex);
-		data.setPageSize(pageSize);
-		data.setTotalRecord(totalRecord);
+        data.setPageIndex(pageIdex);
+        data.setPageSize(pageSize);
+        data.setTotalRecord(totalRecord);
 
-		data.setData(list);
+        data.setData(list);
 
-		return data;
-	}
+        return data;
+    }
 
-	@Override
-	public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time,
-			String openId) {
-		// TODO Auto-generated method stub
-		String hql = " from FeedBack where 1=1 and openId='" + openId + "' ";
+    @Override
+    public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time,
+                                          String openId) {
+        // TODO Auto-generated method stub
+        String hql = " from FeedBack where 1=1 and openId='" + openId + "' ";
 
-		if (time != null) {
+        if (time != null) {
 
-			if (upOrDown.equalsIgnoreCase("up")) {
-				hql += " and sayTime<'"
-						+ DateUtil.timestampToDateStr(time.toString()) + "'";
-			} else if (upOrDown.equalsIgnoreCase("down")) {
-				hql += " and sayTime>'"
-						+ DateUtil.timestampToDateStr(time.toString()) + "'";
-			}
-		}
-		hql += " order by sayTime DESC";
-		Query query = getCurrentSession().createQuery(hql);
-		query.setFirstResult(0);
-		query.setMaxResults(Integer.parseInt(num.toString()));
-		List<FeedBack> list = query.list();
-		return list;
-	}
+            if (upOrDown.equalsIgnoreCase("up")) {
+                hql += " and sayTime<'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            } else if (upOrDown.equalsIgnoreCase("down")) {
+                hql += " and sayTime>'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            }
+        }
+        hql += " order by sayTime DESC";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setFirstResult(0);
+        query.setMaxResults(Integer.parseInt(num.toString()));
+        List<FeedBack> list = query.list();
+        return list;
+    }
+
+    @Override
+    public List<FeedBack> getFeedbackInfo(Long num, String upOrDown, Long time, Integer status, String openId) {
+        String hql = " from FeedBack where 1=1 ";
+        if (openId != null) {
+            hql += " and openId='" + openId + "'";
+        }
+        if (status != null) {
+            hql += " and status=" + status;
+        }
+        if (time != null) {
+
+            if (upOrDown.equalsIgnoreCase("up")) {
+                hql += " and sayTime<'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            } else if (upOrDown.equalsIgnoreCase("down")) {
+                hql += " and sayTime>'"
+                        + DateUtil.timestampToDateStr(time.toString()) + "'";
+            }
+        }
+        hql += " order by sayTime DESC";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setFirstResult(0);
+        query.setMaxResults(Integer.parseInt(num.toString()));
+        List<FeedBack> list = query.list();
+        return list;
+    }
 }

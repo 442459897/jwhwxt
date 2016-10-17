@@ -49,6 +49,27 @@ public class Article implements java.io.Serializable {
 	private String modifyMan;
 	private Boolean enable;
 	private Long status;
+	private Integer readNum;
+	private Integer visitNum;
+
+	@Column(nullable=false,columnDefinition="INT default 0")
+	public Integer getReadNum() {
+		return readNum;
+	}
+
+	public void setReadNum(Integer readNum) {
+		this.readNum = readNum;
+	}
+
+	@Column(nullable=false,columnDefinition="INT default 0")
+	public Integer getVisitNum() {
+		return visitNum;
+	}
+
+	public void setVisitNum(Integer visitNum) {
+		this.visitNum = visitNum;
+	}
+
 	/**
 	 * @return the autoId
 	 */
@@ -72,7 +93,7 @@ public class Article implements java.io.Serializable {
 		return columnKey;
 	}
 	/**
-	 * @param columeKey the columeKey to set
+	 * @param columnKey the columeKey to set
 	 */
 	public void setColumnKey(String columnKey) {
 		this.columnKey = columnKey;
@@ -296,7 +317,7 @@ public class Article implements java.io.Serializable {
 	}
 	/**
 	 * @param autoId
-	 * @param columeKey
+	 * @param columnKey
 	 * @param title
 	 * @param keywords
 	 * @param showType

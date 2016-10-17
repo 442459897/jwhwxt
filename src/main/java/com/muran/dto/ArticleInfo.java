@@ -29,6 +29,39 @@ public class ArticleInfo {
 	private Long commentNum = null;
 	private String columnKey = null;
 	private String keyword = null;
+	private Integer readNum= null;
+	private Integer visitNum= null;
+	private Boolean showReadNum= null;
+
+	@ApiModelProperty(value = "")
+	@JsonProperty("readNum")
+	public Integer getReadNum() {
+		return readNum;
+	}
+
+	public void setReadNum(Integer readNum) {
+		this.readNum = readNum;
+	}
+
+	@ApiModelProperty(value = "")
+	@JsonProperty("visitNum")
+	public Integer getVisitNum() {
+		return visitNum;
+	}
+
+	public void setVisitNum(Integer visitNum) {
+		this.visitNum = visitNum;
+	}
+
+	@ApiModelProperty(value = "")
+	@JsonProperty("showReadNum")
+	public Boolean getShowReadNum() {
+		return showReadNum;
+	}
+
+	public void setShowReadNum(Boolean showReadNum) {
+		this.showReadNum = showReadNum;
+	}
 
 	/**
 	 **/

@@ -30,6 +30,16 @@ public class FeedBack implements java.io.Serializable {
 	private String content;
 	private String image;
 	private String mobile;
+	private Integer status;
+
+	@Column(nullable=false,columnDefinition="INT default 0")
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	/**
 	 * @return the autoId

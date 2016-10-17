@@ -22,4 +22,6 @@ public interface FeedbacksApiService {
     Response getFeedbackInfoPageList(Integer pageSize,Integer pageIdex,Long startTime,Long endTime,Context context);
     Response submitFeedback(AddFeedback feedback,Context context);
     Response getOneById(Long id,Context context);
+    Response getAuditFeedbackInfo(Long num,String upOrDown,Long time,Integer status,Context context);
+    Response auditFeedBack(Long autoId,Integer status,Context context);
 }

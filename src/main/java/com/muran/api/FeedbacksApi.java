@@ -71,4 +71,25 @@ public class FeedbacksApi extends AbstractApi {
 		
 		return service.getOneById(autoId,context());
 	}
+
+    @PUT
+    @Path("/{autoId}")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces({ "application/json" })
+    public Response audit(@PathParam("autoId") Long autoId,@FormParam("status")Integer status,@Context  SecurityContext securityContext) {
+
+        return service.getOneById(autoId,context());
+    }
+
+    @GET
+    @Path("/audit")
+    @Consumes({ "application/json" })
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "\u67E5\u8BE2\u6211\u6709\u8BDD\u8BF4(\u5FAE\u4FE1\u7AEF)", notes = "", response = FeedBackInfo.class, responseContainer = "List", tags={ "replies(我有话说相关)", })
+    @io.swagger.annotations.ApiResponses(value = {
+            @io.swagger.annotations.ApiResponse(code = 200, message = "\u83B7\u53D6\u4FE1\u606F\u6210\u529F", response = FeedBackInfo.class, responseContainer = "List") })
+    public Response getAuditFeedbackInfo(@ApiParam(value = "\u83B7\u53D6\u6570\u91CF  \u9ED8\u8BA4\u4E3A5",required=true) @QueryParam("num") Long num,@ApiParam(value = "up:\u4E0A\u62C9(\u83B7\u53D6time\u4E4B\u524D) down:\u4E0B\u62C9(\u4ECE\u6700\u65B0num*20\u6761\u4E2D\u968F\u673A\u62BD\u53D6num\u6761).\u9ED8\u8BA4up") @QueryParam("upOrDown") String upOrDown,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("time") Long time,
+                                         @ApiParam(value = "\u83B7\u53D6\u6570\u91CF  \u9ED8\u8BA4\u4E3A5",required=true) @QueryParam("status") Integer status,@Context  SecurityContext securityContext){
+        return service.getFeedbackInfo(num,upOrDown,time,context());
+    }
 }

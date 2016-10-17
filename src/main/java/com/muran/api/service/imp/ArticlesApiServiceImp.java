@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.ws.rs.core.Response;
 
+import com.muran.dao.*;
+import com.muran.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +17,8 @@ import com.muran.api.Context;
 import com.muran.api.exception.Code;
 import com.muran.api.exception.ServerException;
 import com.muran.api.service.ArticlesApiService;
-import com.muran.dao.IArticleDao;
-import com.muran.dao.IAttachDao;
-import com.muran.dao.ICommentDao;
 import com.muran.dto.AddArticle;
 import com.muran.dto.ArticleInfo;
-import com.muran.model.Article;
-import com.muran.model.Attach;
-import com.muran.model.Comment;
 import com.muran.util.CommonUtil;
 import com.muran.util.Data;
 
@@ -37,6 +33,12 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 
 	@Resource(name = "CommentDao")
 	private ICommentDao commentDao;
+
+	@Resource(name = "VisitRecordDao")
+	private IVisitRecordDao visitRecordDao;
+
+	@Resource(name = "ColumnConfigDao")
+	private IColumnConfigDao configDao;
 
 	@Override
 	@Transactional
@@ -110,6 +112,24 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
 		}
 
+		if (context.getOpenId()!=null){
+			//微信访问  处理阅读量和访问量
+			boolean isVisit=visitRecordDao.isUserVisitedArticle(article.getColumnKey(),article.getAutoId(),context.getOpenId());
+			if (!isVisit){
+				//若是第一次访问  则访问人数+1
+				article.setVisitNum(article.getVisitNum()+1);
+			}
+			article.setReadNum(article.getReadNum()+1);
+			article=dao.update(article);
+
+			VisitRecord visitRecord=new VisitRecord();
+			visitRecord.setArticleId(article.getAutoId());
+			visitRecord.setColumnKey(article.getColumnKey());
+			visitRecord.setOpenId(context.getOpenId());
+			visitRecord.setTitle(article.getTitle());
+			visitRecord.setVisitTime(new Date());
+			visitRecordDao.save(visitRecord);
+		}
 		info.setAutoId(article.getAutoId());
 		// 查询留言数量
 		List<Comment> list = new ArrayList<Comment>();
@@ -132,6 +152,12 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		info.setVideoUrl(article.getVideoUrl());
 		info.setColumnKey(article.getColumnKey());
 		info.setKeyword(article.getKeywords());
+		info.setReadNum(article.getReadNum());
+		info.setVisitNum(article.getVisitNum());
+
+		List<ColumnConfig> listConfig=configDao.findAll();
+		info.setShowReadNum(isShow(article.getColumnKey(),listConfig));
+
 		return Response.ok().entity(info).build();
 	}
 
@@ -141,6 +167,8 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			String columnKey, String title, String keyword, String source,
 			String status, Context context) {
 		// TODO Auto-generated method stub
+
+		List<ColumnConfig> listConfig=configDao.findAll();
 
 		List<Article> list = dao.getWxArticleList(num, upOrDown, time,
 				columnKey, title, keyword, source, status);
@@ -161,6 +189,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 				info.setTime(article.getPublishTime().getTime());
 				info.setTitle(article.getTitle());
 				info.setVideoUrl(article.getVideoUrl());
+				info.setShowReadNum(isShow(article.getColumnKey(),listConfig));
+				info.setReadNum(article.getReadNum());
+				info.setVisitNum(article.getVisitNum());
 				list2.add(info);
 			}
 		}
@@ -287,6 +318,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 	@Override
 	@Transactional
 	public Response getArticleWxContent(Long articleId, Context context) {
+
+		List<ColumnConfig> listConfig=configDao.findAll();
+
 		// TODO Auto-generated method stub
 		Article articleInfo = new Article();
 		articleInfo = dao.findOne(articleId);
@@ -305,7 +339,9 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 		article.setTime(articleInfo.getPublishTime().getTime());
 		article.setTitle(articleInfo.getTitle());
 		article.setVideoUrl(articleInfo.getVideoUrl());
-
+		article.setShowReadNum(isShow(articleInfo.getColumnKey(),listConfig));
+		article.setReadNum(articleInfo.getReadNum());
+		article.setVisitNum(articleInfo.getVisitNum());
 		// 获取评论数量
 		List<Comment> list = new ArrayList<Comment>();
 		list = commentDao.getList(articleInfo.getColumnKey(), articleId, 1l);
@@ -324,6 +360,19 @@ public class ArticlesApiServiceImp implements ArticlesApiService {
 			throw new ServerException(Code.BadRequestParams, "资讯信息不不能在！");
 		}
 		return Response.ok().entity(article).build();
+	}
+
+    public boolean isShow(String columnKey,List<ColumnConfig> list){
+		if (list==null||list.size()<=0){
+			return false;
+		}
+		for (ColumnConfig config:
+			 list) {
+			if (config.getColumnKey().equals(columnKey)&&config.getShowReadNum()){
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
