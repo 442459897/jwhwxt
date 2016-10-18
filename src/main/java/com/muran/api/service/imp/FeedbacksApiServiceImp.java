@@ -171,8 +171,9 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
 
                 WeChatUser user = new WeChatUser();
                 user = weuserDao.getByOpenId(feedBack.getOpenId());
-                feedBackInfo.setHeadImg(user.getHeadImg());
-                feedBackInfo.setNickName(user.getNickName());
+
+                feedBackInfo.setHeadImg(user != null ? user.getHeadImg() : GlobalConfig.getInstance().getConfig("jwh_headimg"));
+                feedBackInfo.setNickName(user != null ? user.getNickName() : "游客");
                 feedBackInfo.setSelfUser(feedBack.getOpenId().equals(context.getOpenId()));
 
                 // 回复list
