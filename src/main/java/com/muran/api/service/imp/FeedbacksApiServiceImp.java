@@ -153,6 +153,7 @@ public class FeedbacksApiServiceImp implements FeedbacksApiService {
     }
 
     @Override
+    @Transactional
     public Response getAuditFeedbackInfo(Long num, String upOrDown, Long time, Integer status, Context context) {
         if (num == null) {
             num = (long) 10;
