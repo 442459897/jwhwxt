@@ -78,7 +78,7 @@ public class FeedbacksApi extends AbstractApi {
     @Produces({ "application/json" })
     public Response audit(@PathParam("autoId") Long autoId,@FormParam("status")Integer status,@Context  SecurityContext securityContext) {
 
-        return service.getOneById(autoId,context());
+        return service.auditFeedBack(autoId,status,context());
     }
 
     @GET
@@ -90,6 +90,6 @@ public class FeedbacksApi extends AbstractApi {
             @io.swagger.annotations.ApiResponse(code = 200, message = "\u83B7\u53D6\u4FE1\u606F\u6210\u529F", response = FeedBackInfo.class, responseContainer = "List") })
     public Response getAuditFeedbackInfo(@ApiParam(value = "\u83B7\u53D6\u6570\u91CF  \u9ED8\u8BA4\u4E3A5",required=true) @QueryParam("num") Long num,@ApiParam(value = "up:\u4E0A\u62C9(\u83B7\u53D6time\u4E4B\u524D) down:\u4E0B\u62C9(\u4ECE\u6700\u65B0num*20\u6761\u4E2D\u968F\u673A\u62BD\u53D6num\u6761).\u9ED8\u8BA4up") @QueryParam("upOrDown") String upOrDown,@ApiParam(value = "\u65F6\u95F4(\u5FAE\u79D2,eg:1464110904319937).\u9ED8\u8BA4\u5F53\u524D\u65F6\u95F4") @QueryParam("time") Long time,
                                          @ApiParam(value = "\u83B7\u53D6\u6570\u91CF  \u9ED8\u8BA4\u4E3A5",required=true) @QueryParam("status") Integer status,@Context  SecurityContext securityContext){
-        return service.getFeedbackInfo(num,upOrDown,time,context());
+        return service.getAuditFeedbackInfo(num,upOrDown,time,status,context());
     }
 }
