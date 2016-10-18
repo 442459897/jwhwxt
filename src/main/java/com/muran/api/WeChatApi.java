@@ -497,11 +497,8 @@ public class WeChatApi extends AbstractApi {
 		log.info("isSuccess：" + result.isSuccess());
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息
-			return Response
-					.ok()
-					.location(
-							new URI(GlobalConfig.KEY_ERROR_PAGE + "?"
-									+ Code.CreateMenuFail.getCode())).build();
+			log.error(result);
+			throw new ServerException(Code.BadRequestParams, "token获取失败！");
 		}
 		log.info("跳转地址：" + GlobalConfig.KEY_WEB_BASE
 				+ "createMenu.jsp?result=success");
