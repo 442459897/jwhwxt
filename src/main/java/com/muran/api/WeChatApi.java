@@ -490,14 +490,15 @@ public class WeChatApi extends AbstractApi {
 
 		WxMenu menu = service.getWxMenu();
 		String menuJson = JsonUtil.toJSONString(menu);
-		log.info("创建菜单的json串：" + menuJson);
+
 		// 调用微信接口
 		BaseResult result = MenuAPI.menuCreate(token.getAccess_token(),
 				menuJson);
-		log.info("isSuccess：" + result.isSuccess());
+
 		if (!result.isSuccess()) {
 			// 失败 返回失败信息
-			log.error(result);
+			log.error("创建菜单的json串：" + menuJson);
+			log.error(JsonUtil.toJSONString(result) );
 			throw new ServerException(Code.BadRequestParams, "token获取失败！");
 		}
 		log.info("跳转地址：" + GlobalConfig.KEY_WEB_BASE
