@@ -91,8 +91,8 @@ public class CommentsApiServiceImp implements CommentsApiService {
 
 				WeChatUser user = new WeChatUser();
 				user = userDao.getByOpenId(comment.getOpenId());
-				info.setHeadImg(user.getHeadImg());
-				info.setNickName(user.getNickName());
+				info.setHeadImg(user != null ? user.getHeadImg() : GlobalConfig.getInstance().getConfig("jwh_headimg"));
+				info.setNickName(user != null ? user.getNickName() : "游客");
 
 				listReturn.add(info);
 			}
@@ -154,8 +154,8 @@ public class CommentsApiServiceImp implements CommentsApiService {
 
 				WeChatUser user = new WeChatUser();
 				user = userDao.getByOpenId(comment.getOpenId());
-				info.setHeadImg(user.getHeadImg());
-				info.setNickName(user.getNickName());
+				info.setHeadImg(user != null?user.getHeadImg() : GlobalConfig.getInstance().getConfig("jwh_headimg"));
+				info.setNickName(user != null ? user.getNickName() : "游客");
 				listReturn.add(info);
 
 			}
@@ -190,8 +190,8 @@ public class CommentsApiServiceImp implements CommentsApiService {
 
 		WeChatUser user = new WeChatUser();
 		user = userDao.getByOpenId(comment.getOpenId());
-		info.setHeadImg(user.getHeadImg());
-		info.setNickName(user.getNickName());
+		info.setHeadImg(user != null?user.getHeadImg() : GlobalConfig.getInstance().getConfig("jwh_headimg"));
+		info.setNickName(user != null ? user.getNickName() : "游客");
 
 		return Response.ok().entity(info).build();
 	}
@@ -212,8 +212,8 @@ public class CommentsApiServiceImp implements CommentsApiService {
 				if (reply.getReplyType() == 1) {
 					WeChatUser user = new WeChatUser();
 					user = userDao.getByOpenId(reply.getOpenId());
-					info.setHeadImg(user.getHeadImg());
-					info.setName(user.getNickName());
+					info.setHeadImg(user != null?user.getHeadImg() : GlobalConfig.getInstance().getConfig("jwh_headimg"));
+					info.setName(user != null ? user.getNickName() : "游客");
 				} else {
 					info.setHeadImg(GlobalConfig.KEY_JWH_HEADIMG);
 					info.setName(GlobalConfig.KEY_JWH_NAME);
